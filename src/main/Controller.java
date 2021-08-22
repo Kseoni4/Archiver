@@ -1,5 +1,8 @@
 package main;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvValidationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,7 +10,14 @@ import javafx.stage.FileChooser;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Controller {
 
@@ -103,7 +113,7 @@ public class Controller {
     }
 
     @FXML
-    void makeDocuments(ActionEvent event) throws IOException, Docx4JException {
+    void makeDocuments(ActionEvent event) throws IOException, Docx4JException, CsvException, URISyntaxException {
         ProcessingData.loadBaseData(aggregateData());
         ArrayList<Student> studentsList = loadData(pathOfCSVFile.getText());
         for(Student student : studentsList){
@@ -120,16 +130,18 @@ public class Controller {
                 napravlenieID.getText(), groupID.getText(), Integer.parseInt(yearOfGraduate.getText()));
     }
 
-    private static ArrayList<Student> loadData(String pathToCSV) throws IOException {
+    private static ArrayList<Student> loadData(String pathToCSV) throws IOException, CsvException {
 
         ArrayList<Student> studentsList = new ArrayList<>();
-        BufferedReader csvReader = new BufferedReader(new FileReader(pathToCSV));
-        String row = csvReader.readLine();
-        row = row.substring(1);
-        studentsList.add(createNewStudent(row.split(";")));
-        while((row = csvReader.readLine()) != null){
-            String[] data = row.split("/r|/n|/o|;");
-            studentsList.add(createNewStudent(data));
+        Reader reader = Files.newBufferedReader(Paths.get(pathToCSV), Charset.forName("windows-1251"));
+
+        CSVReader csvReader = new CSVReader(reader);
+        List<String[]> listStrings;
+        listStrings = csvReader.readAll();
+        listStrings.remove(0);
+        for(String[] infoLine : listStrings) {
+            String line = Arrays.toString(infoLine).replaceAll("\\[|\\]","");
+            studentsList.add(createNewStudent(line.split(";")));
             System.out.println("Created student " + studentsList.get(studentsList.size()-1).LastName);
         }
         csvReader.close();
