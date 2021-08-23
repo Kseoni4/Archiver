@@ -6,11 +6,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
-    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="com.opencsv:opencsv:5.5.1" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
     <orderEntry type="library" name="org.docx4j:docx4j-JAXB-MOXy:11.2.9" level="project" />
-    <orderEntry type="library" name="javafx" level="project" />
-    <orderEntry type="library" name="javafx" level="project" />
-    <orderEntry type="library" name="com.opencsv:opencsv:5.5.1" level="project" />
+    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
