@@ -1,5 +1,7 @@
 package main;
 
+import com.spire.doc.Document;
+import com.spire.doc.FileFormat;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.ContentAccessor;
@@ -29,6 +31,41 @@ public class ProcessingData {
         makePersonCaseDoc(student);
         makeCommissionConcludeDoc(student);
         makeConcludeAntiplagiatDoc(student);
+        mergeDocuments(student);
+    }
+
+    private static void mergeDocuments(Student student) {
+        String FIO = "".concat(student.LastName)
+                .concat(" ")
+                .concat(student.FirstName)
+                .concat(" ").concat(student.FatherName);
+
+        String personCase = "OutDocuments/"+FIO.concat(".docx");
+        String concludeOfCommission = "OutDocuments/"+FIO.concat("_справка").concat(".docx");
+        String concludeOfPlagiat = "OutDocuments/"+FIO.concat("_заключение").concat(".docx");
+
+        System.out.println("==============================="+PersonCaseNumber+"===============================");
+        System.out.println("Made documents: "+personCase.concat(" \n").concat(concludeOfCommission).concat(" \n").concat(concludeOfPlagiat));
+
+        System.out.println("Set new doc: "+personCase);
+
+        Document personCaseDoc = new Document(personCase);
+
+        System.out.println("Insert new doc: "+concludeOfCommission);
+
+        personCaseDoc.insertTextFromFile(concludeOfCommission, FileFormat.Docx);
+
+        System.out.println("Insert new doc: "+concludeOfPlagiat);
+
+        personCaseDoc.insertTextFromFile(concludeOfPlagiat, FileFormat.Docx);
+
+        System.out.println("Save document for: "+FIO);
+
+        personCaseDoc.saveToFile("OutDocuments/Merged/".concat(FIO).concat(".docx"));
+
+        System.out.println("["+PersonCaseNumber+"]"+"Merge documents - done!");
+
+        System.out.println("[===============================END===============================");
     }
 
     private static void makePersonCaseDoc(Student student) throws IOException, Docx4JException {

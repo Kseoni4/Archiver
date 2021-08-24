@@ -2,15 +2,18 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
    <children>
       <TitledPane animated="false" collapsible="false" layoutX="8.0" layoutY="8.0" prefHeight="600.0" prefWidth="800.0" text="Шаг первый: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -49,33 +52,69 @@
             </AnchorPane>
          </content>
       </TitledPane>
-      <TitledPane animated="false" collapsible="false" layoutY="341.0" prefHeight="259.0" prefWidth="800.0" text="Шаг второй: выберите .csv файл с данными студентов" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="341.0">
+      <TitledPane animated="false" collapsible="false" layoutY="341.0" prefHeight="259.0" prefWidth="800.0" text="Шаг второй: выберите .csv файл с данными студентов или введите данные одного" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="341.0">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="pathOfCSVFile" layoutX="212.0" layoutY="13.0" prefHeight="26.0" prefWidth="365.0" promptText="Выберите файл или введите путь здесь" />
-                  <Button fx:id="filePickerBtn" layoutX="584.0" layoutY="13.0" mnemonicParsing="false" onAction="#pickCSVFile" text="..." />
-               </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
-      <TitledPane animated="false" collapsible="false" layoutY="413.0" prefHeight="187.0" prefWidth="800.0" text="Шаг третий: нажмите на кнопку &quot;сформировать личные дела&quot; для создания набора документов" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="413.0">
-         <content>
-            <AnchorPane prefHeight="145.0" prefWidth="800.0">
-               <children>
-                  <ProgressBar fx:id="progressBar" layoutX="228.0" layoutY="70.0" prefHeight="20.0" prefWidth="320.0" progress="0.0" visible="false" />
-                  <Button fx:id="caseProcessingStartBtn" layoutX="300.0" layoutY="29.0" mnemonicParsing="false" onAction="#makeDocuments" text="Сформировать личные дела" />
-                  <Label layoutX="577.0" layoutY="106.0" text="Автор программы: Ксенофонтов Н.В. Кафедра КБ-4">
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="workIndicator" alignment="CENTER" layoutX="316.0" layoutY="62.0" prefHeight="17.0" prefWidth="145.0" />
-                  <Label layoutX="531.0" layoutY="117.0" text="Обнаруженные проблемы пишите на почту: kseoni4@gmail.com">
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                  </Label>
+                  <TabPane layoutX="45.0" layoutY="18.0" prefHeight="385.0" prefWidth="892.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab fx:id="groupTab" onSelectionChanged="#changeToGroup" text="Группа">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="pathOfCSVFile" layoutX="238.0" layoutY="57.0" prefHeight="26.0" prefWidth="365.0" promptText="Выберите файл или введите путь здесь" />
+                                    <Button fx:id="filePickerBtn" layoutX="614.0" layoutY="57.0" mnemonicParsing="false" onAction="#pickCSVFile" text="..." />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="singleTab" onSelectionChanged="#changeToSingle" text="Один студент">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="studentFIO" layoutX="273.0" layoutY="9.0" prefHeight="26.0" prefWidth="195.0" promptText="Иванов Иван Иванович" AnchorPane.leftAnchor="273.0" />
+                                    <Label layoutX="23.0" layoutY="15.0" text="Фамилия имя отчество студента" AnchorPane.leftAnchor="25.0" />
+                                    <TextField fx:id="headOfVKR" layoutX="281.0" layoutY="38.0" prefHeight="26.0" prefWidth="149.0" promptText="Петров П.П." AnchorPane.leftAnchor="273.0" />
+                                    <Label layoutX="22.0" layoutY="43.0" text="Фамилия и инициалы руководителя ВКР" AnchorPane.leftAnchor="25.0" />
+                                    <Label layoutX="453.0" layoutY="52.0" text="Дата защиты ВКР" AnchorPane.rightAnchor="282.0" />
+                                    <DatePicker fx:id="dateOfDefend" layoutX="569.0" layoutY="46.0" prefHeight="26.0" prefWidth="150.0" promptText="01.01.20" AnchorPane.leftAnchor="569.0" />
+                                    <Label layoutX="505.0" layoutY="15.0" text="Оценка" AnchorPane.rightAnchor="282.0" />
+                                    <ChoiceBox fx:id="score" layoutX="570.0" layoutY="10.0" prefWidth="150.0" AnchorPane.leftAnchor="569.0" />
+                                    <Label layoutX="25.0" layoutY="71.0" text="Шифр студента" AnchorPane.leftAnchor="25.0" />
+                                    <TextField fx:id="personID" layoutX="294.0" layoutY="67.0" prefHeight="26.0" prefWidth="103.0" promptText="12Б3456" AnchorPane.leftAnchor="273.0" />
+                                    <Label layoutX="25.0" layoutY="132.0" text="Тема ВКР" />
+                                    <TextField fx:id="VKRTitle" layoutX="126.0" layoutY="127.0" prefHeight="26.0" prefWidth="665.0" />
+                                    <Label layoutX="456.0" layoutY="84.0" text="Номер протокола" AnchorPane.rightAnchor="282.0" />
+                                    <TextField fx:id="protocolID" layoutX="573.0" layoutY="80.0" prefHeight="26.0" prefWidth="103.0" promptText="01/20" AnchorPane.leftAnchor="569.0" />
+                                    <Label layoutX="28.0" layoutY="100.0" text="Результат А.П." AnchorPane.leftAnchor="25.0" />
+                                    <TextField fx:id="originality" layoutX="125.0" layoutY="95.0" prefHeight="26.0" prefWidth="52.0" promptText="90%" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+                  <TitledPane animated="false" collapsible="false" layoutX="43.4" layoutY="200.4" prefHeight="197.0" prefWidth="829.0" text="Шаг третий: нажмите на кнопку &quot;сформировать личные дела&quot; для создания набора документов" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="190.0">
+                     <content>
+                        <AnchorPane prefHeight="126.0" prefWidth="802.0">
+                           <children>
+                              <ProgressBar fx:id="progressBar" layoutX="228.0" layoutY="70.0" prefHeight="20.0" prefWidth="320.0" progress="0.0" visible="false" />
+                              <Button fx:id="caseProcessingStartBtn" layoutX="300.0" layoutY="29.0" mnemonicParsing="false" onAction="#makeDocuments" text="Сформировать личные дела" />
+                              <Label layoutX="572.0" layoutY="111.0" text="Автор программы: Ксенофонтов Н.В. Кафедра КБ-4">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="workIndicator" alignment="CENTER" layoutX="316.0" layoutY="62.0" prefHeight="17.0" prefWidth="145.0" />
+                              <Label layoutX="526.0" layoutY="122.0" text="Обнаруженные проблемы пишите на почту: kseoni4@gmail.com">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
                </children>
             </AnchorPane>
          </content>
