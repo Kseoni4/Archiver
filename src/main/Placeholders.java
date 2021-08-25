@@ -11,6 +11,8 @@ public class Placeholders {
     public static final String VKR_TITLE = "VKRTitle";
     public static final String VKR_TYPE = "VKRType";
     public static final String HEAD_OF_VKR_GRADES = "headOfVKRGrades";
+    public static final String SMKO_TYPE = "smkoType";
+    public static final String SMKO_TEMPORAL = "smkoTemporal";
     public static final String ORIGINALITY = "orig";
     public static final String HEAD_OF_VKR_NAME = "headOfVKRName";
     public static final String ANTIPLAGIAT_SYSTEM = "antiplagiatSystem";

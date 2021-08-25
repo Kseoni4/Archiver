@@ -26,9 +26,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
         if(!Files.isDirectory(Paths.get("OutDocuments"))) {
             Files.createDirectory(Paths.get("OutDocuments"));
-            Files.createDirectory(Paths.get("OutDocuments/Merged"));
         }
-        primaryStage.setTitle("Архивер. Версия 1.1:24/08/2021");
+        primaryStage.setTitle("Архивер. Версия 1.2:25/08/2021");
         primaryStage.setScene(new Scene(root));
         mainWindow = primaryStage;
         primaryStage.show();

@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,6 +52,9 @@ public class Controller {
     private ChoiceBox<String> vkrType;
 
     @FXML
+    private ChoiceBox<String> smkoType;
+
+    @FXML
     private TextField groupID;
 
     @FXML
@@ -78,7 +82,7 @@ public class Controller {
     private TextField savedGroupIDFile;
 
     @FXML
-    private Label fileNotFound;
+    private Label fileStatusLabel;
 
     @FXML
     private Button filePickerBtn;
@@ -111,9 +115,41 @@ public class Controller {
     private TextField originality;
 
     @FXML
+    public CheckBox allDocsCheck;
+
+    @FXML
+    public CheckBox checkTitleDoc;
+
+    @FXML
+    public CheckBox checkComDoc;
+
+    @FXML
+    public CheckBox checkAPDoc;
+
+    @FXML
+    public ChoiceBox<String> charsetBox;
+
+    @FXML
+    public Label errorMessage;
+
+    @FXML
     private Button caseProcessingStartBtn;
 
     private boolean isGroup = true;
+
+    private boolean isChecked = true;
+
+    @FXML
+    void checkAllDocs(Event event) {
+        isChecked = !isChecked;
+
+        checkTitleDoc.setSelected(isChecked);
+        checkTitleDoc.setDisable(isChecked);
+        checkComDoc.setSelected(isChecked);
+        checkComDoc.setDisable(isChecked);
+        checkAPDoc.setSelected(isChecked);
+        checkAPDoc.setDisable(isChecked);
+    }
 
     @FXML
     void loadSavedData(ActionEvent event) throws IOException, ClassNotFoundException {
@@ -124,7 +160,7 @@ public class Controller {
             putAllData(loadSavedData);
             ois.close();
         } catch (WriteAbortedException | FileNotFoundException e){
-            fileNotFound.setText("Ошибка! Файл не найден!");
+            fileStatusLabel.setText("Ошибка! Файл не найден!");
         }
     }
 
@@ -141,26 +177,50 @@ public class Controller {
         yearOfGraduate.setText(String.valueOf(savedData.YearOfGraduate));
         vkrType.setValue(savedData.VKRType);
         studyForm.setValue(savedData.StudyForm);
+        smkoType.setValue(savedData.smkoType);
     }
 
     @FXML
     void makeDocuments(ActionEvent event) throws IOException, Docx4JException, CsvException, URISyntaxException {
         System.out.println("START PROCESSING DATA");
 
+        ProcessingData.PersonCaseNumber = 0;
+
+        if(!Files.isDirectory(Paths.get("OutDocuments/"+groupID.getText()+"/"))) {
+            Files.createDirectory(Paths.get("OutDocuments/" + groupID.getText() + "/"));
+            Files.createDirectory(Paths.get("OutDocuments/" + groupID.getText() + "/Merged/"));
+        }
+
         workIndicator.setText("");
+        errorMessage.setText("");
 
         ProcessingData.loadBaseData(aggregateData());
 
-        if(isGroup) {
-            ArrayList<Student> studentsList = loadData(pathOfCSVFile.getText());
-            for (Student student : studentsList) {
+        ProcessingData.allDocsCheck = allDocsCheck.isSelected();
+        ProcessingData.checkTitleDoc = checkTitleDoc.isSelected();
+        ProcessingData.checkComDoc = checkComDoc.isSelected();
+        ProcessingData.checkAPDoc = checkAPDoc.isSelected();
+        try {
+            if (isGroup) {
+                try {
+                    ArrayList<Student> studentsList = loadData(pathOfCSVFile.getText(), charsetBox.getValue());
+                    for (Student student : studentsList) {
+                        Main.loadTemplates();
+                        ProcessingData.makeDocuments(student);
+                    }
+                } catch (IndexOutOfBoundsException e){
+                    System.out.println(e.getLocalizedMessage());
+                    errorMessage.setText("Ошибка кодировки файла, выберите другую кодировку"+e.getMessage());
+                    return;
+                }
+            } else {
+                Student student = createNewStudent(getStudentData());
                 Main.loadTemplates();
                 ProcessingData.makeDocuments(student);
             }
-        } else{
-            Student student = createNewStudent(getStudentData());
-            Main.loadTemplates();
-            ProcessingData.makeDocuments(student);
+        } catch (IOException e){
+            errorMessage.setText("Произошла ошибка при формировании документов!"+e.getMessage());
+            return;
         }
 
         System.out.println("END OF PROCESSING DATA");
@@ -169,17 +229,20 @@ public class Controller {
     }
 
     private BaseData aggregateData(){
+        if(smkoType.getValue().equals("Оба")){
+            smkoType.setValue(ProcessingData.smkoBoth);
+        }
         return new BaseData(chairName.getText(), chairNameFull.getText(), chairManName.getText(),
                 headOfCommissionName.getText(), instituteName.getText(), facultyName.getText(),
                 studyForm.getValue(),vkrType.getValue(), antiplagiatSystem.getText(),
-                napravlenieID.getText(), groupID.getText(), Integer.parseInt(yearOfGraduate.getText()));
+                napravlenieID.getText(), groupID.getText(), Integer.parseInt(yearOfGraduate.getText()),
+                smkoType.getValue());
     }
 
-    private static ArrayList<Student> loadData(String pathToCSV) throws IOException, CsvException {
+    private static ArrayList<Student> loadData(String pathToCSV, String charset) throws IOException, CsvException {
 
         ArrayList<Student> studentsList = new ArrayList<>();
-
-        Reader reader = Files.newBufferedReader(Paths.get(pathToCSV), Charset.forName("UTF-8"));
+        Reader reader = Files.newBufferedReader(Paths.get(pathToCSV), Charset.forName(charset));
 
         CSVReader csvReader = new CSVReader(reader);
 
@@ -189,15 +252,15 @@ public class Controller {
 
         String[] row = listStrings.get(0);
 
-        String row2 = Arrays.toString(row).substring(2).replaceAll("\\[|\\]","");
+        String row2 = Arrays.toString(row).substring(1).replaceAll("\\[|\\]", "");
 
         studentsList.add(createNewStudent(row2.split(";")));
 
         listStrings.remove(0);
 
-        System.out.println("Created student " + studentsList.get(studentsList.size()-1).LastName);
+        System.out.println("Created student " + studentsList.get(studentsList.size() - 1).LastName);
 
-        if(!listStrings.isEmpty()) {
+        if (!listStrings.isEmpty()) {
             for (String[] infoLine : listStrings) {
                 String line = Arrays.toString(infoLine).replaceAll("\\[|\\]", "");
                 studentsList.add(createNewStudent(line.split(";")));
@@ -206,7 +269,6 @@ public class Controller {
         }
 
         csvReader.close();
-
         return studentsList;
     }
 
@@ -225,7 +287,7 @@ public class Controller {
         outputData[2] = VKRTitle.getText();
         outputData[3] = headOfVKR.getText();
         outputData[4] = originality.getText();
-        outputData[5] = dateOfDefend.getValue().toString();
+        outputData[5] = dateOfDefend.getValue().format(DateTimeFormatter.ISO_ORDINAL_DATE);
         outputData[6] = protocolID.getText();
         outputData[7] = score.getValue();
         System.out.println(Arrays.toString(outputData).replaceAll("\\[|\\]", ""));
@@ -248,12 +310,16 @@ public class Controller {
         BaseData baseDataForSave = aggregateData();
 
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDataForSave.Group_ID+".sav"));
-
-        oos.writeObject(baseDataForSave);
-
+        try {
+            oos.writeObject(baseDataForSave);
+        } catch (IOException e){
+            fileStatusLabel.setText("Произошла ошибка при сохранении!");
+        }
         oos.flush();
 
         oos.close();
+
+        fileStatusLabel.setText("Файл успешно сохранён!");
     }
 
     @FXML
@@ -272,6 +338,11 @@ public class Controller {
         studyForm.getItems().addAll("Очная", "Заочная", "Очно-заочное");
         vkrType.getItems().addAll("дипломная работа", "бакалаврская работа", "магистрская работа");
         score.getItems().addAll("Отлично", "Хорошо", "Удовлетворительно", "Н/Я");
+        smkoType.getItems().addAll("СМКО МИРЭА  8.5.1/03.П.42-20",
+                "СМКО МИРЭА  7.5.1/03.П.30-19","Оба");
+        charsetBox.getItems().addAll("UTF-8", "Windows-1251");
+        charsetBox.setValue(charsetBox.getItems().get(0));
+
     }
 
 }

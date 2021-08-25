@@ -26,12 +26,14 @@ public class BaseData implements Serializable {
 
     public String Group_ID;
 
+    public String smkoType;
+
     public int YearOfGraduate;
 
     public BaseData(String chairName, String chairNameFull, String chairManName,
                     String headOfCommissionName, String instituteName, String facultyName,
                     String studyForm, String VKRType, String antiplagiatSystem,
-                    String napravlenie_ID, String group_ID, int yearOfGraduate) {
+                    String napravlenie_ID, String group_ID, int yearOfGraduate, String smkoType) {
         ChairName = chairName;
         ChairNameFull = chairNameFull;
         ChairManName = chairManName;
@@ -44,5 +46,6 @@ public class BaseData implements Serializable {
         Napravlenie_ID = napravlenie_ID;
         Group_ID = group_ID;
         YearOfGraduate = yearOfGraduate;
+        this.smkoType = smkoType;
     }
 }
