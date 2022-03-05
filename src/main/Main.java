@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Ксенофонтов Николай Валерьевич
+ * Кафедра КБ-4
+ */
+
 package main;
 
 import javafx.application.Application;
@@ -11,6 +16,27 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * <p>
+ *      Java-приложение для формирования личных документов для архива
+ *      Список формируемых документов:
+ *      <list>
+ *          <br>
+ *          * Титульный лист
+ *          <br>
+ *          * Справка о допуске к защите
+ *          <br>
+ *          * Заключение по анти-плагиату
+ *          <br>
+ *      </list>
+ *      Подоготовленные шаблоны содержат специальный текст-маркер для заполнения соответствующими данными.
+ *      @see Placeholders
+ *
+ * </p>
+ * @author Ксенофонтов Николай Валерьевич
+ * @author Кафедра КБ-4
+ * @version 1.2
+ */
 public class Main extends Application {
 
     private static WordprocessingMLPackage personCaseFile;
@@ -23,6 +49,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        char c = 'A'+1;
+        String s1 = "abc";
+        String s2 = "bca";
+        System.out.println("Java" + 1 + 2 + 3);
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
         if(!Files.isDirectory(Paths.get("OutDocuments"))) {
             Files.createDirectory(Paths.get("OutDocuments"));

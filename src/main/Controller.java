@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Ксенофонтов Николай Валерьевич
+ * Кафедра КБ-4
+ */
+
 package main;
 
 import com.opencsv.CSVReader;
@@ -181,7 +186,7 @@ public class Controller {
     }
 
     @FXML
-    void makeDocuments(ActionEvent event) throws IOException, Docx4JException, CsvException, URISyntaxException {
+    void makeDocuments(ActionEvent event) throws IOException, Docx4JException, CsvException {
         System.out.println("START PROCESSING DATA");
 
         ProcessingData.PersonCaseNumber = 0;
@@ -209,8 +214,8 @@ public class Controller {
                         ProcessingData.makeDocuments(student);
                     }
                 } catch (IndexOutOfBoundsException e){
-                    System.out.println(e.getLocalizedMessage());
-                    errorMessage.setText("Ошибка кодировки файла, выберите другую кодировку"+e.getMessage());
+                    System.out.println("\u001b[38;5;196m"+e.getLocalizedMessage());
+                    errorMessage.setText("Ошибка кодировки файла, выберите другую кодировку");
                     return;
                 }
             } else {
@@ -219,7 +224,7 @@ public class Controller {
                 ProcessingData.makeDocuments(student);
             }
         } catch (IOException e){
-            errorMessage.setText("Произошла ошибка при формировании документов!"+e.getMessage());
+            errorMessage.setText("Произошла ошибка при формировании документов!");
             return;
         }
 
@@ -242,13 +247,20 @@ public class Controller {
     private static ArrayList<Student> loadData(String pathToCSV, String charset) throws IOException, CsvException {
 
         ArrayList<Student> studentsList = new ArrayList<>();
+
         Reader reader = Files.newBufferedReader(Paths.get(pathToCSV), Charset.forName(charset));
 
         CSVReader csvReader = new CSVReader(reader);
 
+        System.out.println("Open file ("+csvReader.getLinesRead()+" lines read)");
+
         List<String[]> listStrings;
 
         listStrings = csvReader.readAll();
+
+        System.out.println("Get strings from csv file");
+
+        System.out.println("Open file ("+csvReader.getLinesRead()+" lines read)");
 
         String[] row = listStrings.get(0);
 
@@ -287,7 +299,7 @@ public class Controller {
         outputData[2] = VKRTitle.getText();
         outputData[3] = headOfVKR.getText();
         outputData[4] = originality.getText();
-        outputData[5] = dateOfDefend.getValue().format(DateTimeFormatter.ISO_ORDINAL_DATE);
+        outputData[5] = dateOfDefend.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         outputData[6] = protocolID.getText();
         outputData[7] = score.getValue();
         System.out.println(Arrays.toString(outputData).replaceAll("\\[|\\]", ""));

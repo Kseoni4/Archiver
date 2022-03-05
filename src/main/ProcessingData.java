@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Ксенофонтов Николай Валерьевич
+ * Кафедра КБ-4
+ */
+
 package main;
 
 import com.spire.doc.Document;
@@ -18,6 +23,8 @@ public class ProcessingData {
 
     private static WordprocessingMLPackage template;
 
+    private static String FIO;
+
     public static int PersonCaseNumber;
 
     private static List<Object> texts;
@@ -34,9 +41,14 @@ public class ProcessingData {
     }
 
     public static void makeDocuments(Student student) throws IOException, Docx4JException {
+        FIO = "".concat(student.LastName)
+                .concat(" ")
+                .concat(student.FirstName)
+                .concat(" ").concat(student.FatherName);
+        PersonCaseNumber++;
         if(allDocsCheck){
             makeAllDocs(student);
-            mergeDocuments(student);
+            mergeDocuments();
             return;
         }
         if(checkTitleDoc)
@@ -45,8 +57,9 @@ public class ProcessingData {
             makeCommissionConcludeDoc(student);
         if(checkAPDoc)
             makeConcludeAntiplagiatDoc(student);
-        mergeDocuments(student);
+        mergeDocuments();
     }
+
 
     private static void makeAllDocs(Student student) throws IOException, Docx4JException {
         makePersonCaseDoc(student);
@@ -54,18 +67,12 @@ public class ProcessingData {
         makeConcludeAntiplagiatDoc(student);
     }
 
-    private static void mergeDocuments(Student student) {
-
-        String FIO = "".concat(student.LastName)
-                .concat(" ")
-                .concat(student.FirstName)
-                .concat(" ").concat(student.FatherName);
-
+    private static void mergeDocuments() {
         String personCase = "OutDocuments/"+baseData.Group_ID.concat("/")+FIO.concat(".docx");
         String concludeOfCommission = "OutDocuments/"+baseData.Group_ID.concat("/")+FIO.concat("_справка").concat(".docx");
         String concludeOfPlagiat = "OutDocuments/"+baseData.Group_ID.concat("/")+FIO.concat("_заключение").concat(".docx");
 
-        System.out.println("==============================="+PersonCaseNumber+"===============================");
+        System.out.println("==============================="+PersonCaseNumber+"===============================]");
         if(allDocsCheck)
             System.out.println("Made documents: "+personCase.concat(" \n").concat(concludeOfCommission).concat(" \n").concat(concludeOfPlagiat));
 
@@ -96,23 +103,16 @@ public class ProcessingData {
 
         blankDoc.saveToFile("OutDocuments/"+baseData.Group_ID.concat("/")+"Merged/".concat(FIO).concat(".docx"));
 
-        System.out.println("["+PersonCaseNumber+"]"+"Merge documents - done!");
+        System.out.println("\u001b[38;5;40m["+PersonCaseNumber+"]"+"Merge documents - done!\u001b[38;5;0m");
 
-        System.out.println("[===============================END===============================");
+        System.out.println("[===============================END===============================]");
     }
 
-    private static void makePersonCaseDoc(Student student) throws IOException, Docx4JException {
+    private static void makePersonCaseDoc(Student student) throws Docx4JException {
         template = Main.getPersonCaseTemplate();
         texts = getAllElementFromObject(template.getMainDocumentPart(), Text.class);
 
         replaceBaseInfo();
-        PersonCaseNumber++;
-
-        String FIO = "".concat(student.LastName)
-                .concat(" ")
-                .concat(student.FirstName)
-                .concat(" ").concat(student.FatherName);
-
         replaceStudentInfo(student);
         replacePlaceholder(student.Date, Placeholders.DATE);
         replacePlaceholder(student.Score, Placeholders.SCORE);
@@ -122,7 +122,7 @@ public class ProcessingData {
         writeDocxToStream("OutDocuments/"+baseData.Group_ID.concat("/")+FIO.concat(".docx"));
     }
 
-    private static void replaceBaseInfo(){
+    private static void replaceBaseInfo() {
         replacePlaceholder(baseData.ChairName, Placeholders.CHAIR_NAME);
         replacePlaceholder(baseData.FacultyName, Placeholders.FACULTY_NAME);
         replacePlaceholder(baseData.InstituteName, Placeholders.INSTITUTE_NAME);
@@ -131,19 +131,13 @@ public class ProcessingData {
     }
 
     private static void replaceStudentInfo(Student student){
-
-        String FIO = "".concat(student.LastName)
-                .concat(" ")
-                .concat(student.FirstName)
-                .concat(" ").concat(student.FatherName);
-
         replacePlaceholder(student.Group_ID, Placeholders.GROUP_ID);
         replacePlaceholder(student.Napravlenie_ID, Placeholders.NAPRAVLENIE_ID);
         replacePlaceholder(student.Person_ID, Placeholders.PERSON_ID);
         replacePlaceholder(FIO, Placeholders.FIO);
     }
 
-    private static void makeCommissionConcludeDoc(Student student) throws IOException, Docx4JException {
+    private static void makeCommissionConcludeDoc(Student student) throws Docx4JException {
         template = Main.getConcludeCommissionTemplate();
         texts = getAllElementFromObject(template.getMainDocumentPart(), Text.class);
 
@@ -163,7 +157,7 @@ public class ProcessingData {
                 .concat("_справка").concat(".docx")));
     }
 
-    private static void makeConcludeAntiplagiatDoc(Student student) throws IOException, Docx4JException {
+    private static void makeConcludeAntiplagiatDoc(Student student) throws Docx4JException {
         template = Main.getConcludeOfPlagiatTemplate();
         texts = getAllElementFromObject(template.getMainDocumentPart(), Text.class);
 
@@ -178,16 +172,25 @@ public class ProcessingData {
         replacePlaceholder(student.Originality, Placeholders.ORIGINALITY);
         replacePlaceholder(String.valueOf(PersonCaseNumber), Placeholders.PERSON_CASE_NUMBER);
         replacePlaceholder(baseData.smkoType, Placeholders.SMKO_TYPE);
+
         if(baseData.smkoType.equals("СМКО МИРЭА  8.5.1/03.П.42-20") || baseData.smkoType.equals(smkoBoth)) {
             replacePlaceholder("Временным", Placeholders.SMKO_TEMPORAL);
         }else{
             replacePlaceholder("", Placeholders.SMKO_TEMPORAL);
         }
 
-        writeDocxToStream("OutDocuments/"+baseData.Group_ID.concat("/")+student.LastName.concat(" ").concat(student.FirstName.concat(" ").concat(student.FatherName).concat("_заключение").concat(".docx")));
+        writeDocxToStream("OutDocuments/"+baseData.Group_ID.concat("/")
+                +student.LastName.concat(" ").concat(
+                        student.FirstName
+                                .concat(" ")
+                        .concat(student.FatherName)
+                        .concat("_заключение")
+                        .concat(".docx")
+                )
+        );
     }
 
-    private static void writeDocxToStream(String target) throws IOException, Docx4JException {
+    private static void writeDocxToStream(String target) throws Docx4JException {
         File f = new File(target);
         template.save(f);
     }

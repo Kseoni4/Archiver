@@ -24,34 +24,34 @@
                   <Label layoutX="27.0" layoutY="77.0" text="Название кафедры" AnchorPane.leftAnchor="10.0" />
                   <TextField fx:id="chairName" layoutX="243.0" layoutY="73.0" prefHeight="26.0" prefWidth="51.0" promptText="КБ-4" AnchorPane.leftAnchor="251.0" />
                   <Label layoutX="24.0" layoutY="109.0" text="Полное название кафедры" AnchorPane.leftAnchor="10.0" />
-                  <TextField fx:id="chairNameFull" layoutX="244.0" layoutY="105.0" prefHeight="26.0" prefWidth="452.0" promptText="Интеллектуальные системы информационной безопасности" AnchorPane.leftAnchor="251.0" />
+                  <TextField fx:id="chairNameFull" layoutX="271.4" layoutY="105.0" prefHeight="26.0" prefWidth="440.0" promptText="Интеллектуальные системы информационной безопасности" AnchorPane.leftAnchor="251.0" />
                   <Label layoutX="24.0" layoutY="139.0" text="Фамилия и инициалы заведующего" AnchorPane.leftAnchor="10.0" />
                   <TextField fx:id="chairManName" layoutX="264.4" layoutY="134.0" promptText="Иванов И.И." AnchorPane.leftAnchor="251.0" />
                   <Label layoutX="26.0" layoutY="15.0" text="Инициалы института" AnchorPane.leftAnchor="10.0" />
                   <TextField fx:id="instituteName" layoutX="244.0" layoutY="11.0" prefHeight="26.0" prefWidth="51.0" promptText="КБСП" AnchorPane.leftAnchor="251.0" />
                   <Label layoutX="23.0" layoutY="46.0" text="Полное название института" AnchorPane.leftAnchor="10.0" />
-                  <TextField fx:id="facultyName" layoutX="251.0" layoutY="41.0" prefHeight="26.0" prefWidth="466.0" promptText="Институт комплексной безопасности и специального приборостроения" AnchorPane.leftAnchor="251.0" />
+                  <TextField fx:id="facultyName" layoutX="271.4" layoutY="41.0" prefHeight="26.0" prefWidth="443.0" promptText="Институт комплексной безопасности и специального приборостроения" AnchorPane.leftAnchor="251.0" />
                   <Label layoutX="25.0" layoutY="168.0" prefHeight="17.0" prefWidth="226.0" text="Фамилия и инициалы главы комиссии" AnchorPane.leftAnchor="10.0" />
                   <TextField fx:id="headOfCommissionName" layoutX="248.0" layoutY="164.0" promptText="Иванову И.И." AnchorPane.leftAnchor="251.0" />
                   <Label layoutX="27.0" layoutY="256.0" prefHeight="17.0" prefWidth="108.0" text="Форма обучения" />
                   <Separator layoutX="12.0" layoutY="204.0" prefHeight="15.0" prefWidth="767.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="10.600000000000023" />
-                  <ChoiceBox fx:id="studyForm" layoutX="140.0" layoutY="252.0" prefHeight="26.0" prefWidth="108.0" AnchorPane.leftAnchor="136.0" />
+                  <ChoiceBox fx:id="studyForm" layoutX="139.0" layoutY="252.0" prefHeight="26.0" prefWidth="108.0" AnchorPane.leftAnchor="139.0" />
                   <Label layoutX="258.0" layoutY="256.0" prefHeight="17.0" prefWidth="50.0" text="Тип ВКР" AnchorPane.leftAnchor="260.0" />
                   <ChoiceBox fx:id="vkrType" layoutX="331.4" layoutY="252.0" prefHeight="26.0" prefWidth="158.0" AnchorPane.leftAnchor="321.0" />
                   <Label layoutX="260.0" layoutY="286.0" prefHeight="17.0" prefWidth="127.0" text="Номер направления" AnchorPane.leftAnchor="260.0" />
                   <Label layoutX="27.0" layoutY="286.0" prefHeight="17.0" prefWidth="93.0" text="Номер группы" />
-                  <TextField fx:id="groupID" layoutX="136.0" layoutY="282.0" prefHeight="26.0" prefWidth="111.0" promptText="ББСО-01-16" AnchorPane.leftAnchor="136.0" />
+                  <TextField fx:id="groupID" layoutX="159.4" layoutY="282.0" prefHeight="26.0" prefWidth="104.0" promptText="ББСО-01-16" AnchorPane.leftAnchor="139.0" />
                   <TextField fx:id="napravlenieID" layoutX="400.0" layoutY="282.0" prefHeight="26.0" prefWidth="77.0" promptText="10.05.05" AnchorPane.leftAnchor="400.0" />
                   <Label layoutX="434.0" layoutY="139.0" prefHeight="17.0" prefWidth="145.0" text="Система антиплагиата" />
-                  <TextField fx:id="antiplagiatSystem" layoutX="577.0" layoutY="135.0" prefHeight="26.0" prefWidth="172.0" promptText="РУТТЕРА" />
+                  <TextField fx:id="antiplagiatSystem" layoutX="577.0" layoutY="135.0" prefHeight="26.0" prefWidth="125.0" promptText="РУКОНТТЕКСТ" />
                   <Button fx:id="serializeDataBtn" layoutX="507.0" layoutY="282.0" mnemonicParsing="false" onAction="#saveInputData" text="Сохранить набор данных" />
                   <Button fx:id="loadSerializedDataBtn" layoutX="507.0" layoutY="252.0" mnemonicParsing="false" onAction="#loadSavedData" prefHeight="26.0" prefWidth="163.0" text="Загрузить набор данных" />
                   <Label layoutX="434.0" layoutY="168.0" prefHeight="17.0" prefWidth="145.0" text="Год защиты диплома" />
-                  <TextField fx:id="yearOfGraduate" layoutX="577.0" layoutY="164.0" prefHeight="26.0" prefWidth="59.0" promptText="2020" />
-                  <TextField fx:id="savedGroupIDFile" layoutX="681.0" layoutY="252.0" prefHeight="26.0" prefWidth="92.0" promptText="БСБО-01-16" />
+                  <TextField fx:id="yearOfGraduate" layoutX="577.0" layoutY="164.0" prefHeight="26.0" prefWidth="49.0" promptText="2020" />
+                  <TextField fx:id="savedGroupIDFile" layoutX="681.0" layoutY="252.0" prefHeight="26.0" prefWidth="98.0" promptText="БСБО-01-16" />
                   <Label fx:id="fileStatusLabel" layoutX="507.0" layoutY="227.0" prefHeight="17.0" prefWidth="263.0" />
                   <Label layoutX="27.0" layoutY="227.0" prefHeight="17.0" prefWidth="108.0" text="Тип СМКО" />
-                  <ChoiceBox fx:id="smkoType" layoutX="140.0" layoutY="222.0" prefHeight="26.0" prefWidth="192.0" AnchorPane.leftAnchor="136.0" />
+                  <ChoiceBox fx:id="smkoType" layoutX="139.0" layoutY="223.0" prefHeight="26.0" prefWidth="215.0" AnchorPane.leftAnchor="139.0" />
                </children>
             </AnchorPane>
          </content>
@@ -100,19 +100,19 @@
                       </Tab>
                     </tabs>
                   </TabPane>
-                  <TitledPane animated="false" collapsible="false" layoutX="43.4" layoutY="200.4" prefHeight="197.0" prefWidth="829.0" text="Шаг третий: нажмите на кнопку &quot;сформировать личные дела&quot; для создания набора документов" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="190.0">
+                  <TitledPane animated="false" collapsible="false" layoutX="43.4" layoutY="200.4" prefHeight="197.0" prefWidth="829.0" text="Шаг третий:  выберите необходимые документы и нажмите на кнопку &quot;сформировать личные дела&quot; для их создания" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="190.0">
                      <content>
                         <AnchorPane prefHeight="126.0" prefWidth="802.0">
                            <children>
                               <ProgressBar fx:id="progressBar" layoutX="228.0" layoutY="70.0" prefHeight="20.0" prefWidth="320.0" progress="0.0" visible="false" />
                               <Button fx:id="caseProcessingStartBtn" layoutX="298.0" layoutY="77.0" mnemonicParsing="false" onAction="#makeDocuments" text="Сформировать личные дела" />
-                              <Label layoutX="572.0" layoutY="111.0" text="Автор программы: Ксенофонтов Н.В. Кафедра КБ-4">
+                              <Label layoutX="580.0" layoutY="111.0" text="Автор программы: Ксенофонтов Н.В. Кафедра КБ-4">
                                  <font>
                                     <Font size="9.0" />
                                  </font>
                               </Label>
                               <Label fx:id="workIndicator" alignment="CENTER" layoutX="316.0" layoutY="108.0" prefHeight="17.0" prefWidth="145.0" />
-                              <Label layoutX="526.0" layoutY="122.0" text="Обнаруженные проблемы пишите на почту: kseoni4@gmail.com">
+                              <Label layoutX="526.0" layoutY="122.0" text="О возникших проблемах сообщайте на почту: kseoni4@gmail.com">
                                  <font>
                                     <Font size="9.0" />
                                  </font>
