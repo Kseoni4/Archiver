@@ -25,8 +25,7 @@
     <orderEntry type="library" name="javafx" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
-    <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="doc" level="project" />
+    <orderEntry type="library" name="spire.doc-5.4.0" level="project" />
   </component>
 </module>

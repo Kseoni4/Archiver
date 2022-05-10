@@ -7,11 +7,17 @@ package main;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import modules.VKRApplication;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 
 import java.io.*;
@@ -332,6 +338,16 @@ public class Controller {
         oos.close();
 
         fileStatusLabel.setText("Файл успешно сохранён!");
+    }
+
+    @FXML
+    void changeWindowToVKRButton(ActionEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(VKRApplication.class.getResource("mainWindowsVKR.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setTitle("Отчет ВКР");
+        window.setScene(scene);
+        window.show();
     }
 
     @FXML

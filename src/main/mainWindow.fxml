@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
    <children>
       <TitledPane animated="false" collapsible="false" layoutX="8.0" layoutY="8.0" prefHeight="600.0" prefWidth="800.0" text="Шаг первый: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -52,6 +52,7 @@
                   <Label fx:id="fileStatusLabel" layoutX="507.0" layoutY="227.0" prefHeight="17.0" prefWidth="263.0" />
                   <Label layoutX="27.0" layoutY="227.0" prefHeight="17.0" prefWidth="108.0" text="Тип СМКО" />
                   <ChoiceBox fx:id="smkoType" layoutX="139.0" layoutY="223.0" prefHeight="26.0" prefWidth="215.0" AnchorPane.leftAnchor="139.0" />
+                  <Button layoutX="531.0" layoutY="11.0" mnemonicParsing="false" onAction="#changeWindowToVKRButton" text="Отчет ВКР" />
                </children>
             </AnchorPane>
          </content>
