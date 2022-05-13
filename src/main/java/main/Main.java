@@ -53,7 +53,7 @@ public class Main extends Application {
         String s1 = "abc";
         String s2 = "bca";
         System.out.println("Java" + 1 + 2 + 3);
-        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/main/mainWindow.fxml"));
         if(!Files.isDirectory(Paths.get("OutDocuments"))) {
             Files.createDirectory(Paths.get("OutDocuments"));
         }

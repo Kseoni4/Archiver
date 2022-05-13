@@ -15,10 +15,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.Main;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
 
-import java.awt.*;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class VKRController implements Initializable {
@@ -88,6 +91,30 @@ public class VKRController implements Initializable {
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);
         window.show();
+    }
+
+    @FXML
+    void makeDocumentVKR(ActionEvent event) throws Exception {
+        System.out.println("Start making document");
+        if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))){
+                Files.createDirectory(Paths.get("OutDocumentsVKR/"));
+        }
+        ProcessingDataVKR processingDataVKR = new ProcessingDataVKR(new VKRData(
+                instituteName.getText(),
+                courseNameFull.getText(),
+                chairName.getText(),
+                studentName.getText(),
+                VKRName.getText(),
+                HeadOfVKRName.getText(),
+                reviewerName.getText(),
+                courseName.getText(),
+                dateFull.getText(),
+                protocolNumber.getText(),
+                VKRGrade.getValue().toString()
+        ));
+
+        processingDataVKR.makeDocumentVKR();
+
     }
 
 }

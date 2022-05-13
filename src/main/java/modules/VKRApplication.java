@@ -10,13 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.awt.*;
-
 public class VKRApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(VKRApplication.class.getResource("mainWindowsVKR.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/modules/mainWindowsVKR.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
