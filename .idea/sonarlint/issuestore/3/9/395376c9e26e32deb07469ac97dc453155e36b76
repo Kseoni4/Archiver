@@ -1,0 +1,48 @@
+
+\	java:S107$"BConstructor has 12 parameters, which is greater than 7 authorized.(ûä¢šþÿÿÿÿ
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä¼ž üÿÿÿÿ
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä¼ž üÿÿÿÿ
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä¼ž üÿÿÿÿ
+k	java:S117&"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£•áÀùÿÿÿÿ
+f	java:S117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸òÎ›
+p
+java:S1104
+"UMake FirstName a static final constant or non-public and provide accessors if needed.(¤óôåùÿÿÿÿ
+l
+java:S1104"VMake FatherName a static final constant or non-public and provide accessors if needed.(¯­«ë
+j
+java:S1104"TMake LastName a static final constant or non-public and provide accessors if needed.(÷ð¢¥
+p
+java:S1104"UMake Person_ID a static final constant or non-public and provide accessors if needed.(š®ÎÇøÿÿÿÿ
+u
+java:S1104"ZMake Napravlenie_ID a static final constant or non-public and provide accessors if needed.(­ôŸ®þÿÿÿÿ
+j
+java:S1104"TMake Group_ID a static final constant or non-public and provide accessors if needed.(˜ƒô¹
+l
+java:S1104"QMake Score a static final constant or non-public and provide accessors if needed.(Ï®»òøÿÿÿÿ
+k
+java:S1104"PMake Date a static final constant or non-public and provide accessors if needed.(÷Ýöîøÿÿÿÿ
+m
+java:S1104"WMake Protocol_ID a static final constant or non-public and provide accessors if needed.(™ÀŽâ
+j
+java:S1104"TMake VKRTitle a static final constant or non-public and provide accessors if needed.(óÐž¤
+o
+java:S1104"YMake HeadOfVKRName a static final constant or non-public and provide accessors if needed.(È òþ
+m
+java:S1104"WMake Originality a static final constant or non-public and provide accessors if needed.(Â¢ÐÆ
+x
+java:S1104"]Make AntiplagiatSystem a static final constant or non-public and provide accessors if needed.(Ü§ÆŒûÿÿÿÿ
+n	java:S116
+"TRename this field "FirstName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤óôåùÿÿÿÿ
+j	java:S116"URename this field "FatherName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯­«ë
+h	java:S116"SRename this field "LastName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ð¢¥
+n	java:S116"TRename this field "Person_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š®ÎÇøÿÿÿÿ
+s	java:S116"YRename this field "Napravlenie_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ôŸ®þÿÿÿÿ
+h	java:S116"SRename this field "Group_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜ƒô¹
+j	java:S116"PRename this field "Score" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï®»òøÿÿÿÿ
+i	java:S116"ORename this field "Date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷Ýöîøÿÿÿÿ
+k	java:S116"VRename this field "Protocol_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™ÀŽâ
+h	java:S116"SRename this field "VKRTitle" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óÐž¤
+m	java:S116"XRename this field "HeadOfVKRName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È òþ
+k	java:S116"VRename this field "Originality" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â¢ÐÆ
+v	java:S116"\Rename this field "AntiplagiatSystem" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ü§ÆŒûÿÿÿÿ
