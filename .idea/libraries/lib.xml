@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../javafx-sdk-17.0.2/lib" />
       <root url="file://$PROJECT_DIR$/javafx-sdk-17.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/javafx-sdk-17.0.2/lib" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
@@ -10,6 +11,7 @@
       <root url="file://$PROJECT_DIR$/javafx-sdk-17.0.2/lib" />
     </NATIVE>
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/javafx-sdk-17.0.2/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/javafx-sdk-17.0.2/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../javafx-sdk-17.0.2/lib" recursive="false" />
   </library>
