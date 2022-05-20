@@ -37,7 +37,7 @@
                   <TextField fx:id="courseName" layoutX="157.0" layoutY="213.0" prefHeight="26.0" prefWidth="101.0" promptText="10.10.10" />
                   <TextField fx:id="dateFull" layoutX="158.0" layoutY="245.0" prefHeight="26.0" prefWidth="180.0" promptText="вторник, 14 Январь, 2022" />
                   <TextField fx:id="protocolNumber" layoutX="158.0" layoutY="280.0" prefHeight="26.0" prefWidth="99.0" promptText="16/20" />
-                  <Button layoutX="614.0" layoutY="16.0" mnemonicParsing="false" onAction="#changeWindowToArchiverButton" text="Основной Архивер" />
+                  <Button layoutX="614.0" layoutY="16.0" mnemonicParsing="false" onAction="#changeWindowToChooseFileButton" text="Назад" />
                   <Button layoutX="614.0" layoutY="92.0" mnemonicParsing="false" onAction="#makeDocumentVKR" text="Сформировать отчет" />
                </children>
             </AnchorPane>

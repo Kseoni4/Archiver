@@ -84,8 +84,8 @@ public class VKRController implements Initializable {
     }
 
     @FXML
-    void changeWindowToArchiverButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("mainWindow.fxml"));
+    void changeWindowToChooseFileButton(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseFileVKRWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
