@@ -18,15 +18,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.Main;
-import org.apache.commons.collections.MultiHashMap;
-import org.apache.commons.collections.MultiMap;
-import org.apache.commons.collections4.MapIterator;
-import org.apache.commons.collections4.MultiSet;
-import org.apache.commons.collections4.MultiValuedMap;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
 
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.xml.bind.JAXBException;
+
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;

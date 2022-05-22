@@ -73,5 +73,3 @@ a
 ,javafx-sdk-17.0.2/legal/javafx.web/webkit.md,4/2/42d95a219e13d3a2f92d4d4e14ef53eb23f08ac1
 R
 "src/main/java/modules/VKRData.java,0/4/040725127fc1700e56a9c807821f8d972cc33050
-P
- src/main/java/main/Launcher.java,8/8/88f3bc41b0540446865a9ba97883387c0a3cf3b5

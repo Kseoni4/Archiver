@@ -5,6 +5,7 @@
 
 package main;
 
+
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import javafx.application.Preloader;
@@ -192,7 +193,7 @@ public class Controller {
     }
 
     @FXML
-    void makeDocuments(ActionEvent event) throws IOException, Docx4JException, CsvException {
+    void makeDocuments(ActionEvent event) throws IOException{
         System.out.println("START PROCESSING DATA");
 
         ProcessingData.PersonCaseNumber = 0;
@@ -223,6 +224,10 @@ public class Controller {
                     System.out.println("\u001b[38;5;196m"+e.getLocalizedMessage());
                     errorMessage.setText("Ошибка кодировки файла, выберите другую кодировку");
                     return;
+                } catch (Docx4JException e) {
+                    e.printStackTrace();
+                } catch (CsvException e) {
+                    e.printStackTrace();
                 }
             } else {
                 Student student = createNewStudent(getStudentData());
@@ -232,6 +237,8 @@ public class Controller {
         } catch (IOException e){
             errorMessage.setText("Произошла ошибка при формировании документов!");
             return;
+        } catch (Docx4JException e) {
+            e.printStackTrace();
         }
 
         System.out.println("END OF PROCESSING DATA");
