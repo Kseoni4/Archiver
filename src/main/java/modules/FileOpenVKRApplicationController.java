@@ -40,10 +40,11 @@ public class FileOpenVKRApplicationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
     @FXML
     void nextStepButton(ActionEvent event) throws IOException {
        /* if ((file!=null)&&getFileExtension(file.getName()).equals("rtf")){*/
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
