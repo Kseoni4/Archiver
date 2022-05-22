@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="spire.doc-5.4.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../spire.doc-5.4.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/spire.doc-5.4.0.jar!/" />
     </CLASSES>
     <JAVADOC />
