@@ -32,5 +32,7 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="spire.doc-5.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.8.0-beta4" level="project" />
+    <orderEntry type="library" name="Maven: com.github.joniles:rtfparserkit:1.16.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.ws.rs:javax.ws.rs-api:2.1" level="project" />
   </component>
 </module>

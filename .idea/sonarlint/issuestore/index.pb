@@ -71,23 +71,7 @@ a
 1javafx-sdk-17.0.2/legal/javafx.graphics/mesa3d.md,3/e/3e52cd107196babd16d3f7c51f65384215060a4d
 \
 ,javafx-sdk-17.0.2/legal/javafx.web/webkit.md,4/2/42d95a219e13d3a2f92d4d4e14ef53eb23f08ac1
-O
-src/main/java/main/Student.java,3/9/395376c9e26e32deb07469ac97dc453155e36b76
 R
 "src/main/java/modules/VKRData.java,0/4/040725127fc1700e56a9c807821f8d972cc33050
 P
- src/main/java/main/BaseData.java,3/2/32cc14b40a7c02013e086f1aef8f57dc9e0fe654
-P
  src/main/java/main/Launcher.java,8/8/88f3bc41b0540446865a9ba97883387c0a3cf3b5
-7
-pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
-L
-src/main/java/main/Main.java,7/f/7f08be4e9c62f2e5f8f02242af89b918cb9a135f
-Y
-)src/main/java/modules/VKRApplication.java,5/e/5e9800f665762c254c0670eaa91d7a9140c39bd6
-T
-$src/main/java/main/Placeholders.java,0/e/0e9da29682ef672f4ff52ac42051e613660bb277
-V
-&src/main/java/main/ProcessingData.java,4/4/44c73f2bb9cd190b2d7f784807d0def5fda988e5
-\
-,src/main/java/modules/ProcessingDataVKR.java,1/a/1a9fb494b884174bb03261ad791e0dfca1092e99

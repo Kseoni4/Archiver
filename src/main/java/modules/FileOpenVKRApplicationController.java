@@ -42,18 +42,18 @@ public class FileOpenVKRApplicationController implements Initializable {
     }
     @FXML
     void nextStepButton(ActionEvent event) throws IOException {
-        if ((file!=null)&&getFileExtension(file.getName()).equals("rtf")){
+       /* if ((file!=null)&&getFileExtension(file.getName()).equals("rtf")){*/
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);
             window.show();
-        } else if (file==null){
+        /*} else if (file==null){
             fileLabel.setText("Выберите файл с расширением rtf");
         } else if (!getFileExtension(file.getName()).equals("rtf")){
             fileLabel.setText("Выбран файл не с расширением rtf");
-        }
+        }*/
     }
 
     @FXML
