@@ -17,35 +17,17 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.Main;
 
 import org.apache.poi.xwpf.usermodel.*;
-import org.docx4j.services.client.ConversionException;
-import org.docx4j.services.client.Converter;
-import org.docx4j.services.client.Format;
-import org.w3c.dom.ranges.Range;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
 
-import javax.swing.*;
-import javax.swing.text.rtf.RTFEditorKit;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.sax.SAXTransformerFactory;
-import javax.xml.transform.sax.TransformerHandler;
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FileOpenVKRApplicationController implements Initializable {
 
@@ -117,6 +99,8 @@ public class FileOpenVKRApplicationController implements Initializable {
         FileInputStream fileInputStream = new FileInputStream("test.docx");
         XWPFDocument document = new XWPFDocument(fileInputStream);
 
+        /*Твой изначальный метод
+
         List<XWPFTable> tables = document.getTables();
 
         System.out.println("Total number of parags:: " +tables.size());
@@ -128,9 +112,38 @@ public class FileOpenVKRApplicationController implements Initializable {
                     System.out.println("Table index:: "+i +" row index:: "+j+" " + cell.getText());
                 }
             }
+        }*/
+
+        /*Можно посмареть скока и каких объектов в доке
+
+        List<IBodyElement> tables = document.getBodyElements();
+        System.out.println("Total number of parags:: " +tables.size());
+        for (int i = 0; i<tables.size(); i++){
+            System.out.println(tables.get(i).getElementType());
+        }
+        */
+
+        // По факту твой же метод, но выводящий чисто метаданные студентов групп
+        List<XWPFTable> tables = document.getTables();
+
+        System.out.println("Найдены следующие таблицы групп");
+        for (int i = 0; i < tables.size(); i++) {
+            if (tables.get(i).getRows().get(0).getCell(0).getText().equalsIgnoreCase("ФИО студента")) {
+                for (int j = 0; j < tables.get(i).getRows().size(); j++) {
+                    int studentNumber = 1;
+                    int checkHelper = 0;
+                    for (XWPFTableCell cell : tables.get(i).getRows().get(j).getTableCells()) {
+                        if (cell.getText().equalsIgnoreCase("ФИО студента") ||
+                                cell.getText().equalsIgnoreCase("Тема выпускной квалификационной работы") ||
+                                cell.getText().equalsIgnoreCase("Руководитель \n" +
+                                        "выпускной квалификационной работы\n")) {
+                        } else {
+                            System.out.println("Table index:: " + i + " row index:: " + j + " " + cell.getText());
+                        }
+                    }
+                }
+            }
         }
         fileInputStream.close();
-
     }
-
 }
