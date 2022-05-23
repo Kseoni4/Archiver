@@ -94,9 +94,9 @@ public class ChooseInstituteController implements Initializable {
             String napName;
             while ((nextLine = csvReader.readLine()) != null) {
                 LinkedList<String> forInst = new LinkedList<>(Arrays.stream(nextLine.split(";")).toList());
-                for (String tmp : forInst){
+                /*for (String tmp : forInst){
                     System.out.println(tmp);
-                }
+                }*/
                 instName = forInst.remove(0);
                 chaName = forInst.remove(0);
                 napName = forInst.remove(0)+" "+ forInst.remove(0);
