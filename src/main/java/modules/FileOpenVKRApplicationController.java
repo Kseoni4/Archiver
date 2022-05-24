@@ -103,6 +103,52 @@ public class FileOpenVKRApplicationController implements Initializable {
         FileInputStream fileInputStream = new FileInputStream("test.docx");
         XWPFDocument document = new XWPFDocument(fileInputStream);
 
+        List<IBodyElement> objects = document.getBodyElements();
+        ArrayList<String> groups = new ArrayList<>();
+        System.out.println("Total number of parags:: " + objects.size());
+        int tableCount = 0;
+        Pattern groupIndexPattern = Pattern.compile("\\b[А-ЯЁ]{4}[-][0-9]{2}[-][0-9]{2}\\b");
+        int i = 0;
+        while (tableCount != 2) {
+            //System.out.println(objects.get(i).getElementType().name());
+            if (objects.get(i).getElementType().name().equalsIgnoreCase("TABLE")) {
+                tableCount++;
+            } else {
+                String text = objects.get(i).getBody().getParagraphs().get(i).getText();
+                //System.out.println(text);
+                Matcher match = groupIndexPattern.matcher(text);
+                if (match.find()) {
+                    //System.out.println("Вы нашли группу - " + match.group());
+                    groups.add(match.group());
+                }
+            }
+            i++;
+        }
+        System.out.println("Найденные группы в документе - " + groups);
+        tableCount = groups.size();
+        int indexGroup = 0;
+
+        List<XWPFTable> tables = document.getTables();
+
+        for(i=0;i<tables.size();i++) {
+            if (tables.get(i).getRows().get(0).getCell(0).getText().equalsIgnoreCase("ФИО студента")) {
+                int studentNumber = 1;
+                System.out.println("Группа - " + groups.get(indexGroup));
+                indexGroup++;
+                for (int j = 1; j < tables.get(i).getRows().size(); j++) {
+                    System.out.println(studentNumber + " - студент:\n" +
+                            "ФИО: " + tables.get(i).getRows().get(j).getCell(0).getText() + "\n" +
+                            "Тема ВКР: " + tables.get(i).getRows().get(j).getCell(1).getText() + "\n" +
+                            "Научный руководитель: " + tables.get(i).getRows().get(j).getCell(2).getText());
+                    studentNumber++;
+                }
+                System.out.println();
+            }
+        }
+        fileInputStream.close();
+    }
+
+
         //Твой изначальный метод
         /*
         List<XWPFTable> tables = document.getTables();
@@ -129,6 +175,7 @@ public class FileOpenVKRApplicationController implements Initializable {
 
         // По факту твой же метод, но выводящий чисто метаданные студентов групп
 
+        /*
         List<XWPFTable> tables = document.getTables();
 
         System.out.println("Найдены следующие таблицы групп");
@@ -154,6 +201,8 @@ public class FileOpenVKRApplicationController implements Initializable {
     }
 
     //Метод для поиска групп
+
+    /*
     private void findingGroups(File file) throws IOException, XMLStreamException {
 
         Document document1 = new Document();
@@ -187,4 +236,5 @@ public class FileOpenVKRApplicationController implements Initializable {
 
         fileInputStream.close();
     }
+    */
 }
