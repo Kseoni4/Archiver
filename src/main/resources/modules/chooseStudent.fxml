@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseStudentController">
+   <children>
+      <TitledPane animated="false" prefHeight="400.0" prefWidth="600.0" text="Шаг четвертый: выберите студента" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableStudent" layoutX="173.0" layoutY="10.0" prefHeight="458.0" prefWidth="540.0">
+                    <columns>
+                      <TableColumn fx:id="studentName" prefWidth="249.0" text="ФИО" />
+                      <TableColumn fx:id="studentVkrName" minWidth="6.0" prefWidth="146.0" text="Тема" />
+                        <TableColumn fx:id="studentNauchName" prefWidth="142.0" text="Научрук" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tableGroup" layoutX="8.0" layoutY="10.0" prefHeight="458.0" prefWidth="127.0">
+                    <columns>
+                      <TableColumn fx:id="groupName" prefWidth="124.00000607967377" text="Группа" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>
