@@ -28,6 +28,8 @@ public class ChooseInstituteController implements Initializable {
     private HashMap<String, LinkedList<String>> hashMapChair;
     private HashMap<String, LinkedList<String>> hashMapNapr;
 
+    private LinkedList<GroupData> groupData;
+
     //Полное название института
     @FXML
     protected ComboBox<String> instituteName;
@@ -72,12 +74,27 @@ public class ChooseInstituteController implements Initializable {
 
     @FXML
     void nextStepButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        ChooseStudentController controller = fxmlLoader.getController();
+        controller.initGroupData(groupData);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);
         window.show();
+    }
+
+    public void getData(LinkedList<GroupData> aGroupData){
+        groupData = new LinkedList<>();
+        while (aGroupData.size()>0){
+            System.out.println("Added Intitute");
+            groupData.add(aGroupData.remove(0));
+        }
+        System.out.println("Институт данные получил");
+        for (int i = 0; i<groupData.size(); i++){
+            System.out.println(groupData.get(i).getName());
+        }
+
     }
 
     private void prepareHashMaps() {
