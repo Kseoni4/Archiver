@@ -53,7 +53,7 @@ public class FileOpenVKRApplicationController implements Initializable {
     private LinkedList<GroupData> groupData;
 
     @FXML
-    void nextStepButton(ActionEvent event) throws IOException, XMLStreamException {
+    void nextStepButton(ActionEvent event) throws IOException {
         if ((file!=null)&&getFileExtension(file.getName()).equals("rtf")){
            rtfParse(file);
            int i = 0;
@@ -105,7 +105,7 @@ public class FileOpenVKRApplicationController implements Initializable {
     }
 
 
-    private void rtfParse(File file) throws IOException, XMLStreamException {
+    private void rtfParse(File file) throws IOException {
 
         Document document1 = new Document();
         document1.loadFromFile(file.getAbsolutePath(), FileFormat.Rtf);
@@ -115,54 +115,57 @@ public class FileOpenVKRApplicationController implements Initializable {
 
         groupData = new LinkedList<>();
 
+        List<XWPFTable> tables = document.getTables();
         List<IBodyElement> objects = document.getBodyElements();
-
         ArrayList<String> groups = new ArrayList<>();
-        System.out.println("Total number of parags:: " + objects.size());
+
         int tableCount = 0;
-        Pattern groupIndexPattern = Pattern.compile("\\b[А-ЯЁ]{4}[-][0-9]{2}[-][0-9]{2}\\b");
         int i = 0;
+        int indexGroup = 0;
+
+        String studentName;
+        String studentVkrName;
+        String studentNauchName;
+
+        Pattern groupIndexPattern = Pattern.compile("\\b[А-ЯЁ]{4}[-][0-9]{2}[-][0-9]{2}\\b");
+
         while (tableCount != 2) {
-            //System.out.println(objects.get(i).getElementType().name());
             if (objects.get(i).getElementType().name().equalsIgnoreCase("TABLE")) {
                 tableCount++;
             } else {
                 String text = objects.get(i).getBody().getParagraphs().get(i).getText();
-                //System.out.println(text);
                 Matcher match = groupIndexPattern.matcher(text);
                 if (match.find()) {
-                    //System.out.println("Вы нашли группу - " + match.group());
                     groups.add(match.group());
                     groupData.add(new GroupData(match.group()));
                 }
             }
             i++;
         }
-        System.out.println("Найденные группы в документе - " + groups);
-        tableCount = groups.size();
-        int indexGroup = 0;
 
-        List<XWPFTable> tables = document.getTables();
-        String studentName;
-        String studentVkrName;
-        String studentNauchName;
+        //System.out.println("Найденные группы в документе - " + groups);
 
-        for(i=0;i<tables.size();i++) {
+        for(i = 0; i < tables.size(); i++) {
             if (tables.get(i).getRows().get(0).getCell(0).getText().equalsIgnoreCase("ФИО студента")) {
-                int studentNumber = 1;
-                System.out.println("Группа - " + groups.get(indexGroup));
-                //indexGroup++;
+
+                //int studentNumber = 1;
+                //System.out.println("Группа - " + groups.get(indexGroup));
+
                 for (int j = 1; j < tables.get(i).getRows().size(); j++) {
+
                     studentName = tables.get(i).getRows().get(j).getCell(0).getText();
                     studentVkrName = tables.get(i).getRows().get(j).getCell(1).getText();
                     studentNauchName = tables.get(i).getRows().get(j).getCell(2).getText();
 
                     groupData.get(indexGroup).getGroupStudents().add(new Student(studentName, studentVkrName, studentNauchName));
+
+                    /*
                     System.out.println(studentNumber + " - студент:\n" +
                             "ФИО: " + tables.get(i).getRows().get(j).getCell(0).getText() + "\n" +
                             "Тема ВКР: " + tables.get(i).getRows().get(j).getCell(1).getText() + "\n" +
                             "Научный руководитель: " + tables.get(i).getRows().get(j).getCell(2).getText());
                     studentNumber++;
+                     */
                 }
                 indexGroup++;
                 System.out.println();
@@ -170,94 +173,4 @@ public class FileOpenVKRApplicationController implements Initializable {
         }
         fileInputStream.close();
     }
-
-
-        //Твой изначальный метод
-        /*
-        List<XWPFTable> tables = document.getTables();
-
-        System.out.println("Total number of parags:: " +tables.size());
-        System.out.println("Total number of rows in table 0:: " +tables.get(0).getRows().size());
-        System.out.println("Total Number of TableCells in row 0:: "+tables.get(0).getRows().get(0).getTableCells().size());
-        for (int i = 0; i<tables.size(); i++){
-            for (int j = 0; j<tables.get(i).getRows().size(); j++){
-                for (XWPFTableCell cell : tables.get(i).getRows().get(j).getTableCells()){
-                    System.out.println("Table index:: "+i +" row index:: "+j+" " + cell.getText());
-                }
-            }
-        }
-        */
-
-        //Можно посмареть скока и каких объектов в доке
-        /*
-        List<IBodyElement> tables = document.getBodyElements();
-        System.out.println("Total number of parags:: " +tables.size());
-        for (int i = 0; i<tables.size(); i++){
-            System.out.println(tables.get(i).getElementType());
-         */
-
-        // По факту твой же метод, но выводящий чисто метаданные студентов групп
-
-        /*
-        List<XWPFTable> tables = document.getTables();
-
-        System.out.println("Найдены следующие таблицы групп");
-        for (int i = 0; i < tables.size(); i++) {
-            if (tables.get(i).getRows().get(0).getCell(0).getText().equalsIgnoreCase("ФИО студента")) {
-                for (int j = 0; j < tables.get(i).getRows().size(); j++) {
-                    int studentNumber = 1;
-                    int checkHelper = 0;
-                    for (XWPFTableCell cell : tables.get(i).getRows().get(j).getTableCells()) {
-                        if (cell.getText().equalsIgnoreCase("ФИО студента") ||
-                                cell.getText().equalsIgnoreCase("Тема выпускной квалификационной работы") ||
-                                cell.getText().equalsIgnoreCase("Руководитель \n" +
-                                        "выпускной квалификационной работы\n")) {
-                        } else {
-                            System.out.println("Table index:: " + i + " row index:: " + j + " " + cell.getText());
-                        }
-                    }
-                }
-            }
-        }
-
-        fileInputStream.close();
-    }
-
-    //Метод для поиска групп
-
-    /*
-    private void findingGroups(File file) throws IOException, XMLStreamException {
-
-        Document document1 = new Document();
-        document1.loadFromFile(file.getAbsolutePath(), FileFormat.Rtf);
-        document1.saveToFile("test.docx", FileFormat.Docx);
-        FileInputStream fileInputStream = new FileInputStream("test.docx");
-        XWPFDocument document = new XWPFDocument(fileInputStream);
-
-        List<IBodyElement> tables = document.getBodyElements();
-        ArrayList<String> groups = new ArrayList<>();
-        System.out.println("Total number of parags:: " +tables.size());
-        int tableCount = 0;
-        Pattern groupIndexPattern = Pattern.compile("\\b[А-ЯЁ]{4}[-][0-9]{2}[-][0-9]{2}\\b");
-        int i = 0;
-        while (tableCount != 2) {
-            //System.out.println(tables.get(i).getElementType().name());
-            if (tables.get(i).getElementType().name().equalsIgnoreCase("TABLE")) {
-                tableCount++;
-            } else {
-                String text = tables.get(i).getBody().getParagraphs().get(i).getText();
-                //System.out.println(text);
-                Matcher match = groupIndexPattern.matcher(text);
-                if (match.find()) {
-                    //System.out.println("Вы нашли группу - " + match.group());
-                    groups.add(match.group());
-                }
-            }
-            i++;
-        }
-        System.out.println("Найденные группы в документе - " + groups);
-
-        fileInputStream.close();
-    }
-    */
 }
