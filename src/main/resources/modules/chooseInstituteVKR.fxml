@@ -2,20 +2,52 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="826.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
    <children>
-      <TitledPane animated="false" prefHeight="400.0" prefWidth="600.0" text="Шаг второй: выберите факультет, кафедру и направление" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ComboBox fx:id="instituteName" layoutX="225.0" layoutY="35.0" onAction="#instituteSelected" prefWidth="150.0" />
-      <ComboBox fx:id="chairName" layoutX="225.0" layoutY="85.0" onAction="#chairSelected" prefWidth="150.0" />
-      <ComboBox fx:id="courseNameFull" layoutX="225.0" layoutY="140.0" prefWidth="150.0" />
-      <Label layoutX="14.0" layoutY="39.0" text="Полное название института" />
-      <Label layoutX="18.0" layoutY="90.0" text="Полное название кафедры" />
-      <Label layoutX="14.0" layoutY="145.0" text="Полное название направления" />
-      <Button layoutX="346.0" layoutY="347.0" mnemonicParsing="false" onAction="#changeWindowToChooseFileButton" text="Назад" />
-      <Button layoutX="492.0" layoutY="348.0" mnemonicParsing="false" onAction="#nextStepButton" text="Далее" />
+      <TitledPane animated="false" prefHeight="26.0" prefWidth="650.0" text="Шаг второй: выберите факультет, кафедру и направление" AnchorPane.bottomAnchor="504.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ComboBox fx:id="instituteName" layoutX="225.0" layoutY="35.0" onAction="#instituteSelected" prefHeight="26.0" prefWidth="257.0" />
+      <ComboBox fx:id="chairName" layoutX="225.0" layoutY="71.0" onAction="#chairSelected" prefHeight="26.0" prefWidth="257.0" />
+      <ComboBox fx:id="courseNameFull" layoutX="225.0" layoutY="107.0" prefHeight="26.0" prefWidth="257.0" />
+      <Label layoutX="8.0" layoutY="39.0" prefHeight="17.0" prefWidth="187.0" text="Полное название института" />
+      <Label layoutX="9.0" layoutY="70.0" prefHeight="26.0" prefWidth="181.0" text="Полное название кафедры" />
+      <Label layoutX="9.0" layoutY="108.0" prefHeight="26.0" prefWidth="203.0" text="Полное название направления" />
+      <Button layoutX="633.0" layoutY="471.0" mnemonicParsing="false" onAction="#changeWindowToChooseFileButton" text="Назад" />
+      <Button layoutX="726.0" layoutY="471.0" mnemonicParsing="false" onAction="#nextStepButton" text="Далее" />
+      <Label layoutX="9.0" layoutY="148.0" prefHeight="26.0" prefWidth="170.0" text="Председатель ГЭК" />
+      <TextField fx:id="predsedatel" layoutX="225.0" layoutY="149.0" prefHeight="17.0" prefWidth="257.0" />
+      <TextField fx:id="secretary" layoutX="225.0" layoutY="387.0" prefHeight="26.0" prefWidth="257.0" />
+      <Label layoutX="18.0" layoutY="392.0" prefHeight="17.0" prefWidth="139.0" text="Секретарь ГЭК" />
+      <Label layoutX="18.0" layoutY="430.0" text="Номер протокола" />
+      <TextField fx:id="protocolNumber" layoutX="225.0" layoutY="426.0" prefHeight="26.0" prefWidth="257.0" promptText="01/22" />
+      <DatePicker fx:id="fullDate" layoutX="225.0" layoutY="465.0" />
+      <Label layoutX="18.0" layoutY="470.0" text="Дата заседания" />
+      <Label fx:id="errorLabel1" layoutX="499.0" layoutY="35.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel2" layoutX="504.0" layoutY="71.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel3" layoutX="511.0" layoutY="107.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel4" layoutX="504.0" layoutY="149.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel5" layoutX="504.0" layoutY="175.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel6" layoutX="497.0" layoutY="220.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel7" layoutX="497.0" layoutY="258.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel8" layoutX="497.0" layoutY="299.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel9" layoutX="499.0" layoutY="343.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel10" layoutX="497.0" layoutY="388.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel11" layoutX="499.0" layoutY="426.0" prefHeight="26.0" prefWidth="315.0" />
+      <Label fx:id="errorLabel12" layoutX="427.0" layoutY="466.0" prefHeight="26.0" prefWidth="192.0" />
+      <Label layoutX="11.0" layoutY="191.0" prefHeight="17.0" prefWidth="178.0" text="Первый член ГЭК" />
+      <Label layoutX="22.0" layoutY="232.0" prefHeight="17.0" prefWidth="120.0" text="Второй член ГЭК" />
+      <Label layoutX="19.0" layoutY="275.0" text="Третий член ГЭК" />
+      <Label layoutX="18.0" layoutY="316.0" text="Четвертый член ГЭК" />
+      <Label layoutX="33.0" layoutY="347.0" text="Пятый член ГЭК" />
+      <TextField fx:id="memberGek1" layoutX="227.0" layoutY="186.0" prefHeight="26.0" prefWidth="250.0" />
+      <TextField fx:id="memberGek2" layoutX="228.0" layoutY="230.0" prefHeight="26.0" prefWidth="250.0" />
+      <TextField fx:id="memberGek3" layoutX="223.0" layoutY="272.0" prefHeight="26.0" prefWidth="250.0" />
+      <TextField fx:id="memberGek4" layoutX="228.0" layoutY="313.0" prefHeight="26.0" prefWidth="250.0" />
+      <TextField fx:id="memberGek5" layoutX="228.0" layoutY="344.0" prefHeight="26.0" prefWidth="250.0" />
    </children>
 </AnchorPane>

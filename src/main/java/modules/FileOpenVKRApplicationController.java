@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -47,8 +48,11 @@ public class FileOpenVKRApplicationController implements Initializable {
     @FXML
     private Label fileLabel;
 
+    @FXML protected ProgressBar progressBar = new ProgressBar();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        progressBar.setProgress(0.25F);
 
     }
     private LinkedList<GroupData> groupData;

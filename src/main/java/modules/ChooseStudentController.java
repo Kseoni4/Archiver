@@ -61,10 +61,12 @@ public class ChooseStudentController implements Initializable {
 
     public void setTableStudents(){
         GroupData group = tableGroup.getSelectionModel().getSelectedItem();
-        ObservableList<Student> students = FXCollections.observableArrayList();
-        for (Student student : group.getGroupStudents()){
-            students.add(student);
+        if (group!=null) {
+            ObservableList<Student> students = FXCollections.observableArrayList();
+            for (Student student : group.getGroupStudents()) {
+                students.add(student);
+            }
+            tableStudent.setItems(students);
         }
-        tableStudent.setItems(students);
     }
 }

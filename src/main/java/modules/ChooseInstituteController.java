@@ -5,13 +5,17 @@
 
 package modules;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import main.Main;
 
@@ -30,17 +34,46 @@ public class ChooseInstituteController implements Initializable {
 
     private LinkedList<GroupData> groupData;
 
-    //Полное название института
-    @FXML
-    protected ComboBox<String> instituteName;
+    private LinkedList<MemberGek> memberGeks = new LinkedList<>();
 
-    //Полное название направления обучения
-    @FXML
-    protected ComboBox<String> courseNameFull;
+    @FXML protected ComboBox<String> instituteName;
 
-    //Полное название кафедры
-    @FXML
-    protected ComboBox<String> chairName;
+    @FXML protected ComboBox<String> courseNameFull;
+
+    @FXML protected ComboBox<String> chairName;
+
+    @FXML protected TextField predsedatel;
+
+    @FXML protected TextField memberGek1;
+
+    @FXML protected TextField memberGek2;
+
+    @FXML protected TextField memberGek3;
+
+    @FXML protected TextField memberGek4;
+
+    @FXML protected TextField memberGek5;
+
+    @FXML protected TextField secretary;
+
+    @FXML protected TextField protocolNumber;
+
+    @FXML protected DatePicker fullDate;
+
+    @FXML protected Label errorLabel1;
+    @FXML protected Label errorLabel2;
+    @FXML protected Label errorLabel3;
+    @FXML protected Label errorLabel4;
+    @FXML protected Label errorLabel5;
+    @FXML protected Label errorLabel6;
+    @FXML protected Label errorLabel7;
+    @FXML protected Label errorLabel8;
+    @FXML protected Label errorLabel9;
+    @FXML protected Label errorLabel10;
+    @FXML protected Label errorLabel11;
+    @FXML protected Label errorLabel12;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         prepareHashMaps();
@@ -49,6 +82,7 @@ public class ChooseInstituteController implements Initializable {
         courseNameFull.getItems().addAll(hashMapNapr.keySet());
 
     }
+
 
     @FXML
     public void instituteSelected(ActionEvent event){
@@ -74,14 +108,79 @@ public class ChooseInstituteController implements Initializable {
 
     @FXML
     void nextStepButton(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        ChooseStudentController controller = fxmlLoader.getController();
-        controller.initGroupData(groupData);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setTitle("Архивер. Версия 1.2:25/08/2021");
-        window.setScene(scene);
-        window.show();
+        if (isFilled()) {
+            memberGeks.add(new MemberGek(memberGek1.getText()));
+            memberGeks.add(new MemberGek(memberGek2.getText()));
+            memberGeks.add(new MemberGek(memberGek3.getText()));
+            memberGeks.add(new MemberGek(memberGek4.getText()));
+            memberGeks.add(new MemberGek(memberGek5.getText()));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            ChooseStudentController controller = fxmlLoader.getController();
+            controller.initGroupData(groupData);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setTitle("Архивер. Версия 1.2:25/08/2021");
+            window.setScene(scene);
+            window.show();
+        }
+    }
+
+    public boolean isFilled(){
+        int i = 0;
+        if (instituteName.getValue()==null){
+            errorLabel1.setText("Не выбрано название института");
+            i++;
+        }
+        if (chairName.getValue()==null){
+            errorLabel2.setText("Не выбрано название кафедры");
+            i++;
+        }
+        if (courseNameFull.getValue()==null){
+            errorLabel3.setText("Не выбрано название направления");
+            i++;
+        }
+        if (predsedatel.getText().isBlank()){
+            errorLabel4.setText("Не введен председатель ГЭК");
+            i++;
+        }
+        if (memberGek1.getText().isBlank()){
+            errorLabel5.setText("Не введен первый член ГЭК");
+            i++;
+        }
+        if (memberGek2.getText().isBlank()){
+            errorLabel6.setText("Не введен второй член ГЭК");
+            i++;
+        }
+        if (memberGek3.getText().isBlank()){
+            errorLabel7.setText("Не введен третий член ГЭК");
+            i++;
+        }
+        if (memberGek4.getText().isBlank()){
+            errorLabel8.setText("Не введен четвертый член ГЭК");
+            i++;
+        }
+        if (memberGek5.getText().isBlank()){
+            errorLabel9.setText("Не введен пятый член ГЭК");
+            i++;
+        }
+
+        if (secretary.getText().isBlank()){
+            errorLabel10.setText("Не введен секретарь ГЭК");
+            i++;
+        }
+        if (protocolNumber.getText().isBlank()){
+            errorLabel11.setText("Не введен номер протокола");
+            i++;
+        }
+        if (fullDate.getValue()==null){
+            errorLabel12.setText("Не указана дата заседания");
+            i++;
+        }
+        if (i==0){
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
+        }
     }
 
     public void getData(LinkedList<GroupData> aGroupData){
