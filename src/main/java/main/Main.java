@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
@@ -54,6 +55,7 @@ public class Main extends Application {
         String s2 = "bca";
         System.out.println("Java" + 1 + 2 + 3);
         Parent root = FXMLLoader.load(getClass().getResource("/main/mainWindow.fxml"));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         if(!Files.isDirectory(Paths.get("OutDocuments"))) {
             Files.createDirectory(Paths.get("OutDocuments"));
         }
