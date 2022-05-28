@@ -70,9 +70,30 @@
 
                 <dependency>
                     <groupId>org.docx4j</groupId>
-                    <artifactId>docx4j</artifactId>
-                    <version>6.1.2</version>
+                    <artifactId>docx4j-JAXB-Internal</artifactId>
+                    <version>8.3.4</version>
                 </dependency>
+        <dependency>
+            <groupId>org.docx4j</groupId>
+            <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
+            <version>11.4.7</version>
+        </dependency>
+
+                 <dependency>
+                     <groupId>org.docx4j</groupId>
+                     <artifactId>docx4j-core</artifactId>
+                     <version>11.4.7</version>
+                 </dependency>
+        <dependency>
+            <groupId>org.docx4j</groupId>
+            <artifactId>docx4j-legacy-service</artifactId>
+            <version>11.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.docx4j</groupId>
+            <artifactId>docx4j-core</artifactId>
+            <version>11.4.7</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.googlecode.jaxb-namespaceprefixmapper-interfaces/JAXBNamespacePrefixMapper -->
         <dependency>

@@ -51,6 +51,7 @@ public class ProcessingDataVKR {
             mappings.put("id"+i, String.valueOf(i));
             mappings.put("question_chlen"+i+"_name", membersGekTableNames.get(i-1));
             mappings.put("question"+i, membersGekQuestions.get(i-1));
+            System.out.println(membersGekQuestions.get(i-1));
         }
         templateVKR = WordprocessingMLPackage.load(new File("Protocol_VKR.docx"));
     }
