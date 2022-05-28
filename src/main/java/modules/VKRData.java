@@ -5,50 +5,76 @@
 
 package modules;
 
+import java.util.LinkedList;
+
 public class VKRData {
 
     private String instituteName;
-    private String courseNameFull;
     private String chairName;
-    private String studentName;
-    private String VKRName;
-    private String HeadOfVKRName;
-    private String reviewerName;
+    private String courseNumber;
     private String courseName;
-    private String dateFull;
     private String protocolNumber;
-    private String VKRGrade;
+    private String predsedatelName;
+    private String secretaryName;
+    private LinkedList<String> membersGekTableNames;
+    private LinkedList<String> membersGekQuestions;
+    private LinkedList<String> membersGekNames;
+    private String studentName;
+    private String vkrName;
+    private String nauchName;
+    private String reviewerName;
+    private String date;
+    private String vkrGrade;
+    private String vkrType;
 
-    public VKRData(String instituteName,
-                   String courseNameFull,
-                   String chairName,
-                   String studentName,
-                   String VKRName,
-                   String HeadOfVKRName,
-                   String reviewerName,
-                   String courseName,
-                   String dateFull,
-                   String protocolNumber,
-                   String VKRGrade){
-        this.instituteName = instituteName;
-        this.courseNameFull = courseNameFull;
-        this.chairName = chairName;
-        this.studentName = studentName;
-        this.VKRName = VKRName;
-        this.HeadOfVKRName = HeadOfVKRName;
-        this.reviewerName = reviewerName;
-        this.courseName = courseName;
-        this.dateFull = dateFull;
-        this.protocolNumber = protocolNumber;
-        this.VKRGrade = VKRGrade;
+    public VKRData(String aInstituteName,
+                   String aChairName,
+                   String aCourseNumber,
+                   String aCourseName,
+                   String aProtocolNumber,
+                   String aPredsedatelName,
+                   String aSecretaryName,
+                   LinkedList<String> aMembersGekTableNames,
+                   LinkedList<String> aMembersGekQuestions,
+                   LinkedList<String> aMembersGekNames,
+                   String aStudentName,
+                   String aVkrName,
+                   String aNauchName,
+                   String aReviewerName,
+                   String aDate,
+                   String aVkrGrade,
+                   String aVkrType){
+        instituteName = aInstituteName;
+        chairName = aChairName;
+        courseNumber = aCourseNumber;
+        courseName = aCourseName;
+        protocolNumber = aProtocolNumber;
+        predsedatelName = aPredsedatelName;
+        secretaryName = aSecretaryName;
+        membersGekTableNames = new LinkedList<>(aMembersGekTableNames);
+        membersGekQuestions = new LinkedList<>(aMembersGekQuestions);
+        membersGekNames = new LinkedList<>(aMembersGekNames);
+        studentName = aStudentName;
+        vkrName = aVkrName;
+        nauchName = aNauchName;
+        reviewerName = aReviewerName;
+        date = aDate;
+        vkrGrade = aVkrGrade;
+        vkrType = aVkrType;
     }
     //Getters
-    public String getCourseNameFull() {
-        return courseNameFull;
+    public String getPredsedatelName(){return predsedatelName;}
+    public LinkedList<String> getMembersGekTableNames(){return membersGekTableNames;}
+    public LinkedList<String> getMembersGekQuestions(){return membersGekQuestions;}
+    public LinkedList<String> getMembersGekNames(){return membersGekNames;}
+    public String getVkrType(){return vkrType;}
+    public String getCourseName() {
+        return courseName;
     }
     public String getInstituteName() {
         return instituteName;
     }
+    public String getSecretaryName(){return secretaryName;}
 
     public String getChairName() {
         return chairName;
@@ -58,32 +84,32 @@ public class VKRData {
         return studentName;
     }
 
-    public String getVKRName() {
-        return VKRName;
+    public String getVkrName() {
+        return vkrName;
     }
 
-    public String getHeadOfVKRName() {
-        return HeadOfVKRName;
+    public String getNauchName() {
+        return nauchName;
     }
 
     public String getReviewerName() {
         return reviewerName;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getCourseNumber() {
+        return courseNumber;
     }
 
-    public String getDateFull() {
-        return dateFull;
+    public String getDate() {
+        return date;
     }
 
     public String getProtocolNumber() {
         return protocolNumber;
     }
 
-    public String getVKRGrade() {
-        return VKRGrade;
+    public String getVkrGrade() {
+        return vkrGrade;
     }
 
 }

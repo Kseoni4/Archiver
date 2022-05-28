@@ -46,6 +46,12 @@ public class VKRController implements Initializable {
     //Рецензент для ВКР
     @FXML protected TextField reviewerName;
 
+    //Название института
+    @FXML protected TextField instituteName;
+
+    //Название кафедры
+    @FXML protected TextField chairName;
+
     //Номер направления обучения (10.10.10)
     @FXML protected Label courseNumber;
 
@@ -114,23 +120,39 @@ public class VKRController implements Initializable {
 
     @FXML
     void makeDocumentVKR(ActionEvent event) throws Exception {
+        LinkedList<String> membersGekTableNames = new LinkedList<>();
+        LinkedList<String> membersGekQuestions = new LinkedList<>();
+        LinkedList<String> membersGekNames = new LinkedList<>();
+        ObservableList<MemberGek> tmpList = memberGekTable.getItems();
+        for (int i = 0; i<tmpList.size(); i++){
+            membersGekTableNames.add(tmpList.get(i).getName());
+            membersGekQuestions.add(tmpList.get(i).getQuestion());
+        }
+        for (int i =0; i<membersGek.size(); i++){
+            membersGekNames.add(membersGek.get(i).getName());
+        }
         System.out.println("Start making document");
         if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
             Files.createDirectory(Paths.get("OutDocumentsVKR/"));
         }
         ProcessingDataVKR processingDataVKR = new ProcessingDataVKR(new VKRData(
-                //instituteName.getValue(),
-                //courseNameFull.getValue(),
-                //chairName.getValue(),
-                "123","321","234",
+                instituteName.getText(),
+                chairName.getText(),
+                courseNumber.getText(),
+                courseName.getText(),
+                protocolNumber.getText(),
+                predsedatelName.getText(),
+                secretaryName.getText(),
+                membersGekTableNames,
+                membersGekQuestions,
+                membersGekNames,
                 studentName.getText(),
                 vkrName.getText(),
                 nauchName.getText(),
                 reviewerName.getText(),
-                courseName.getText(),
                 dateFull.getText(),
-                protocolNumber.getText(),
-                VKRGrade.getValue().toString()
+                VKRGrade.getValue().toString(),
+                VKRType.getValue().toString()
         ));
 
         processingDataVKR.makeDocumentVKR();
@@ -145,9 +167,11 @@ public class VKRController implements Initializable {
         vkrName.setEditable(false);
     }
 
-    public void initCourseData(String aCourseNumber, String aCourseName){
+    public void initCourseData(String aCourseNumber, String aCourseName, String aInstituteName, String aChairName){
         courseNumber.setText(aCourseNumber);
         courseName.setText(aCourseName);
+        instituteName.setText(aInstituteName);
+        chairName.setText(aChairName);
     }
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
         membersGek = new LinkedList<MemberGek>(aMembersGek);

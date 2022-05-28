@@ -37,6 +37,8 @@ public class ChooseStudentController implements Initializable {
     private String courseName;
     private String courseNumber;
     private String protocolNumber;
+    private String instituteName;
+    private String chairName;
 
 
 
@@ -61,9 +63,12 @@ public class ChooseStudentController implements Initializable {
         secretaryName = aSecretary;
     }
 
-    public void initCourseData(String aCourseName, String aCourseNumber){
+    public void initCourseData(String aCourseName, String aCourseNumber, String aInstituteName, String aChairName){
         courseNumber = aCourseNumber;
         courseName = aCourseName;
+        instituteName = aInstituteName;
+        chairName = aChairName;
+
     }
 
     public void initOtherData(LocalDate aDate, String aProtocolNumber){
@@ -104,7 +109,7 @@ public class ChooseStudentController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             VKRController controller = fxmlLoader.getController();
             controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), tableGroup.getSelectionModel().getSelectedItem().getGroupStudents());
-            controller.initCourseData(courseNumber, courseName);
+            controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
             controller.initOtherData(date, protocolNumber);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

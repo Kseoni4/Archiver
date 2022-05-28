@@ -120,7 +120,7 @@ public class ChooseInstituteController implements Initializable {
             ChooseStudentController controller = fxmlLoader.getController();
             controller.initGroupData(groupData);
             LinkedList<String> tmpLinked = new LinkedList<>(Arrays.stream(courseNameFull.getValue().split(";")).toList());
-            controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0));
+            controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0), instituteName.getValue().toString(), chairName.getValue().toString());
             controller.initGekData(memberGeks, predsedatel.getText(), secretary.getText());
             controller.initOtherData(fullDate.getValue(), protocolNumber.getText());
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
