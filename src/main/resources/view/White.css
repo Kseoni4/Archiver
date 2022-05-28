@@ -1,0 +1,10 @@
+/*
+ * Copyright (c) Ксенофонтов Николай Валерьевич
+ * Кафедра КБ-4
+ */
+.label {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #eeeeee;
+    -fx-opacity: 0.95;
+}

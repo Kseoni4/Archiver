@@ -2,15 +2,11 @@
  * Copyright (c) Ксенофонтов Николай Валерьевич
  * Кафедра КБ-4
  */
-.background {
-    -fx-background-color: #cccccc;
-}
-
 .label {
     -fx-font-size: 13pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #333333;
-    -fx-opacity: 0.6;
+    -fx-opacity: 0.8;
 }
 .table-view {
     -fx-base: #1d1d1d;
@@ -81,7 +77,34 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
 }
+.titled-pane > .title
+{
+    -fx-background-color: #16637D;
+}
 .titled-pane
 {
-    -fx-background-color: linear-gradient(aliceblue, lightslategray);
+    -fx-border-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0;
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #eeeeee;
+    -fx-opacity: 1;
 }
+.titled-pane > .title > .arrow-button .arrow
+{
+    -fx-opacity: 0;
+}
+.button
+{
+    -fx-text-fill: #eeeeee;
+    -fx-background-color: #16637D;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 14pt;
+}
+.choice-box .label
+{
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #333333;
+    -fx-opacity: 0.8;
+}
+
