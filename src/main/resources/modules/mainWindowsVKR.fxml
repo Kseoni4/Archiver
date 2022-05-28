@@ -3,36 +3,53 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
    <children>
       <TitledPane animated="false" collapsible="false" prefHeight="600.0" prefWidth="800.0" text="Шаг третий: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="18.0" layoutY="217.0" prefHeight="17.0" prefWidth="130.0" text="Номер направления" />
-                  <Label layoutX="13.0" layoutY="284.0" text="Номер протокола" />
-                  <Label layoutX="20.0" layoutY="249.0" text="Дата заседания" />
-                  <Label layoutX="20.0" layoutY="104.0" text="ФИО студента(ки)" />
-                  <Label layoutX="20.0" layoutY="129.0" text="Тема ВКР" />
-                  <ChoiceBox fx:id="VKRType" layoutX="614.0" layoutY="213.0" prefWidth="150.0" />
-                  <Label layoutX="449.0" layoutY="218.0" text="ВКР выполнена в виде" />
-                  <Label layoutX="20.0" layoutY="157.0" text="Руководитель ВКР" />
-                  <Label layoutX="18.0" layoutY="182.0" text="Рецензент для ВКР" />
-                  <Label layoutX="449.0" layoutY="285.0" text="Итоговая оценка" />
-                  <ChoiceBox fx:id="VKRGrade" layoutX="614.0" layoutY="280.0" prefWidth="150.0" />
-                  <TextField fx:id="studentName" layoutX="223.0" layoutY="100.0" prefHeight="26.0" prefWidth="369.0" promptText="Иванов Иван Иванович" />
-                  <TextField fx:id="VKRName" layoutX="223.0" layoutY="125.0" prefHeight="26.0" prefWidth="368.0" promptText="Крутая тема ВКР" />
-                  <TextField fx:id="HeadOfVKRName" layoutX="223.0" layoutY="153.0" prefHeight="26.0" prefWidth="370.0" promptText="д-р. техн. наук, профессор Иванов И.И." />
-                  <TextField fx:id="reviewerName" layoutX="223.0" layoutY="178.0" prefHeight="26.0" prefWidth="371.0" promptText="Директор &quot;Google Inc.&quot; Иванов И.И." />
-                  <TextField fx:id="courseName" layoutX="157.0" layoutY="213.0" prefHeight="26.0" prefWidth="101.0" promptText="10.10.10" />
-                  <TextField fx:id="dateFull" layoutX="158.0" layoutY="245.0" prefHeight="26.0" prefWidth="180.0" promptText="вторник, 14 Январь, 2022" />
-                  <TextField fx:id="protocolNumber" layoutX="158.0" layoutY="280.0" prefHeight="26.0" prefWidth="99.0" promptText="16/20" />
-                  <Button layoutX="614.0" layoutY="16.0" mnemonicParsing="false" onAction="#changeWindowToChooseInstituteButton" text="Назад" />
+                  <Label layoutX="8.0" layoutY="241.0" prefHeight="17.0" prefWidth="130.0" text="Номер направления" />
+                  <Label layoutX="14.0" layoutY="322.0" text="Номер протокола" />
+                  <Label layoutX="15.0" layoutY="296.0" text="Дата заседания" />
+                  <Label layoutX="5.0" layoutY="34.0" text="ФИО студента(ки)" />
+                  <Label layoutX="19.0" layoutY="84.0" text="Тема ВКР" />
+                  <ChoiceBox fx:id="VKRType" layoutX="193.0" layoutY="559.0" prefWidth="150.0" />
+                  <Label layoutX="13.0" layoutY="564.0" text="ВКР выполнена в виде" />
+                  <Label layoutX="12.0" layoutY="150.0" text="Руководитель ВКР" />
+                  <Label layoutX="11.0" layoutY="184.0" text="Рецензент для ВКР" />
+                  <Label layoutX="23.0" layoutY="608.0" text="Итоговая оценка" />
+                  <ChoiceBox fx:id="VKRGrade" layoutX="193.0" layoutY="603.0" prefWidth="150.0" />
+                  <Button layoutX="614.0" layoutY="16.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" text="Назад" />
                   <Button layoutX="614.0" layoutY="92.0" mnemonicParsing="false" onAction="#makeDocumentVKR" text="Сформировать отчет" />
+                  <Label layoutX="11.0" layoutY="350.0" text="Председатель ГЭК" />
+                  <Label layoutX="17.0" layoutY="375.0" text="Секретарь Гэк" />
+                  <Label layoutX="30.0" layoutY="406.0" text="Член1 ГЭК" />
+                  <Label layoutX="31.0" layoutY="435.0" text="Член2 ГЭК" />
+                  <Label layoutX="29.0" layoutY="463.0" text="Член3 ГЭК" />
+                  <Label layoutX="31.0" layoutY="494.0" text="член4 ГЭК" />
+                  <Label fx:id="studentName" layoutX="195.0" layoutY="34.0" text="Label" />
+                  <Label fx:id="nauchName" layoutX="195.0" layoutY="150.0" text="Label" />
+                  <Label fx:id="courseNumber" layoutX="223.0" layoutY="241.0" text="Label" />
+                  <Label fx:id="dateFull" layoutX="221.0" layoutY="296.0" text="Label" />
+                  <Label fx:id="protocolNumber" layoutX="223.0" layoutY="322.0" text="Label" />
+                  <Label fx:id="predsedatelName" layoutX="221.0" layoutY="350.0" text="Label" />
+                  <Label fx:id="secretaryName" layoutX="221.0" layoutY="375.0" text="Label" />
+                  <Label fx:id="memberGekOne" layoutX="223.0" layoutY="406.0" text="Label" />
+                  <Label fx:id="memberGekTwo" layoutX="223.0" layoutY="435.0" text="Label" />
+                  <Label fx:id="memberGekThree" layoutX="221.0" layoutY="463.0" text="Label" />
+                  <Label fx:id="memberGekFour" layoutX="221.0" layoutY="494.0" text="Label" />
+                  <Label layoutX="30.0" layoutY="526.0" text="член5 ГЭК" />
+                  <Label fx:id="memberGekFive" layoutX="223.0" layoutY="526.0" prefHeight="0.0" prefWidth="34.0" text="Label" />
+                  <Label layoutX="3.0" layoutY="270.0" text="Название направления" />
+                  <Label fx:id="courseName" layoutX="223.0" layoutY="270.0" prefHeight="0.0" prefWidth="34.0" text="Label" />
+                  <TextField fx:id="reviewerName" layoutX="161.0" layoutY="180.0" prefHeight="26.0" prefWidth="187.0" />
+                  <TextArea fx:id="vkrName" layoutX="122.0" layoutY="67.0" prefHeight="60.0" prefWidth="291.0" />
                </children>
             </AnchorPane>
         </content>

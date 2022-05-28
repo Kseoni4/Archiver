@@ -69,7 +69,7 @@ public class FileOpenVKRApplicationController implements Initializable {
            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));
            Scene scene = new Scene(fxmlLoader.load());
            ChooseInstituteController controller = fxmlLoader.getController();
-           controller.getData(groupData);
+           controller.initGroupData(groupData);
            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
            window.setTitle("Архивер. Версия 1.2:25/08/2021");
            window.setScene(scene);

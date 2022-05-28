@@ -36,6 +36,7 @@ public class ChooseInstituteController implements Initializable {
 
     private LinkedList<MemberGek> memberGeks = new LinkedList<>();
 
+
     @FXML protected ComboBox<String> instituteName;
 
     @FXML protected ComboBox<String> courseNameFull;
@@ -118,6 +119,10 @@ public class ChooseInstituteController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             ChooseStudentController controller = fxmlLoader.getController();
             controller.initGroupData(groupData);
+            LinkedList<String> tmpLinked = new LinkedList<>(Arrays.stream(courseNameFull.getValue().split(";")).toList());
+            controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0));
+            controller.initGekData(memberGeks, predsedatel.getText(), secretary.getText());
+            controller.initOtherData(fullDate.getValue(), protocolNumber.getText());
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);
@@ -183,17 +188,8 @@ public class ChooseInstituteController implements Initializable {
         }
     }
 
-    public void getData(LinkedList<GroupData> aGroupData){
-        groupData = new LinkedList<>();
-        while (aGroupData.size()>0){
-            System.out.println("Added Intitute");
-            groupData.add(aGroupData.remove(0));
-        }
-        System.out.println("Институт данные получил");
-        for (int i = 0; i<groupData.size(); i++){
-            System.out.println(groupData.get(i).getName());
-        }
-
+    public void initGroupData(LinkedList<GroupData> aGroupData){
+        groupData = new LinkedList<>(aGroupData);
     }
 
     private void prepareHashMaps() {
@@ -217,7 +213,7 @@ public class ChooseInstituteController implements Initializable {
 
                 chaName = forInst.remove(0);
 
-                napName = forInst.remove(0)+" "+ forInst.remove(0);
+                napName = forInst.remove(0)+";"+ forInst.remove(0);
 
 
                 if (hashMapInstitute.containsKey(instName)){
