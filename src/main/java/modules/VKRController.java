@@ -7,13 +7,20 @@ package modules;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
 
@@ -74,9 +81,15 @@ public class VKRController implements Initializable {
     //Итоговая оценка
     @FXML protected ChoiceBox VKRGrade;
 
+    @FXML protected TableView<MemberGek> memberGekTable;
+    @FXML protected TableColumn<MemberGek,String> memberGekName;
+    @FXML protected TableColumn<MemberGek,String> memberGekQuestion;
+
+
     private LinkedList<Student> students;
 
     private LinkedList<MemberGek> membersGek;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,6 +97,8 @@ public class VKRController implements Initializable {
         VKRType.getItems().addAll("Бакалаврская работа (выпускная квалификационная работа бакалавра",
                     "Дипломный проект", "Дипломная работа", "Магистерская диссертация");
         VKRGrade.getItems().addAll("Неудовлетворительно", "Удовлетворительно", "Хорошо", "Отлично");
+        memberGekName.setCellValueFactory(new PropertyValueFactory<MemberGek, String>("name"));
+        memberGekQuestion.setCellValueFactory(new PropertyValueFactory<MemberGek,String>("question"));
 
     }
 
@@ -135,7 +150,7 @@ public class VKRController implements Initializable {
         courseName.setText(aCourseName);
     }
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
-        membersGek = new LinkedList<>(aMembersGek);
+        membersGek = new LinkedList<MemberGek>(aMembersGek);
         predsedatelName.setText(aPredsedatel);
         secretaryName.setText(aSecretary);
         memberGekOne.setText(membersGek.get(0).getName());
@@ -148,5 +163,25 @@ public class VKRController implements Initializable {
         dateFull.setText(aDate.toString());
         protocolNumber.setText(aProtocolNumber);
     }
+
+    @FXML
+    public void addQuestionButton(ActionEvent event) throws IOException {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        LinkedList<String> memberNames = new LinkedList<>();
+        for (int i = 0; i<membersGek.size(); i++){
+            memberNames.add(membersGek.get(i).getName());
+        }
+        memberNames.add(predsedatelName.getText());
+
+        FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/addQuestion.fxml"));
+        Scene scene = new Scene(loaderSlave.load());
+        addQuestionController controller = loaderSlave.getController();
+        controller.initMembersData(memberNames, memberGekTable);
+        window.setScene(scene);
+        window.setTitle("Добавить вопрос");
+        window.showAndWait();
+    }
+
 
 }

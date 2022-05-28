@@ -11,13 +11,10 @@ import java.util.LinkedList;
 
 public class MemberGek {
     private SimpleStringProperty name;
-    private LinkedList<String> questions;
+    private SimpleStringProperty question;
 
-    public MemberGek(){
-        questions = new LinkedList<>();
-    }
+    public MemberGek(){}
     public MemberGek(String aName){
-        questions = new LinkedList<>();
         name = new SimpleStringProperty(aName);
     }
 
@@ -25,15 +22,15 @@ public class MemberGek {
         name = new SimpleStringProperty(aName);
     }
 
-    public void addQuestion(String question){
-        questions.add(question);
+    public void addQuestion(String aQuestion){
+        question = new SimpleStringProperty(aQuestion);
     }
 
     public String getName(){
         return name.get();
     }
 
-    public LinkedList<String> getQuestions(){
-        return questions;
+    public String getQuestion(){
+        return question.get();
     }
 }
