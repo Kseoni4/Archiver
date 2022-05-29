@@ -21,12 +21,12 @@
                   <Label layoutX="15.0" layoutY="296.0" text="Дата заседания" />
                   <Label layoutX="5.0" layoutY="14.0" text="ФИО студента(ки)" />
                   <Label layoutX="23.0" layoutY="56.0" text="Тема ВКР" />
-                  <ChoiceBox fx:id="VKRType" layoutX="193.0" layoutY="559.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="vkrType" layoutX="193.0" layoutY="559.0" prefWidth="150.0" />
                   <Label layoutX="13.0" layoutY="564.0" text="ВКР выполнена в виде" />
                   <Label layoutX="12.0" layoutY="94.0" text="Руководитель ВКР" />
                   <Label layoutX="11.0" layoutY="128.0" text="Рецензент для ВКР" />
                   <Label layoutX="23.0" layoutY="608.0" text="Итоговая оценка" />
-                  <ChoiceBox fx:id="VKRGrade" layoutX="193.0" layoutY="603.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="vkrGrade" layoutX="193.0" layoutY="603.0" prefWidth="150.0" />
                   <Button layoutX="390.0" layoutY="603.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" text="Следующий студент" />
                   <Button layoutX="555.0" layoutY="604.0" mnemonicParsing="false" onAction="#makeDocumentVKR" text="Сформировать протокол ВКР" />
                   <Label layoutX="11.0" layoutY="350.0" text="Председатель ГЭК" />

@@ -5,6 +5,7 @@
 
 package modules;
 
+import main.Main;
 import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -18,14 +19,12 @@ import java.util.*;
 
 public class ProcessingDataVKR {
 
-    private VKRData vkrData;
 
     private WordprocessingMLPackage templateDocument;
 
     private HashMap<String,String> mappings;
 
-    public ProcessingDataVKR(VKRData vkrData) throws FileNotFoundException, Docx4JException {
-        this.vkrData = vkrData;
+    public ProcessingDataVKR(VKRData vkrData){
         mappings = new HashMap<>();
         mappings.put("insitut_name",vkrData.getInstituteName());
         mappings.put("kafedra_name",(vkrData.getChairName()));
@@ -56,12 +55,12 @@ public class ProcessingDataVKR {
             mappings.replace("id"+i, String.valueOf(i));
             mappings.replace("question_chlen"+i+"_name", membersGekTableNames.get(i-1));
             mappings.replace("question"+i, membersGekQuestions.get(i-1));
-            System.out.println(membersGekQuestions.get(i-1));
+            Main.logger.debug(membersGekQuestions.get(i-1));
         }
     }
 
 
-    public void loadTemplatesVKR() throws FileNotFoundException, Docx4JException {
+    public void loadTemplatesVKR() throws Docx4JException {
         templateDocument = WordprocessingMLPackage.load(new File("Protocol_VKR.docx"));
     }
 
@@ -74,20 +73,20 @@ public class ProcessingDataVKR {
         loadTemplatesVKR();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        System.out.println("End of making Document");
+        Main.logger.debug("End of making Document");
         File outputFile = new File("OutDocumentsVKR/"+"templateVKR.docx");
         templateDocument.save(outputFile);
-        System.out.println("Document is written");
+        Main.logger.debug("Document is written");
     }
 
     public void makeDocumentAtestacii() throws Exception {
         loadTemplatesAtestacii();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        System.out.println("End of making Document");
+        Main.logger.debug("End of making Document");
         File outputFile = new File("OutDocumentsVKR/"+"templateAtestacii.docx");
         templateDocument.save(outputFile);
-        System.out.println("Document is written");
+        Main.logger.debug("Document is written");
     }
 
 }

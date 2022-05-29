@@ -7,7 +7,6 @@ package modules;
 
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.LinkedList;
 
 public class MemberGek {
     private SimpleStringProperty name;

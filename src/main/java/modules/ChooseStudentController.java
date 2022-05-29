@@ -14,14 +14,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 
-import javafx.scene.control.TableCell;
+
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
+
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
+
 import javafx.stage.Stage;
-import javafx.util.Callback;
+
 import main.Main;
 
 
@@ -106,38 +106,10 @@ public class ChooseStudentController implements Initializable {
                 students.add(student);
             }
             tableStudent.setItems(students);
-           // styleRowColor();
+
         }
     }
 
-   /* public void styleRowColor() {
-        Callback<TableColumn<Student, String>,TableCell<Student, String>> cellFactory
-                = new Callback<TableColumn<Student, String>, TableCell<Student, String>>() {
-            @Override
-            public TableCell<Student, String> call(TableColumn<Student, String> studentStringTableColumn) {
-                final TableCell<Student, String> cell = new TableCell<Student, String>(){
-                    @Override
-                    public void updateItem(String item, boolean empty){
-                        super.updateItem(item, empty);
-                        if (empty){
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            setText(item);
-                            TableRow<Student> row = getTableRow();
-                            if (row.getItem().getColor().equals("green")){
-                                row.getStyleClass().clear();
-                                row.getStyleClass().add("\"-fx-background-color: green ;\"");
-                            }
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-        studentRowColor.setCellFactory(cellFactory);
-    }
-    */
 
     @FXML
     public void nextStepButton(ActionEvent event) throws IOException {
@@ -145,7 +117,7 @@ public class ChooseStudentController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             VKRController controller = fxmlLoader.getController();
-            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), tableGroup.getSelectionModel().getSelectedItem().getGroupStudents(), groupData, tableGroup.getSelectionModel().getSelectedItem());
+            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData);
             controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
             controller.initOtherData(date, protocolNumber);

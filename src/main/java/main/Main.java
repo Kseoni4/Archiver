@@ -11,9 +11,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.commons.logging.impl.SLF4JLog;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -47,6 +51,8 @@ public class Main extends Application {
     private static WordprocessingMLPackage concludeAntiplagiatFile;
 
     public static Stage mainWindow;
+
+    public static Logger logger = LoggerFactory.getLogger(Main.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception{

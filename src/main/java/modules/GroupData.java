@@ -15,10 +15,6 @@ public class GroupData {
 
     private LinkedList<Student> groupStudents;
 
-    public GroupData(){
-        groupStudents = new LinkedList<>();
-    };
-
     public GroupData(String aName){
         groupStudents = new LinkedList<>();
         groupName = new SimpleStringProperty(aName);

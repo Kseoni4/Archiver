@@ -5,8 +5,7 @@
 
 package modules;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +19,7 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-public class addQuestionController implements Initializable {
+public class AddQuestionController implements Initializable {
 
     @FXML protected Button addButton;
 
@@ -33,7 +32,7 @@ public class addQuestionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //Нечего инициализировать
     }
 
     public void initMembersData(LinkedList<String> aMemberNames, TableView<MemberGek> aTableView){

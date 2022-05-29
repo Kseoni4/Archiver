@@ -12,13 +12,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import main.Main;
 import org.apache.poi.xwpf.usermodel.IBodyElement;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.docx4j.wml.Style;
 import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,29 +52,16 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
 
     @Override
     protected LinkedList<GroupData> call() throws Exception {
-        System.out.println("Начинаю выполнение");
+        Main.logger.debug("Начинаю выполнение");
 
         Document document1 = new Document();
         document1.loadFromFile(file.getAbsolutePath(), FileFormat.Rtf);
         document1.saveToFile("test.docx", FileFormat.Docx);
-            FileInputStream fileInputStream = null;
-            try {
-                fileInputStream = new FileInputStream("test.docx");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            XWPFDocument document = null;
-            try {
-                document = new XWPFDocument(fileInputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        Optional<FileInputStream> fileInputStream = Optional.ofNullable(new FileInputStream("test.docx"));
+        Optional<XWPFDocument> document = Optional.ofNullable(new XWPFDocument(fileInputStream.get()));
 
-            System.out.println("Docx сформирован");
-
-
-        List<XWPFTable> tables = document.getTables();
-        List<IBodyElement> objects = document.getBodyElements();
+        List<XWPFTable> tables = document.get().getTables();
+        List<IBodyElement> objects = document.get().getBodyElements();
         ArrayList<String> groups = new ArrayList<>();
 
         int tableCount = 0;
@@ -101,13 +88,9 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
             i++;
         }
 
-        //System.out.println("Найденные группы в документе - " + groups);
 
         for(i = 0; i < tables.size(); i++) {
             if (tables.get(i).getRows().get(0).getCell(0).getText().equalsIgnoreCase("ФИО студента")) {
-
-                //int studentNumber = 1;
-                //System.out.println("Группа - " + groups.get(indexGroup));
 
                 for (int j = 1; j < tables.get(i).getRows().size(); j++) {
 
@@ -126,16 +109,11 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
                      */
                 }
                 indexGroup++;
-                System.out.println();
             }
         }
-        System.out.println("Заканчиваю выполнение");
-            try {
-                fileInputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> {
+        Main.logger.debug("Заканчиваю выполнение");
+        fileInputStream.get().close();
+        Platform.runLater(()-> {
                 nextButton.setDisable(false);
                 backButton.setDisable(false);
                 chooseButton.setDisable(false);
@@ -146,7 +124,7 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
         return groupData;
     }
 
-    public LinkedList<GroupData> getGroupData(){
-        return groupData;
+    public List<GroupData> getGroupData(){
+        return groupData.stream().toList();
     }
 }
