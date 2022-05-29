@@ -20,7 +20,7 @@ public class ProcessingDataVKR {
 
     private VKRData vkrData;
 
-    private WordprocessingMLPackage templateVKR;
+    private WordprocessingMLPackage templateDocument;
 
     private HashMap<String,String> mappings;
 
@@ -41,6 +41,11 @@ public class ProcessingDataVKR {
         mappings.put("recenzent_vkr", vkrData.getReviewerName());
         mappings.put("ocenka", vkrData.getVkrGrade());
         mappings.put("secretar_name", vkrData.getSecretaryName());
+        for (int i = 1; i<=6; i++){
+            mappings.put("id"+i,"");
+            mappings.put("question_chlen"+i+"_name", "");
+            mappings.put("question"+i, "");
+        }
         LinkedList<String> membersGekNames = vkrData.getMembersGekNames();
         for (int i = 1; i<=membersGekNames.size(); i++){
             mappings.put("chlen"+i+"_name", membersGekNames.get(i-1));
@@ -48,26 +53,40 @@ public class ProcessingDataVKR {
         LinkedList<String> membersGekTableNames = vkrData.getMembersGekTableNames();
         LinkedList<String> membersGekQuestions = vkrData.getMembersGekQuestions();
         for (int i = 1; i<=membersGekTableNames.size(); i++){
-            mappings.put("id"+i, String.valueOf(i));
-            mappings.put("question_chlen"+i+"_name", membersGekTableNames.get(i-1));
-            mappings.put("question"+i, membersGekQuestions.get(i-1));
+            mappings.replace("id"+i, String.valueOf(i));
+            mappings.replace("question_chlen"+i+"_name", membersGekTableNames.get(i-1));
+            mappings.replace("question"+i, membersGekQuestions.get(i-1));
             System.out.println(membersGekQuestions.get(i-1));
         }
-        templateVKR = WordprocessingMLPackage.load(new File("Protocol_VKR.docx"));
     }
 
 
     public void loadTemplatesVKR() throws FileNotFoundException, Docx4JException {
-        templateVKR = WordprocessingMLPackage.load(new File("template1.docx"));
+        templateDocument = WordprocessingMLPackage.load(new File("Protocol_VKR.docx"));
+    }
+
+    public void loadTemplatesAtestacii() throws Docx4JException {
+        templateDocument = WordprocessingMLPackage.load(new File("Protocol_atestacii.docx"));
     }
 
 
     public void makeDocumentVKR() throws Exception {
-        VariablePrepare.prepare(templateVKR);
-        templateVKR.getMainDocumentPart().variableReplace(mappings);
+        loadTemplatesVKR();
+        VariablePrepare.prepare(templateDocument);
+        templateDocument.getMainDocumentPart().variableReplace(mappings);
         System.out.println("End of making Document");
         File outputFile = new File("OutDocumentsVKR/"+"templateVKR.docx");
-        templateVKR.save(outputFile);
+        templateDocument.save(outputFile);
+        System.out.println("Document is written");
+    }
+
+    public void makeDocumentAtestacii() throws Exception {
+        loadTemplatesAtestacii();
+        VariablePrepare.prepare(templateDocument);
+        templateDocument.getMainDocumentPart().variableReplace(mappings);
+        System.out.println("End of making Document");
+        File outputFile = new File("OutDocumentsVKR/"+"templateAtestacii.docx");
+        templateDocument.save(outputFile);
         System.out.println("Document is written");
     }
 

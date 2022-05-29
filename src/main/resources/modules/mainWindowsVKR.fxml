@@ -38,7 +38,7 @@
                   <Label fx:id="studentName" layoutX="144.0" layoutY="14.0" prefHeight="17.0" prefWidth="193.0" text="Label" />
                   <Label fx:id="nauchName" layoutX="184.0" layoutY="94.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
                   <Label fx:id="courseNumber" layoutX="223.0" layoutY="241.0" text="Label" />
-                  <Label fx:id="dateFull" layoutX="221.0" layoutY="296.0" text="Label" />
+                  <Label fx:id="dateText" layoutX="221.0" layoutY="296.0" text="Label" />
                   <Label fx:id="protocolNumber" layoutX="223.0" layoutY="322.0" text="Label" />
                   <Label fx:id="predsedatelName" layoutX="221.0" layoutY="350.0" text="Label" />
                   <Label fx:id="secretaryName" layoutX="221.0" layoutY="375.0" text="Label" />
@@ -64,6 +64,7 @@
                   <TextField fx:id="chairName" editable="false" layoutX="163.0" layoutY="201.0" prefHeight="26.0" prefWidth="190.0" />
                   <TextField fx:id="instituteName" editable="false" layoutX="163.0" layoutY="162.0" prefHeight="26.0" prefWidth="189.0" />
                   <Label layoutX="12.0" layoutY="167.0" text="Название института" />
+                  <Button layoutX="534.0" layoutY="560.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" text="Сформировать протокол атестации" />
                </children>
             </AnchorPane>
         </content>

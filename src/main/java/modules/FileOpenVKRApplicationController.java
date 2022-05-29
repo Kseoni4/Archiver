@@ -9,13 +9,17 @@ package modules;
 
 import com.spire.doc.Document;
 import com.spire.doc.FileFormat;
+import com.sun.javafx.tk.Toolkit;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
@@ -39,33 +43,38 @@ import java.util.regex.Pattern;
 public class FileOpenVKRApplicationController implements Initializable {
 
     private File file;
+
     @FXML
     private AnchorPane ap;
 
     @FXML
     private Label nameFile;
 
+    @FXML private Button nextButton;
+    @FXML private Button backButton;
+    @FXML private Button chooseButton;
+
     @FXML
     private Label fileLabel;
 
     @FXML protected ProgressBar progressBar = new ProgressBar();
 
+    private ParseTask task;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        progressBar.setProgress(0.25F);
-
     }
     private LinkedList<GroupData> groupData;
 
+
     @FXML
-    void nextStepButton(ActionEvent event) throws IOException {
-        if ((file!=null)&&getFileExtension(file.getName()).equals("rtf")){
-           rtfParse(file);
+    void nextStepButton(ActionEvent event) throws IOException, InterruptedException {
+        if (groupData!=null){
+           //rtfParse(file);
            int i = 0;
            for (i=0;i<groupData.size();i++){
                System.out.println(groupData.get(i).getName());
            }
-
            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));
            Scene scene = new Scene(fxmlLoader.load());
            ChooseInstituteController controller = fxmlLoader.getController();
@@ -74,11 +83,10 @@ public class FileOpenVKRApplicationController implements Initializable {
            window.setTitle("Архивер. Версия 1.2:25/08/2021");
            window.setScene(scene);
            window.show();
-        } else if (file==null){
-            fileLabel.setText("Выберите файл с расширением rtf");
-        } else if (!getFileExtension(file.getName()).equals("rtf")){
-            fileLabel.setText("Выбран файл не с расширением rtf");
+        } else {
+            fileLabel.setText("Не загружена информация из файла");
         }
+
     }
 
     @FXML
@@ -100,6 +108,24 @@ public class FileOpenVKRApplicationController implements Initializable {
         } else{
             nameFile.setText("Файл не выбран");
         }
+        if (!getFileExtension(file.getName()).equals("rtf")){
+            fileLabel.setText("Выбран файл не с расширением rtf");
+        }
+        fileLabel.setText("Начинается обработка выбранного файла, подождите");
+        nextButton.setDisable(true);
+        backButton.setDisable(true);
+        chooseButton.setDisable(true);
+        task = new ParseTask(file, nextButton, backButton, chooseButton, fileLabel, progressBar);
+        progressBar.progressProperty().unbind();
+        progressBar.progressProperty().bind(task.progressProperty());
+        task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                groupData = task.getValue();
+            }
+        });
+        Thread threadParse = new Thread(task);
+        threadParse.start();
     }
 
     private String getFileExtension(String fileName){
@@ -109,7 +135,7 @@ public class FileOpenVKRApplicationController implements Initializable {
             return "";
     }
 
-
+/*
     private void rtfParse(File file) throws IOException {
 
         Document document1 = new Document();
@@ -170,7 +196,7 @@ public class FileOpenVKRApplicationController implements Initializable {
                             "Тема ВКР: " + tables.get(i).getRows().get(j).getCell(1).getText() + "\n" +
                             "Научный руководитель: " + tables.get(i).getRows().get(j).getCell(2).getText());
                     studentNumber++;
-                     */
+
                 }
                 indexGroup++;
                 System.out.println();
@@ -178,4 +204,6 @@ public class FileOpenVKRApplicationController implements Initializable {
         }
         fileInputStream.close();
     }
+    */
+
 }

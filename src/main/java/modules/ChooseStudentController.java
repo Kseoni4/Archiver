@@ -14,10 +14,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import main.Main;
 
 
@@ -48,6 +52,9 @@ public class ChooseStudentController implements Initializable {
     @FXML protected TableColumn<Student, String> studentName;
     @FXML protected TableColumn<Student, String> studentVkrName;
     @FXML protected TableColumn<Student, String> studentNauchName;
+    @FXML protected TableColumn<Student, String> studentRowColor;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,6 +62,8 @@ public class ChooseStudentController implements Initializable {
         studentName.setCellValueFactory(new PropertyValueFactory<Student,String>("name"));
         studentVkrName.setCellValueFactory(new PropertyValueFactory<Student,String>("VkrName"));
         studentNauchName.setCellValueFactory(new PropertyValueFactory<Student,String>("NauchName"));
+        studentRowColor.setCellValueFactory(new PropertyValueFactory<Student, String>("color"));
+        studentRowColor.setVisible(false);
     }
 
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
@@ -78,9 +87,6 @@ public class ChooseStudentController implements Initializable {
 
     public void initGroupData(LinkedList<GroupData> aGroupData){
         groupData = new LinkedList<>(aGroupData);
-        /*while (aGroupData.size()>0){
-            groupData.add(aGroupData.remove(0));
-        }*/
         getGroups();
     }
 
@@ -100,15 +106,46 @@ public class ChooseStudentController implements Initializable {
                 students.add(student);
             }
             tableStudent.setItems(students);
+           // styleRowColor();
         }
     }
+
+   /* public void styleRowColor() {
+        Callback<TableColumn<Student, String>,TableCell<Student, String>> cellFactory
+                = new Callback<TableColumn<Student, String>, TableCell<Student, String>>() {
+            @Override
+            public TableCell<Student, String> call(TableColumn<Student, String> studentStringTableColumn) {
+                final TableCell<Student, String> cell = new TableCell<Student, String>(){
+                    @Override
+                    public void updateItem(String item, boolean empty){
+                        super.updateItem(item, empty);
+                        if (empty){
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            setText(item);
+                            TableRow<Student> row = getTableRow();
+                            if (row.getItem().getColor().equals("green")){
+                                row.getStyleClass().clear();
+                                row.getStyleClass().add("\"-fx-background-color: green ;\"");
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        studentRowColor.setCellFactory(cellFactory);
+    }
+    */
+
     @FXML
     public void nextStepButton(ActionEvent event) throws IOException {
         if (!tableStudent.getSelectionModel().isEmpty()) {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             VKRController controller = fxmlLoader.getController();
-            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), tableGroup.getSelectionModel().getSelectedItem().getGroupStudents());
+            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), tableGroup.getSelectionModel().getSelectedItem().getGroupStudents(), groupData, tableGroup.getSelectionModel().getSelectedItem());
             controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
             controller.initOtherData(date, protocolNumber);
@@ -123,6 +160,8 @@ public class ChooseStudentController implements Initializable {
     public void backStepButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        ChooseInstituteController controller = fxmlLoader.getController();
+        controller.initGroupData(groupData);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);

@@ -5,21 +5,15 @@
 
 package modules;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-import javafx.beans.InvalidationListener;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
@@ -56,7 +50,7 @@ public class VKRController implements Initializable {
     @FXML protected Label courseNumber;
 
     //Дата заседания (вторник, 14 января, 2022)
-    @FXML protected Label dateFull;
+    @FXML protected Label dateText;
 
     //Номер протокола
     @FXML protected Label protocolNumber;
@@ -94,7 +88,15 @@ public class VKRController implements Initializable {
 
     private LinkedList<Student> students;
 
+    private LinkedList<GroupData> groupData;
+
     private LinkedList<MemberGek> membersGek;
+
+    private ProcessingDataVKR processingDataVKR = null;
+
+    private GroupData group;
+
+    private LocalDate date;
 
 
     @Override
@@ -112,6 +114,11 @@ public class VKRController implements Initializable {
     void changeWindowToChooseStudentButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        ChooseStudentController controller = fxmlLoader.getController();
+        controller.initCourseData(courseNumber.getText(), courseName.getText(), instituteName.getText(), chairName.getText());
+        controller.initGroupData(groupData);
+        controller.initGekData(membersGek, predsedatelName.getText(), secretaryName.getText());
+        controller.initOtherData(date,protocolNumber.getText());
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);
@@ -120,51 +127,120 @@ public class VKRController implements Initializable {
 
     @FXML
     void makeDocumentVKR(ActionEvent event) throws Exception {
-        LinkedList<String> membersGekTableNames = new LinkedList<>();
-        LinkedList<String> membersGekQuestions = new LinkedList<>();
-        LinkedList<String> membersGekNames = new LinkedList<>();
-        ObservableList<MemberGek> tmpList = memberGekTable.getItems();
-        for (int i = 0; i<tmpList.size(); i++){
-            membersGekTableNames.add(tmpList.get(i).getName());
-            membersGekQuestions.add(tmpList.get(i).getQuestion());
+        if (processingDataVKR == null) {
+            LinkedList<String> membersGekTableNames = new LinkedList<>();
+            LinkedList<String> membersGekQuestions = new LinkedList<>();
+            LinkedList<String> membersGekNames = new LinkedList<>();
+            ObservableList<MemberGek> tmpList = memberGekTable.getItems();
+            for (int i = 0; i < tmpList.size(); i++) {
+                membersGekTableNames.add(tmpList.get(i).getName());
+                membersGekQuestions.add(tmpList.get(i).getQuestion());
+            }
+            for (int i = 0; i < membersGek.size(); i++) {
+                membersGekNames.add(membersGek.get(i).getName());
+            }
+            System.out.println("Start making document");
+            if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
+                Files.createDirectory(Paths.get("OutDocumentsVKR/"));
+            }
+            processingDataVKR = new ProcessingDataVKR(new VKRData(
+                    instituteName.getText(),
+                    chairName.getText(),
+                    courseNumber.getText(),
+                    courseName.getText(),
+                    protocolNumber.getText(),
+                    predsedatelName.getText(),
+                    secretaryName.getText(),
+                    membersGekTableNames,
+                    membersGekQuestions,
+                    membersGekNames,
+                    studentName.getText(),
+                    vkrName.getText(),
+                    nauchName.getText(),
+                    reviewerName.getText(),
+                    dateText.getText(),
+                    VKRGrade.getValue().toString(),
+                    VKRType.getValue().toString()
+            ));
         }
-        for (int i =0; i<membersGek.size(); i++){
-            membersGekNames.add(membersGek.get(i).getName());
-        }
-        System.out.println("Start making document");
-        if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
-            Files.createDirectory(Paths.get("OutDocumentsVKR/"));
-        }
-        ProcessingDataVKR processingDataVKR = new ProcessingDataVKR(new VKRData(
-                instituteName.getText(),
-                chairName.getText(),
-                courseNumber.getText(),
-                courseName.getText(),
-                protocolNumber.getText(),
-                predsedatelName.getText(),
-                secretaryName.getText(),
-                membersGekTableNames,
-                membersGekQuestions,
-                membersGekNames,
-                studentName.getText(),
-                vkrName.getText(),
-                nauchName.getText(),
-                reviewerName.getText(),
-                dateFull.getText(),
-                VKRGrade.getValue().toString(),
-                VKRType.getValue().toString()
-        ));
-
         processingDataVKR.makeDocumentVKR();
-
+        GroupData tmpGroup = null;
+        for (int i = 0; i<groupData.size(); i++){
+            if (group.getName().equals(groupData.get(i).getName())){
+                tmpGroup = groupData.get(i);
+            }
+        }
+        if (tmpGroup!=null){
+            for (int i =0; i<group.getGroupStudents().size(); i++){
+                if (studentName.getText().equals(tmpGroup.getGroupStudents().get(i).getName())){
+                    tmpGroup.getGroupStudents().get(i).setColor("Green");
+                }
+            }
+        }
     }
 
-    public void initStudentData(Student student, LinkedList<Student> aStudents){
+    @FXML
+    void makeDocumentAtestacii(ActionEvent event) throws Exception {
+        if (processingDataVKR == null) {
+            LinkedList<String> membersGekTableNames = new LinkedList<>();
+            LinkedList<String> membersGekQuestions = new LinkedList<>();
+            LinkedList<String> membersGekNames = new LinkedList<>();
+            ObservableList<MemberGek> tmpList = memberGekTable.getItems();
+            for (int i = 0; i < tmpList.size(); i++) {
+                membersGekTableNames.add(tmpList.get(i).getName());
+                membersGekQuestions.add(tmpList.get(i).getQuestion());
+            }
+            for (int i = 0; i < membersGek.size(); i++) {
+                membersGekNames.add(membersGek.get(i).getName());
+            }
+            System.out.println("Start making document");
+            if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
+                Files.createDirectory(Paths.get("OutDocumentsVKR/"));
+            }
+            processingDataVKR = new ProcessingDataVKR(new VKRData(
+                    instituteName.getText(),
+                    chairName.getText(),
+                    courseNumber.getText(),
+                    courseName.getText(),
+                    protocolNumber.getText(),
+                    predsedatelName.getText(),
+                    secretaryName.getText(),
+                    membersGekTableNames,
+                    membersGekQuestions,
+                    membersGekNames,
+                    studentName.getText(),
+                    vkrName.getText(),
+                    nauchName.getText(),
+                    reviewerName.getText(),
+                    dateText.getText(),
+                    VKRGrade.getValue().toString(),
+                    VKRType.getValue().toString()
+            ));
+        }
+        processingDataVKR.makeDocumentAtestacii();
+        GroupData tmpGroup = null;
+        for (int i = 0; i<groupData.size(); i++){
+            if (group.getName().equals(groupData.get(i).getName())){
+                tmpGroup = groupData.get(i);
+            }
+        }
+        if (tmpGroup!=null){
+            for (int i =0; i<group.getGroupStudents().size(); i++){
+                if (studentName.getText().equals(tmpGroup.getGroupStudents().get(i).getName())){
+                    tmpGroup.getGroupStudents().get(i).setColor("Green");
+                }
+            }
+        }
+    }
+
+    public void initStudentData(Student student, LinkedList<Student> aStudents, LinkedList<GroupData> aGroupData, GroupData aGroup){
         studentName.setText(student.getName());
         vkrName.setText(student.getVkrName());
         nauchName.setText(student.getNauchName());
         students = new LinkedList<>(aStudents);
+        groupData = new LinkedList<>(aGroupData);
         vkrName.setEditable(false);
+        group = aGroup;
     }
 
     public void initCourseData(String aCourseNumber, String aCourseName, String aInstituteName, String aChairName){
@@ -184,8 +260,9 @@ public class VKRController implements Initializable {
         memberGekFive.setText(membersGek.get(4).getName());
     }
     public void initOtherData(LocalDate aDate, String aProtocolNumber){
-        dateFull.setText(aDate.toString());
+        dateText.setText(aDate.toString());
         protocolNumber.setText(aProtocolNumber);
+        date = aDate;
     }
 
     @FXML
