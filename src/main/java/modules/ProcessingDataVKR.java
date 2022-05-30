@@ -44,7 +44,7 @@ public class ProcessingDataVKR {
         for (int i = 1; i<=6; i++){
             mappings.put("id"+i,"");
             mappings.put("question_chlen"+i+"_name", "");
-            mappings.put("question"+i, "");
+            mappings.put("question_"+i, "");
         }
         LinkedList<String> membersGekNames = vkrData.getMembersGekNames();
         for (int i = 1; i<=membersGekNames.size(); i++){
@@ -55,7 +55,7 @@ public class ProcessingDataVKR {
         for (int i = 1; i<=membersGekTableNames.size(); i++){
             mappings.replace("id"+i, String.valueOf(i));
             mappings.replace("question_chlen"+i+"_name", membersGekTableNames.get(i-1));
-            mappings.replace("question"+i, membersGekQuestions.get(i-1));
+            mappings.replace("question_" + i, membersGekQuestions.get(i-1));
             //Main.logger.debug(membersGekQuestions.get(i-1));
         }
     }

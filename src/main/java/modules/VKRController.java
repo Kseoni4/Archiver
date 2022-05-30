@@ -40,7 +40,7 @@ public class VKRController implements Initializable {
     @FXML protected TextField studentNameDP;
 
     //Полное название темы ВКР
-    @FXML protected TextArea vkrName;
+    @FXML protected TextField vkrName;
 
     //Имя и должность Научного руководителя (д-р. техн. наук, профессор Иванов И.И.)
     @FXML protected Label nauchName;
