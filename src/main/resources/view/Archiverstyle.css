@@ -26,7 +26,7 @@
 
 .table-view .column-header .label
 {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.8;
@@ -34,7 +34,7 @@
 
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -68,7 +68,14 @@
 }
 .choice-box .label
 {
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #333333;
+    -fx-opacity: 0.8;
+}
+.combo-box .list-view
+{
+    -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #333333;
     -fx-opacity: 0.8;

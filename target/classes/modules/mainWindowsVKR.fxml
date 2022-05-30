@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -10,61 +14,58 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
+<AnchorPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
    <children>
-      <TitledPane animated="false" collapsible="false" prefHeight="600.0" prefWidth="800.0" text="Шаг третий: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TitledPane animated="false" collapsible="false" prefHeight="678.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг третий: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css">
                <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16637d" height="710.0" layoutX="-9.0" opacity="0.8" stroke="#16637d" strokeType="INSIDE" width="309.0" />
                   <Label layoutX="8.0" layoutY="241.0" prefHeight="17.0" prefWidth="130.0" text="Номер направления" />
                   <Label layoutX="14.0" layoutY="322.0" text="Номер протокола" />
                   <Label layoutX="15.0" layoutY="296.0" text="Дата заседания" />
-                  <Label layoutX="5.0" layoutY="14.0" text="ФИО студента(ки)" />
-                  <Label layoutX="23.0" layoutY="56.0" text="Тема ВКР" />
-                  <ChoiceBox fx:id="vkrType" layoutX="193.0" layoutY="559.0" prefWidth="150.0" />
-                  <Label layoutX="13.0" layoutY="564.0" text="ВКР выполнена в виде" />
-                  <Label layoutX="12.0" layoutY="94.0" text="Руководитель ВКР" />
-                  <Label layoutX="11.0" layoutY="128.0" text="Рецензент для ВКР" />
-                  <Label layoutX="23.0" layoutY="608.0" text="Итоговая оценка" />
-                  <ChoiceBox fx:id="vkrGrade" layoutX="193.0" layoutY="603.0" prefWidth="150.0" />
-                  <Button layoutX="390.0" layoutY="603.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" text="Следующий студент" />
-                  <Button layoutX="555.0" layoutY="604.0" mnemonicParsing="false" onAction="#makeDocumentVKR" text="Сформировать протокол ВКР" />
-                  <Label layoutX="11.0" layoutY="350.0" text="Председатель ГЭК" />
-                  <Label layoutX="17.0" layoutY="375.0" text="Секретарь Гэк" />
-                  <Label layoutX="30.0" layoutY="406.0" text="Член1 ГЭК" />
-                  <Label layoutX="31.0" layoutY="435.0" text="Член2 ГЭК" />
-                  <Label layoutX="29.0" layoutY="463.0" text="Член3 ГЭК" />
-                  <Label layoutX="31.0" layoutY="494.0" text="член4 ГЭК" />
-                  <Label fx:id="studentName" layoutX="144.0" layoutY="14.0" prefHeight="17.0" prefWidth="193.0" text="Label" />
-                  <Label fx:id="nauchName" layoutX="184.0" layoutY="94.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
+                  <Label layoutX="14.0" layoutY="564.0" text="ФИО студента(ки)" />
+                  <Label layoutX="215.0" layoutY="50.0" text="Тема ВКР" />
+                  <ChoiceBox fx:id="vkrType" layoutX="692.0" layoutY="43.0" prefWidth="150.0" stylesheets="@../view/Archiverstyle.css" />
+                  <Label layoutX="589.0" layoutY="70.0" text="ВКР выполнена в виде" />
+                  <Label layoutX="142.0" layoutY="85.0" text="Руководитель ВКР" />
+                  <Label layoutX="138.0" layoutY="120.0" text="Рецензент для ВКР" />
+                  <Label layoutX="788.0" layoutY="522.0" text="Итоговая оценка" />
+                  <ChoiceBox fx:id="vkrGrade" layoutX="936.0" layoutY="512.0" prefWidth="150.0" stylesheets="@../view/Archiverstyle.css" />
+                  <Button layoutX="909.0" layoutY="561.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" text="Следующий студент" />
+                  <Button layoutX="814.0" layoutY="654.0" mnemonicParsing="false" onAction="#makeDocumentVKR" text="Сформировать протокол ВКР" />
+                  <Label fx:id="studentName" layoutX="207.0" layoutY="564.0" prefHeight="17.0" prefWidth="193.0" text="Label" />
+                  <Label fx:id="nauchName" layoutX="320.0" layoutY="85.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
                   <Label fx:id="courseNumber" layoutX="223.0" layoutY="241.0" text="Label" />
                   <Label fx:id="dateText" layoutX="221.0" layoutY="296.0" text="Label" />
                   <Label fx:id="protocolNumber" layoutX="223.0" layoutY="322.0" text="Label" />
-                  <Label fx:id="predsedatelName" layoutX="221.0" layoutY="350.0" text="Label" />
-                  <Label fx:id="secretaryName" layoutX="221.0" layoutY="375.0" text="Label" />
-                  <Label fx:id="memberGekOne" layoutX="223.0" layoutY="406.0" text="Label" />
-                  <Label fx:id="memberGekTwo" layoutX="223.0" layoutY="435.0" text="Label" />
-                  <Label fx:id="memberGekThree" layoutX="221.0" layoutY="463.0" text="Label" />
-                  <Label fx:id="memberGekFour" layoutX="221.0" layoutY="494.0" text="Label" />
-                  <Label layoutX="30.0" layoutY="526.0" text="член5 ГЭК" />
-                  <Label fx:id="memberGekFive" layoutX="223.0" layoutY="526.0" prefHeight="0.0" prefWidth="34.0" text="Label" />
                   <Label layoutX="3.0" layoutY="270.0" text="Название направления" />
                   <Label fx:id="courseName" layoutX="223.0" layoutY="270.0" prefHeight="0.0" prefWidth="34.0" text="Label" />
-                  <TextField fx:id="reviewerName" layoutX="164.0" layoutY="124.0" prefHeight="26.0" prefWidth="187.0" />
-                  <TextArea fx:id="vkrName" layoutX="138.0" layoutY="45.0" prefHeight="34.0" prefWidth="199.0" />
-                  <Label layoutX="431.0" layoutY="34.0" text="Вопросы" />
-                  <TableView fx:id="memberGekTable" layoutX="390.0" layoutY="73.0" prefHeight="280.0" prefWidth="353.0">
+                  <TextField fx:id="reviewerName" layoutX="315.0" layoutY="119.0" prefHeight="26.0" prefWidth="187.0" stylesheets="@../view/White.css" />
+                  <TextArea fx:id="vkrName" layoutX="315.0" layoutY="49.0" prefHeight="34.0" prefWidth="199.0" stylesheets="@../view/White.css" />
+                  <Label layoutX="832.0" layoutY="69.0" text="Вопросы" />
+                  <TableView fx:id="memberGekTable" layoutX="724.0" layoutY="101.0" prefHeight="208.0" prefWidth="468.0" stylesheets="@../view/Archiverstyle.css">
                     <columns>
-                      <TableColumn fx:id="memberGekName" prefWidth="176.0" text="Член ГЭК" />
-                      <TableColumn fx:id="memberGekQuestion" prefWidth="175.0" text="Вопрос" />
+                      <TableColumn fx:id="memberGekName" prefWidth="235.0" text="Член ГЭК" />
+                      <TableColumn fx:id="memberGekQuestion" prefWidth="232.0" text="Вопрос" />
                     </columns>
                   </TableView>
-                  <Button layoutX="607.0" layoutY="30.0" mnemonicParsing="false" onAction="#addQuestionButton" text="Добавить вопрос" />
+                  <Button layoutX="921.0" layoutY="62.0" mnemonicParsing="false" onAction="#addQuestionButton" text="Добавить вопрос" />
                   <Label layoutX="12.0" layoutY="205.0" text="Название кафедры" />
-                  <TextField fx:id="chairName" editable="false" layoutX="163.0" layoutY="201.0" prefHeight="26.0" prefWidth="190.0" />
-                  <TextField fx:id="instituteName" editable="false" layoutX="163.0" layoutY="162.0" prefHeight="26.0" prefWidth="189.0" />
-                  <Label layoutX="12.0" layoutY="167.0" text="Название института" />
-                  <Button layoutX="534.0" layoutY="560.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" text="Сформировать протокол атестации" />
+                  <TextField fx:id="chairName" editable="false" layoutX="315.0" layoutY="204.0" prefHeight="26.0" prefWidth="190.0" stylesheets="@../view/White.css" />
+                  <TextField fx:id="instituteName" editable="false" layoutX="314.0" layoutY="154.0" prefHeight="26.0" prefWidth="189.0" stylesheets="@../view/White.css" />
+                  <Label layoutX="129.0" layoutY="155.0" text="Название института" />
+                  <Button layoutX="819.0" layoutY="603.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" text="Сформировать протокол атестации" />
+                  <TextArea fx:id="studentHar" layoutX="814.0" layoutY="424.0" prefHeight="78.0" prefWidth="270.0" stylesheets="@../view/Archiverstyle.css" />
+                  <Label layoutX="870.0" layoutY="388.0" text="Характеристика студента" />
+                  <Label layoutX="14.0" layoutY="585.0" text="ФИО студента в дательном падеже" />
+                  <Label layoutX="18.0" layoutY="621.0" text="Фио студента в родительном падеже" />
+                  <TextField fx:id="studentNameDP" layoutX="265.0" layoutY="585.0" stylesheets="@../view/White.css" />
+                  <TextField fx:id="studentNameRP" layoutX="286.0" layoutY="617.0" stylesheets="@../view/White.css" />
+                  <TextField fx:id="qualification" layoutX="870.0" layoutY="304.0" stylesheets="@../view/Archiverstyle.css" />
+                  <Label layoutX="747.0" layoutY="309.0" text="Квалификация" />
+                  <Label layoutX="808.0" layoutY="350.0" text="Диплом" />
+                  <TextField fx:id="diplom" layoutX="887.0" layoutY="345.0" stylesheets="@../view/Archiverstyle.css" />
                </children>
             </AnchorPane>
         </content>

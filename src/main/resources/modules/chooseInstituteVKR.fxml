@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -12,11 +13,11 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
    <children>
       <TitledPane animated="false" prefHeight="26.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг второй: выберите факультет, кафедру и направление" AnchorPane.bottomAnchor="674.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16637d" height="665.0" layoutY="37.0" opacity="0.8" stroke="#16637d" strokeType="INSIDE" width="300.0" />
-      <ComboBox fx:id="instituteName" layoutX="320.0" layoutY="45.0" onAction="#instituteSelected" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <ComboBox fx:id="instituteName" layoutX="320.0" layoutY="45.0" onAction="#instituteSelected" prefHeight="26.0" prefWidth="300.0" />
       <ComboBox fx:id="chairName" layoutX="320.0" layoutY="80.0" onAction="#chairSelected" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
       <ComboBox fx:id="courseNameFull" layoutX="320.0" layoutY="115.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="60.0" layoutY="45.0" prefHeight="26.0" prefWidth="232.0" stylesheets="@../view/White.css" text="Полное название института" />

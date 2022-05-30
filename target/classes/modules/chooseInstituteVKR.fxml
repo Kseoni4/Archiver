@@ -12,7 +12,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
    <children>
       <TitledPane animated="false" prefHeight="26.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг второй: выберите факультет, кафедру и направление" AnchorPane.bottomAnchor="674.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16637d" height="665.0" layoutY="37.0" opacity="0.8" stroke="#16637d" strokeType="INSIDE" width="300.0" />
