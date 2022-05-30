@@ -68,21 +68,20 @@ public class VKRController implements Initializable {
     @FXML protected TextField diplom;
 
     //Председатель ГЭК
-    @FXML protected Label predsedatelName;
+     protected String predsedatelName;
 
     //Секретарь ГЭК
-    @FXML protected Label secretaryName;
+     protected String secretaryName;
 
-    //Первый член ГЭК
-    @FXML protected Label memberGekOne;
+    protected String memberGekOne;
     //Второй член ГЭК
-    @FXML protected Label memberGekTwo;
+     protected String memberGekTwo;
     //Третий член ГЭК
-    @FXML protected Label memberGekThree;
+     protected String memberGekThree;
     //Четвертый член ГЭК
-    @FXML protected Label memberGekFour;
+     protected String memberGekFour;
     //Пятый член ГЭК
-    @FXML protected Label memberGekFive;
+     protected String memberGekFive;
 
     //Название направления
     @FXML protected Label courseName;
@@ -129,7 +128,7 @@ public class VKRController implements Initializable {
         ChooseStudentController controller = fxmlLoader.getController();
         controller.initCourseData(courseNumber.getText(), courseName.getText(), instituteName.getText(), chairName.getText());
         controller.initGroupData(groupData);
-        controller.initGekData(membersGek, predsedatelName.getText(), secretaryName.getText());
+        controller.initGekData(membersGek, predsedatelName, secretaryName);
         controller.initOtherData(date,protocolNumber.getText());
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
@@ -166,13 +165,13 @@ public class VKRController implements Initializable {
     }
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
         membersGek = new LinkedList<MemberGek>(aMembersGek);
-        predsedatelName.setText(aPredsedatel);
-        secretaryName.setText(aSecretary);
-        memberGekOne.setText(membersGek.get(0).getName());
-        memberGekTwo.setText(membersGek.get(1).getName());
-        memberGekThree.setText(membersGek.get(2).getName());
-        memberGekFour.setText(membersGek.get(3).getName());
-        memberGekFive.setText(membersGek.get(4).getName());
+        predsedatelName = aPredsedatel;
+        secretaryName = aSecretary;
+        memberGekOne = membersGek.get(0).getName();
+        memberGekTwo = membersGek.get(1).getName();
+        memberGekThree = membersGek.get(2).getName();
+        memberGekFour = membersGek.get(3).getName();
+        memberGekFive = membersGek.get(4).getName();
     }
     public void initOtherData(LocalDate aDate, String aProtocolNumber){
         dateText.setText(aDate.toString());
@@ -188,7 +187,7 @@ public class VKRController implements Initializable {
         for (int i = 0; i<membersGek.size(); i++){
             memberNames.add(membersGek.get(i).getName());
         }
-        memberNames.add(predsedatelName.getText());
+        memberNames.add(predsedatelName);
 
         FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/addQuestion.fxml"));
         Scene scene = new Scene(loaderSlave.load());
@@ -222,8 +221,8 @@ public class VKRController implements Initializable {
             tmpData.setCourseNumber(courseNumber.getText());
             tmpData.setCourseName(courseName.getText());
             tmpData.setProtocolNumber(protocolNumber.getText());
-            tmpData.setPredsedatelName(predsedatelName.getText());
-            tmpData.setSecretaryName(secretaryName.getText());
+            tmpData.setPredsedatelName(predsedatelName);
+            tmpData.setSecretaryName(secretaryName);
             tmpData.setStudentName(studentName.getText());
             tmpData.setVkrName(vkrName.getText());
             tmpData.setNauchName(nauchName.getText());
