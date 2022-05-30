@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.addQuestionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="269.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.AddQuestionController">
    <children>
       <ComboBox fx:id="memberNames" layoutX="4.0" layoutY="102.0" prefHeight="26.0" prefWidth="174.0" promptText="Кто задает вопрос" />
       <TextArea fx:id="question" layoutX="182.0" layoutY="68.0" prefHeight="121.0" prefWidth="429.0" promptText="Вопрос члена комиссии" />

@@ -175,7 +175,7 @@ public class VKRController implements Initializable {
         }
         memberNames.add(predsedatelName.getText());
 
-        FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/AddQuestion.fxml"));
+        FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/addQuestion.fxml"));
         Scene scene = new Scene(loaderSlave.load());
         AddQuestionController controller = loaderSlave.getController();
         controller.initMembersData(memberNames, memberGekTable);
