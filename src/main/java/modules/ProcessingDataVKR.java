@@ -40,6 +40,7 @@ public class ProcessingDataVKR {
         mappings.put("recenzent_vkr", vkrData.getReviewerName());
         mappings.put("ocenka", vkrData.getVkrGrade());
         mappings.put("secretar_name", vkrData.getSecretaryName());
+        mappings.put("harakteristika", vkrData.getStudentHar());
         for (int i = 1; i<=6; i++){
             mappings.put("id"+i,"");
             mappings.put("question_chlen"+i+"_name", "");
