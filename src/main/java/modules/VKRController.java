@@ -78,6 +78,9 @@ public class VKRController implements Initializable {
     //ВКР выполнена в виде:
     @FXML protected ChoiceBox<String> vkrType;
 
+    //Характеристика студента
+    @FXML protected TextArea studentHar;
+
     //Итоговая оценка
     @FXML protected ChoiceBox<String> vkrGrade;
 
@@ -90,7 +93,7 @@ public class VKRController implements Initializable {
 
     private LinkedList<MemberGek> membersGek;
 
-    private Optional<ProcessingDataVKR> processingDataVKR;
+    private Optional<ProcessingDataVKR> processingDataVKR = Optional.ofNullable(null);
 
 
     private LocalDate date;
@@ -201,25 +204,23 @@ public class VKRController implements Initializable {
             if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
                 Files.createDirectory(Paths.get("OutDocumentsVKR/"));
             }
-            processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(new VKRData(
-                    instituteName.getText(),
-                    chairName.getText(),
-                    courseNumber.getText(),
-                    courseName.getText(),
-                    protocolNumber.getText(),
-                    predsedatelName.getText(),
-                    secretaryName.getText(),
-                    membersGekTableNames,
-                    membersGekQuestions,
-                    membersGekNames,
-                    studentName.getText(),
-                    vkrName.getText(),
-                    nauchName.getText(),
-                    reviewerName.getText(),
-                    dateText.getText(),
-                    vkrGrade.getValue(),
-                    vkrType.getValue()
-            )));
+            VKRData tmpData = new VKRData(membersGekTableNames, membersGekQuestions,membersGekNames);
+            tmpData.setInstituteName(instituteName.getText());
+            tmpData.setChairName(chairName.getText());
+            tmpData.setCourseNumber(courseNumber.getText());
+            tmpData.setCourseName(courseName.getText());
+            tmpData.setProtocolNumber(protocolNumber.getText());
+            tmpData.setPredsedatelName(predsedatelName.getText());
+            tmpData.setSecretaryName(secretaryName.getText());
+            tmpData.setStudentName(studentName.getText());
+            tmpData.setVkrName(vkrName.getText());
+            tmpData.setNauchName(nauchName.getText());
+            tmpData.setReviewerName(reviewerName.getText());
+            tmpData.setDate(dateText.getText());
+            tmpData.setVkrGrade(vkrGrade.getValue());
+            tmpData.setVkrType(vkrType.getValue());
+            tmpData.setStudentHar(studentHar.getText());
+            processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
         }
 
     }
