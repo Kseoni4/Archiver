@@ -5,6 +5,10 @@
 
 package modules;
 
+import com.github.petrovich4j.Case;
+import com.github.petrovich4j.Gender;
+import com.github.petrovich4j.NameType;
+import com.github.petrovich4j.Petrovich;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -222,6 +226,29 @@ public class VKRController implements Initializable {
             )));
         }
 
+    }
+    private void  grammaticalCaseName(String fullName){
+
+        String[] nameParts = fullName.split(" ");
+
+        Petrovich sklonyatel = new Petrovich();
+
+        String lastName = nameParts[0];
+        String firstName = nameParts[1];
+        String patronymicName = nameParts[2];
+
+        Gender gender = sklonyatel.gender(patronymicName, Gender.Both);
+
+        System.out.println("Склоняем " + lastName + " " + firstName + " " + patronymicName);
+        System.out.println(gender);
+        System.out.println("В Родительном падаеже:" +
+                sklonyatel.say(lastName, NameType.LastName, gender, Case.Genitive) + " " +
+                sklonyatel.say(firstName, NameType.FirstName, gender, Case.Genitive) + " " +
+                sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Genitive));
+        System.out.println("В Дательном падаеже:" +
+                sklonyatel.say(lastName, NameType.LastName, gender, Case.Dative) + " " +
+                sklonyatel.say(firstName, NameType.FirstName, gender, Case.Dative) + " " +
+                sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Dative));
     }
 
 }
