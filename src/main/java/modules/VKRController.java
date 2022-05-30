@@ -35,6 +35,10 @@ public class VKRController implements Initializable {
     //Полное имя студента в Именительном падеже
     @FXML protected Label studentName;
 
+    @FXML protected TextField studentNameRP;
+
+    @FXML protected TextField studentNameDP;
+
     //Полное название темы ВКР
     @FXML protected TextArea vkrName;
 
@@ -58,6 +62,10 @@ public class VKRController implements Initializable {
 
     //Номер протокола
     @FXML protected Label protocolNumber;
+
+    @FXML protected TextField qualification;
+
+    @FXML protected TextField diplom;
 
     //Председатель ГЭК
     @FXML protected Label predsedatelName;

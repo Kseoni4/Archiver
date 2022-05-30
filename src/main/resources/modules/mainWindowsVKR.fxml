@@ -19,14 +19,14 @@
                   <Label layoutX="8.0" layoutY="241.0" prefHeight="17.0" prefWidth="130.0" text="Номер направления" />
                   <Label layoutX="14.0" layoutY="322.0" text="Номер протокола" />
                   <Label layoutX="15.0" layoutY="296.0" text="Дата заседания" />
-                  <Label layoutX="5.0" layoutY="14.0" text="ФИО студента(ки)" />
+                  <Label layoutX="14.0" layoutY="564.0" text="ФИО студента(ки)" />
                   <Label layoutX="23.0" layoutY="56.0" text="Тема ВКР" />
-                  <ChoiceBox fx:id="vkrType" layoutX="193.0" layoutY="559.0" prefWidth="150.0" />
-                  <Label layoutX="13.0" layoutY="564.0" text="ВКР выполнена в виде" />
+                  <ChoiceBox fx:id="vkrType" layoutX="174.0" layoutY="10.0" prefWidth="150.0" />
+                  <Label layoutX="13.0" layoutY="14.0" text="ВКР выполнена в виде" />
                   <Label layoutX="12.0" layoutY="94.0" text="Руководитель ВКР" />
                   <Label layoutX="11.0" layoutY="128.0" text="Рецензент для ВКР" />
-                  <Label layoutX="23.0" layoutY="608.0" text="Итоговая оценка" />
-                  <ChoiceBox fx:id="vkrGrade" layoutX="193.0" layoutY="603.0" prefWidth="150.0" />
+                  <Label layoutX="681.0" layoutY="494.0" text="Итоговая оценка" />
+                  <ChoiceBox fx:id="vkrGrade" layoutX="819.0" layoutY="490.0" prefWidth="150.0" />
                   <Button layoutX="584.0" layoutY="603.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" text="Следующий студент" />
                   <Button layoutX="762.0" layoutY="603.0" mnemonicParsing="false" onAction="#makeDocumentVKR" text="Сформировать протокол ВКР" />
                   <Label layoutX="11.0" layoutY="350.0" text="Председатель ГЭК" />
@@ -35,7 +35,7 @@
                   <Label layoutX="31.0" layoutY="435.0" text="Член2 ГЭК" />
                   <Label layoutX="29.0" layoutY="463.0" text="Член3 ГЭК" />
                   <Label layoutX="31.0" layoutY="494.0" text="член4 ГЭК" />
-                  <Label fx:id="studentName" layoutX="144.0" layoutY="14.0" prefHeight="17.0" prefWidth="193.0" text="Label" />
+                  <Label fx:id="studentName" layoutX="152.0" layoutY="564.0" prefHeight="17.0" prefWidth="193.0" text="Label" />
                   <Label fx:id="nauchName" layoutX="184.0" layoutY="94.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
                   <Label fx:id="courseNumber" layoutX="223.0" layoutY="241.0" text="Label" />
                   <Label fx:id="dateText" layoutX="221.0" layoutY="296.0" text="Label" />
@@ -52,7 +52,7 @@
                   <Label fx:id="courseName" layoutX="223.0" layoutY="270.0" prefHeight="0.0" prefWidth="34.0" text="Label" />
                   <TextField fx:id="reviewerName" layoutX="164.0" layoutY="124.0" prefHeight="26.0" prefWidth="187.0" />
                   <TextArea fx:id="vkrName" layoutX="138.0" layoutY="45.0" prefHeight="34.0" prefWidth="199.0" />
-                  <Label layoutX="540.0" layoutY="37.0" text="Вопросы" />
+                  <Label layoutX="762.0" layoutY="37.0" text="Вопросы" />
                   <TableView fx:id="memberGekTable" layoutX="501.0" layoutY="82.0" prefHeight="208.0" prefWidth="468.0">
                     <columns>
                       <TableColumn fx:id="memberGekName" prefWidth="235.0" text="Член ГЭК" />
@@ -67,6 +67,14 @@
                   <Button layoutX="721.0" layoutY="559.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" text="Сформировать протокол атестации" />
                   <TextArea fx:id="studentHar" layoutX="501.0" layoutY="315.0" prefHeight="155.0" prefWidth="467.0" />
                   <Label layoutX="501.0" layoutY="296.0" text="Характеристика студента" />
+                  <Label layoutX="14.0" layoutY="585.0" text="ФИО студента в дательном падеже" />
+                  <Label layoutX="18.0" layoutY="621.0" text="Фио студента в родительном падеже" />
+                  <TextField fx:id="studentNameDP" layoutX="270.0" layoutY="581.0" />
+                  <TextField fx:id="studentNameRP" layoutX="286.0" layoutY="617.0" />
+                  <TextField fx:id="qualification" layoutX="468.0" layoutY="490.0" />
+                  <Label layoutX="328.0" layoutY="494.0" text="Квалификация" />
+                  <Label layoutX="328.0" layoutY="535.0" text="Диплом" />
+                  <TextField fx:id="diplom" layoutX="468.0" layoutY="531.0" />
                </children>
             </AnchorPane>
         </content>
