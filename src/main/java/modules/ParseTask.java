@@ -32,12 +32,11 @@ import java.util.regex.Pattern;
 public class ParseTask extends Task<LinkedList<GroupData>> {
 
     private File file;
-    @FXML
-    private Button nextButton;
-    private Button backButton;
-    private Button chooseButton;
-    private Label fileLabel;
-    private ProgressBar progressBar;
+    @FXML private Button nextButton;
+    @FXML private Button backButton;
+    @FXML private Button chooseButton;
+    @FXML private Label fileLabel;
+    @FXML private ProgressBar progressBar;
 
     public ParseTask(File aFile, Button aNextButton, Button aBackButton, Button aChooseButton, Label aFileLabel, ProgressBar aProgressBar){
         file = aFile;
@@ -52,17 +51,20 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
 
     @Override
     protected LinkedList<GroupData> call() throws Exception {
-        Main.logger.debug("Начинаю выполнение");
+        //Main.logger.debug("Начинаю выполнение");
+        System.out.println("Начинаю выполнение");
 
         Document document1 = new Document();
         document1.loadFromFile(file.getAbsolutePath(), FileFormat.Rtf);
         document1.saveToFile("test.docx", FileFormat.Docx);
-        Optional<FileInputStream> fileInputStream = Optional.ofNullable(new FileInputStream("test.docx"));
-        Optional<XWPFDocument> document = Optional.ofNullable(new XWPFDocument(fileInputStream.get()));
+        FileInputStream fileInputStream = new FileInputStream("test.docx");
+        XWPFDocument document = new XWPFDocument(fileInputStream);
 
-        List<XWPFTable> tables = document.get().getTables();
-        List<IBodyElement> objects = document.get().getBodyElements();
+        List<XWPFTable> tables = document.getTables();
+        List<IBodyElement> objects = document.getBodyElements();
         ArrayList<String> groups = new ArrayList<>();
+
+        System.out.println("Выполняютсь здесь");
 
         int tableCount = 0;
         int i = 0;
@@ -87,6 +89,7 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
             }
             i++;
         }
+        System.out.println("А теперь здесь");
 
 
         for(i = 0; i < tables.size(); i++) {
@@ -111,8 +114,9 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
                 indexGroup++;
             }
         }
-        Main.logger.debug("Заканчиваю выполнение");
-        fileInputStream.get().close();
+        System.out.println("заканчиваю выполнение");
+        //Main.logger.debug("Заканчиваю выполнение");
+        fileInputStream.close();
         Platform.runLater(()-> {
                 nextButton.setDisable(false);
                 backButton.setDisable(false);

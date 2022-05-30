@@ -175,7 +175,7 @@ public class VKRController implements Initializable {
         }
         memberNames.add(predsedatelName.getText());
 
-        FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/addQuestion.fxml"));
+        FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/AddQuestion.fxml"));
         Scene scene = new Scene(loaderSlave.load());
         AddQuestionController controller = loaderSlave.getController();
         controller.initMembersData(memberNames, memberGekTable);
@@ -197,7 +197,7 @@ public class VKRController implements Initializable {
             for (int i = 0; i < membersGek.size(); i++) {
                 membersGekNames.add(membersGek.get(i).getName());
             }
-            Main.logger.debug("Start mking document");
+            //Main.logger.debug("Start mking document");
             if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
                 Files.createDirectory(Paths.get("OutDocumentsVKR/"));
             }

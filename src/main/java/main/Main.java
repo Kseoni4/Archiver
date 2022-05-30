@@ -52,7 +52,7 @@ public class Main extends Application {
 
     public static Stage mainWindow;
 
-    public static Logger logger = LoggerFactory.getLogger(Main.class);
+    //public static Logger logger = LoggerFactory.getLogger(Main.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception{

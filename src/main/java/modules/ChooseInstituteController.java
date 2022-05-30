@@ -5,8 +5,7 @@
 
 package modules;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import main.Main;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -77,7 +73,11 @@ public class ChooseInstituteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        prepareHashMaps();
+        try {
+            prepareHashMaps();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         instituteName.getItems().addAll(hashMapInstitute.keySet());
         chairName.getItems().addAll(hashMapChair.keySet());
         courseNameFull.getItems().addAll(hashMapNapr.keySet());
@@ -120,7 +120,7 @@ public class ChooseInstituteController implements Initializable {
             ChooseStudentController controller = fxmlLoader.getController();
             controller.initGroupData(groupData);
             LinkedList<String> tmpLinked = new LinkedList<>(Arrays.stream(courseNameFull.getValue().split(";")).toList());
-            controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0), instituteName.getValue().toString(), chairName.getValue().toString());
+            controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0), instituteName.getValue(), chairName.getValue());
             controller.initGekData(memberGeks, predsedatel.getText(), secretary.getText());
             controller.initOtherData(fullDate.getValue(), protocolNumber.getText());
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -192,23 +192,20 @@ public class ChooseInstituteController implements Initializable {
         groupData = new LinkedList<>(aGroupData);
     }
 
-    private void prepareHashMaps() {
-        BufferedReader csvReader = null;
+    private void prepareHashMaps() throws IOException {
         hashMapInstitute = new HashMap<>();
 
         hashMapNapr = new HashMap<>();
         hashMapChair = new HashMap<>();
-        try {
-            csvReader = new BufferedReader(new FileReader("csvTableExample.csv"));
-            String nextLine;
+        try (
+                BufferedReader csvReader = new BufferedReader(new FileReader("csvTableExample.csv"))
+        ){
+            Optional<String> nextLine = Optional.ofNullable(csvReader.readLine());
             String instName;
             String chaName;
             String napName;
-            while (((nextLine = csvReader.readLine()) != null)&&(!nextLine.isEmpty())) {
-                LinkedList<String> forInst = new LinkedList<>(Arrays.stream(nextLine.split(";")).toList());
-                /*for (String tmp : forInst){
-                    System.out.println(tmp);
-                }*/
+            while (((nextLine.isPresent())&&(!nextLine.get().isEmpty()))) {
+                LinkedList<String> forInst = new LinkedList<>(Arrays.stream(nextLine.get().split(";")).toList());
                 instName = forInst.remove(0);
 
                 chaName = forInst.remove(0);
@@ -216,30 +213,38 @@ public class ChooseInstituteController implements Initializable {
                 napName = forInst.remove(0)+";"+ forInst.remove(0);
 
 
-                if (hashMapInstitute.containsKey(instName)){
-                    if (!(hashMapInstitute.get(instName).contains(chaName))) {
-                        hashMapInstitute.get(instName).add(chaName);
-                    } else {}
-                } else {
-                    hashMapInstitute.put(instName, new LinkedList<String>(Collections.singleton(chaName)));
-                }
+                addChair(instName, chaName);
 
-                if (hashMapChair.containsKey(chaName)){
-                    hashMapChair.get(chaName).add(napName);
-                } else {
-                    hashMapChair.put(chaName, new LinkedList<String>(Collections.singleton(napName)));
-                }
+                addNapr(chaName, napName);
+
                 if (hashMapNapr.containsKey(napName)){
                     hashMapNapr.get(napName).addAll(forInst);
                 } else {
                     hashMapNapr.put(napName, new LinkedList<>(forInst));
                 }
+                nextLine = Optional.ofNullable(csvReader.readLine());
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addChair(String instituteName, String chairName) {
+        if (hashMapInstitute.containsKey(instituteName)) {
+            if (!(hashMapInstitute.get(instituteName).contains(chairName))) {
+                hashMapInstitute.get(instituteName).add(chairName);
+            }
+        } else {
+            hashMapInstitute.put(instituteName, new LinkedList<>(Collections.singleton(chairName)));
+        }
+    }
+
+    private void addNapr(String chairName, String napName) {
+        if (hashMapChair.containsKey(chairName)){
+            hashMapChair.get(chairName).add(napName);
+        } else {
+            hashMapChair.put(chairName, new LinkedList<>(Collections.singleton(napName)));
         }
 
     }

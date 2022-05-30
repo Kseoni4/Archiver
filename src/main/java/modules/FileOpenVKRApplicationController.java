@@ -66,7 +66,7 @@ public class FileOpenVKRApplicationController implements Initializable {
         if (groupData!=null){
            int i = 0;
            for (i=0;i<groupData.size();i++){
-               Main.logger.debug(groupData.get(i).getName());
+              // Main.logger.debug(groupData.get(i).getName());
            }
            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));
            Scene scene = new Scene(fxmlLoader.load());
