@@ -255,9 +255,19 @@ public class VKRController implements Initializable {
 
         String lastName = nameParts[0];
         String firstName = nameParts[1];
-        String patronymicName = nameParts[2];
+        String patronymicName;
+        if(nameParts.length == 3) {
+            patronymicName = nameParts[2];
+        }else if(nameParts.length == 2){
+            patronymicName = " ";
+        }else{
+            lastName = fullName;
+            firstName = " ";
+            patronymicName = " ";
+        }
 
-        Gender gender = sklonyatel.gender(patronymicName, Gender.Both);
+        Gender gender = sklonyatel.gender(patronymicName, Gender.Male);
+
 
         System.out.println("Склоняем " + lastName + " " + firstName + " " + patronymicName);
         System.out.println(gender);
