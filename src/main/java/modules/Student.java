@@ -13,15 +13,12 @@ public class Student {
     private SimpleStringProperty vkrName;
     private SimpleStringProperty nauchName;
 
-    private SimpleStringProperty color;
 
-    public Student(){}
 
     public Student(String aName, String aVkrName, String aNauchName){
         name = new SimpleStringProperty(aName);
         vkrName = new SimpleStringProperty(aVkrName);
         nauchName = new SimpleStringProperty(aNauchName);
-        color = new SimpleStringProperty("none");
     }
 
     public void setName(String aName){
@@ -36,7 +33,6 @@ public class Student {
         nauchName = new SimpleStringProperty(aName);
     }
 
-    public void setColor(String aColor){ color = new SimpleStringProperty(aColor);}
 
     public String getName(){
         return name.get();
@@ -50,6 +46,5 @@ public class Student {
         return nauchName.get();
     }
 
-    public String getColor(){return color.get();}
 
 }

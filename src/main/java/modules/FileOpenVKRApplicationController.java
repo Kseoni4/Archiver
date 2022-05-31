@@ -49,7 +49,6 @@ public class FileOpenVKRApplicationController implements Initializable {
 
     /**
      *
-     * @param url
      * @param resourceBundle
      * Нечего инициализировать, оставляем как есть
      */
@@ -62,12 +61,8 @@ public class FileOpenVKRApplicationController implements Initializable {
 
 
     @FXML
-    void nextStepButton(ActionEvent event) throws IOException, InterruptedException {
+    void nextStepButton(ActionEvent event) throws IOException {
         if (groupData!=null){
-           int i = 0;
-           for (i=0;i<groupData.size();i++){
-              // Main.logger.debug(groupData.get(i).getName());
-           }
            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));
            Scene scene = new Scene(fxmlLoader.load());
            ChooseInstituteController controller = fxmlLoader.getController();

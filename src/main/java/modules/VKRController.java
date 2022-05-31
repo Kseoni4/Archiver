@@ -36,8 +36,10 @@ public class VKRController implements Initializable {
     //Полное имя студента в Именительном падеже
     @FXML protected Label studentName;
 
+    //Полное имя студента в родительном падеже
     @FXML protected TextField studentNameRP;
 
+    //Полное имя студента в дательном падеже
     @FXML protected TextField studentNameDP;
 
     //Полное название темы ВКР
@@ -64,8 +66,10 @@ public class VKRController implements Initializable {
     //Номер протокола
     @FXML protected Label protocolNumber;
 
+    //Присваиваемая квалификация
     @FXML protected TextField qualification;
 
+    //Диплом с отличием или без
     @FXML protected ChoiceBox<String> diplom;
 
     //Председатель ГЭК
@@ -74,13 +78,18 @@ public class VKRController implements Initializable {
     //Секретарь ГЭК
      protected String secretaryName;
 
+    //Первый член ГЭК
     protected String memberGekOne;
+
     //Второй член ГЭК
      protected String memberGekTwo;
+
     //Третий член ГЭК
      protected String memberGekThree;
+
     //Четвертый член ГЭК
      protected String memberGekFour;
+
     //Пятый член ГЭК
      protected String memberGekFive;
 
@@ -96,18 +105,35 @@ public class VKRController implements Initializable {
     //Итоговая оценка
     @FXML protected ChoiceBox<String> vkrGrade;
 
+    //Таблица с вопросами членов ГЭК
     @FXML protected TableView<MemberGek> memberGekTable;
+
     @FXML protected TableColumn<MemberGek,String> memberGekName;
+
     @FXML protected TableColumn<MemberGek,String> memberGekQuestion;
 
+    @FXML protected Button createProtocolAttest;
 
+    @FXML protected Button createProtocolVkr;
+
+    @FXML protected Button openInWord;
+
+    @FXML protected Button nextStudent;
+
+    @FXML protected Button addQuest;
+
+    //Данные о текущей группе
     private LinkedList<GroupData> groupData;
 
+    //Данные о членах ГЭК
     private LinkedList<MemberGek> membersGek;
 
-    private Optional<ProcessingDataVKR> processingDataVKR = Optional.ofNullable(null);
+    //Объект для генерации документов
+    private Optional<ProcessingDataVKR> processingDataVKR;
 
+    private Optional<File> fileVkr;
 
+    //Текущая дата
     private LocalDate date;
 
 
@@ -143,15 +169,35 @@ public class VKRController implements Initializable {
 
     @FXML
     void makeDocumentVKR(ActionEvent event) throws Exception {
-        prepareProcessingData();
-        processingDataVKR.get().makeDocumentVKR();
+        if (!isFilledVkr()) {
+            prepareProcessingData();
+            if (processingDataVKR.isPresent()) {
+                fileVkr = Optional.ofNullable(processingDataVKR.get().makeDocumentVKR());
+            }
+            System.out.println("Документ ВКР сделан");
+        }
     }
 
     @FXML
     void makeDocumentAtestacii(ActionEvent event) throws Exception {
-        prepareProcessingData();
-        processingDataVKR.get().makeDocumentAtestacii();
+        if (!isFilledAttest()) {
+            prepareProcessingData();
+            if (processingDataVKR.isPresent()) {
+                processingDataVKR.get().makeDocumentAtestacii();
+            }
+            System.out.println("Документ аттестации сделан");
+        }
+    }
 
+    @FXML
+    void openProtocolVkrInWord() throws IOException {
+        if (fileVkr.isPresent()){
+            Runtime rt = Runtime.getRuntime();
+            Process ps = rt.exec("rundll32 SHELL32.DLL,ShellExec_RunDLL winword.exe");
+            if (ps.isAlive()){
+                System.out.println("Вроде запустить должен");
+            }
+        }
     }
 
     public void initStudentData(Student student, LinkedList<GroupData> aGroupData){
@@ -190,8 +236,8 @@ public class VKRController implements Initializable {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         LinkedList<String> memberNames = new LinkedList<>();
-        for (int i = 0; i<membersGek.size(); i++){
-            memberNames.add(membersGek.get(i).getName());
+        for (MemberGek memberGekTmp: membersGek){
+            memberNames.add(memberGekTmp.getName());
         }
         memberNames.add(predsedatelName);
 
@@ -206,45 +252,47 @@ public class VKRController implements Initializable {
     }
 
     private void prepareProcessingData() throws IOException {
-        if (processingDataVKR.isEmpty()) {
-            LinkedList<String> membersGekTableNames = new LinkedList<>();
-            LinkedList<String> membersGekQuestions = new LinkedList<>();
-            LinkedList<String> membersGekNames = new LinkedList<>();
-            ObservableList<MemberGek> tmpList = memberGekTable.getItems();
-            for (int i = 0; i < tmpList.size(); i++) {
-                membersGekTableNames.add(tmpList.get(i).getName());
-                membersGekQuestions.add(tmpList.get(i).getQuestion());
-            }
-            for (int i = 0; i < membersGek.size(); i++) {
-                membersGekNames.add(membersGek.get(i).getName());
-            }
-            //Main.logger.debug("Start mking document");
-            if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
-                Files.createDirectory(Paths.get("OutDocumentsVKR/"));
-            }
-            VKRData tmpData = new VKRData(membersGekTableNames, membersGekQuestions,membersGekNames);
-            tmpData.setInstituteName(instituteName);
-            tmpData.setChairName(chairName.getText());
-            tmpData.setCourseNumber(courseNumber.getText());
-            tmpData.setCourseName(courseName);
-            tmpData.setProtocolNumber(protocolNumber.getText());
-            tmpData.setPredsedatelName(predsedatelName);
-            tmpData.setSecretaryName(secretaryName);
-            tmpData.setStudentName(studentName.getText());
-            tmpData.setStudentNameDP(studentNameDP.getText());
-            tmpData.setStudentNameRP(studentNameRP.getText());
-            tmpData.setVkrName(vkrName.getText());
-            tmpData.setNauchName(nauchName.getText());
-            tmpData.setReviewerName(reviewerName.getText());
-            tmpData.setDate(dateText.getText());
-            tmpData.setVkrGrade(vkrGrade.getValue());
-            tmpData.setVkrType(vkrType.getValue());
-            tmpData.setStudentHar(vkrGrade.getValue());
-            tmpData.setSpecialOpinion(specialOpinion.getText());
-            tmpData.setDiplom(diplom.getValue());
-            tmpData.setQualification(qualification.getText());
-            processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
+
+        LinkedList<String> membersGekTableNames = new LinkedList<>();
+        LinkedList<String> membersGekQuestions = new LinkedList<>();
+        LinkedList<String> membersGekNames = new LinkedList<>();
+        ObservableList<MemberGek> tmpList = memberGekTable.getItems();
+        for (int i = 0; i < tmpList.size(); i++) {
+            membersGekTableNames.add(tmpList.get(i).getName());
+            membersGekQuestions.add(tmpList.get(i).getQuestion());
         }
+
+        for (int i = 0; i < membersGek.size(); i++) {
+            membersGekNames.add(membersGek.get(i).getName());
+        }
+
+        if (!Files.isDirectory(Paths.get("OutDocumentsVKR/"))) {
+            Files.createDirectory(Paths.get("OutDocumentsVKR/"));
+        }
+        VKRData tmpData = new VKRData(membersGekTableNames, membersGekQuestions,membersGekNames);
+
+        tmpData.setInstituteName(instituteName);
+        tmpData.setChairName(chairName.getText());
+        tmpData.setCourseNumber(courseNumber.getText());
+        tmpData.setCourseName(courseName);
+        tmpData.setProtocolNumber(protocolNumber.getText());
+        tmpData.setPredsedatelName(predsedatelName);
+        tmpData.setSecretaryName(secretaryName);
+        tmpData.setStudentName(studentName.getText());
+        tmpData.setStudentNameDP(studentNameDP.getText());
+        tmpData.setStudentNameRP(studentNameRP.getText());
+        tmpData.setVkrName(vkrName.getText());
+        tmpData.setNauchName(nauchName.getText());
+        tmpData.setReviewerName(reviewerName.getText());
+        tmpData.setDate(dateText.getText());
+        tmpData.setVkrGrade(vkrGrade.getValue());
+        tmpData.setVkrType(vkrType.getValue());
+        tmpData.setStudentHar(vkrGrade.getValue());
+        tmpData.setSpecialOpinion(specialOpinion.getText());
+        tmpData.setDiplom(diplom.getValue());
+        tmpData.setQualification(qualification.getText());
+
+        processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
 
     }
     private void  grammaticalCaseName(String fullName){
@@ -287,6 +335,30 @@ public class VKRController implements Initializable {
                 sklonyatel.say(firstName, NameType.FirstName, gender, Case.Dative) + " " +
                 sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Dative);
         studentNameDP.setText(tmpStudentNameDP);
+    }
+
+    public boolean isFilledAttest(){
+        return ((vkrGrade.getValue() == null)||(diplom.getValue() == null)||(qualification.getText() == null));
+    }
+
+    public boolean isFilledVkr(){
+        return ((reviewerName.getText()==null)||(vkrType.getValue() == null)||(vkrGrade.getValue()==null));
+    }
+
+    public void disableButtons(){
+        createProtocolAttest.setDisable(true);
+        createProtocolVkr.setDisable(true);
+        addQuest.setDisable(true);
+        nextStudent.setDisable(true);
+        openInWord.setDisable(true);
+    }
+
+    public void enableButtons(){
+        createProtocolAttest.setDisable(false);
+        createProtocolVkr.setDisable(false);
+        addQuest.setDisable(false);
+        nextStudent.setDisable(false);
+        openInWord.setDisable(false);
     }
 
 }

@@ -92,9 +92,7 @@ public class ChooseStudentController implements Initializable {
 
     public void  getGroups(){
         ObservableList<GroupData> groups = FXCollections.observableArrayList();
-        for (GroupData group: groupData){
-            groups.add(group);
-        }
+        groups.addAll(groupData);
         tableGroup.setItems(groups);
     }
 
@@ -102,11 +100,8 @@ public class ChooseStudentController implements Initializable {
         GroupData group = tableGroup.getSelectionModel().getSelectedItem();
         if (group!=null) {
             ObservableList<Student> students = FXCollections.observableArrayList();
-            for (Student student : group.getGroupStudents()) {
-                students.add(student);
-            }
+            students.addAll(group.getGroupStudents());
             tableStudent.setItems(students);
-
         }
     }
 

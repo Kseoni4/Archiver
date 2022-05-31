@@ -5,15 +5,13 @@
 
 package modules;
 
-import org.checkerframework.checker.nullness.Opt;
+
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Locale;
 import java.util.Optional;
 
 public class VKRData {
@@ -132,21 +130,20 @@ public class VKRData {
 
     public String getStudentHar(){return studentHar;}
     public void setStudentHar(String aName) throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader("Harakteristiki.csv"));
-        Optional<String> nextLine = Optional.ofNullable(csvReader.readLine());
-        String ocenka;
-        String tmpHar;
-        studentHar = "";
-        while ((nextLine.isPresent())&&(!nextLine.get().isEmpty())){
-            System.out.println("Читаем");
-            System.out.println(nextLine.get());
-            LinkedList<String> tmpList = new LinkedList<>(Arrays.stream(nextLine.get().split(";")).toList());
-            ocenka = tmpList.remove(0);
-            tmpHar = tmpList.remove(0);
-            if (ocenka.equals(vkrGrade)){
-                studentHar = tmpHar;
+        try(BufferedReader csvReader = new BufferedReader(new FileReader("Harakteristiki.csv"))) {
+            Optional<String> nextLine = Optional.ofNullable(csvReader.readLine());
+            String ocenka;
+            String tmpHar;
+            studentHar = "";
+            while ((nextLine.isPresent()) && (!nextLine.get().isEmpty())) {
+                LinkedList<String> tmpList = new LinkedList<>(Arrays.stream(nextLine.get().split(";")).toList());
+                ocenka = tmpList.remove(0);
+                tmpHar = tmpList.remove(0);
+                if (ocenka.equals(aName)) {
+                    studentHar = tmpHar;
+                }
+                nextLine = Optional.ofNullable(csvReader.readLine());
             }
-            nextLine = Optional.ofNullable(csvReader.readLine());
         }
 
     }

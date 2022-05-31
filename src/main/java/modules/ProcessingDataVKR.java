@@ -62,7 +62,6 @@ public class ProcessingDataVKR {
             mappings.replace("id"+i, String.valueOf(i));
             mappings.replace("question_chlen"+i+"_name", membersGekTableNames.get(i-1));
             mappings.replace("question_" + i, membersGekQuestions.get(i-1));
-            //Main.logger.debug(membersGekQuestions.get(i-1));
         }
     }
 
@@ -76,24 +75,21 @@ public class ProcessingDataVKR {
     }
 
 
-    public void makeDocumentVKR() throws Exception {
+    public File makeDocumentVKR() throws Exception {
         loadTemplatesVKR();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        //Main.logger.debug("End of making Document");
         File outputFile = new File("OutDocumentsVKR/"+"templateVKR.docx");
         templateDocument.save(outputFile);
-        //Main.logger.debug("Document is written");
+        return outputFile;
     }
 
     public void makeDocumentAtestacii() throws Exception {
         loadTemplatesAtestacii();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        //Main.logger.debug("End of making Document");
         File outputFile = new File("OutDocumentsVKR/"+"templateAtestacii.docx");
         templateDocument.save(outputFile);
-       // Main.logger.debug("Document is written");
     }
 
 }

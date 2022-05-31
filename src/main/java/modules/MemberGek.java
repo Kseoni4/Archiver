@@ -12,7 +12,6 @@ public class MemberGek {
     private SimpleStringProperty name;
     private SimpleStringProperty question;
 
-    public MemberGek(){}
     public MemberGek(String aName){
         name = new SimpleStringProperty(aName);
     }

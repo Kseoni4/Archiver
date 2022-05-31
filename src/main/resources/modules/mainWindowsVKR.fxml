@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
    <children>
       <TitledPane animated="false" collapsible="false" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг четвёртый: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
@@ -33,8 +29,8 @@
                   <Label layoutX="138.0" layoutY="50.0" stylesheets="@../view/White.css" text="Рецензент для ВКР" />
                   <Label layoutX="594.0" layoutY="540.0" text="Итоговая оценка" />
                   <ChoiceBox fx:id="vkrGrade" layoutX="744.0" layoutY="535.0" prefHeight="37.0" prefWidth="346.0" stylesheets="@../view/Archiverstyle.css" />
-                  <Button layoutX="320.0" layoutY="640.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" prefWidth="250.0" text="Следующий студент" />
-                  <Button layoutX="740.0" layoutY="640.0" mnemonicParsing="false" onAction="#makeDocumentVKR" prefWidth="350.0" text="Сформировать протокол ВКР" />
+                  <Button fx:id="nextStudent" layoutX="320.0" layoutY="640.0" mnemonicParsing="false" onAction="#changeWindowToChooseStudentButton" prefWidth="250.0" text="Следующий студент" />
+                  <Button fx:id="createProtocolVkr" layoutX="740.0" layoutY="640.0" mnemonicParsing="false" onAction="#makeDocumentVKR" prefWidth="350.0" text="Сформировать протокол ВКР" />
                   <Label fx:id="studentName" layoutX="741.0" layoutY="11.0" prefHeight="26.0" prefWidth="355.0" text="Label" />
                   <Label fx:id="nauchName" layoutX="749.0" layoutY="50.0" prefHeight="26.0" prefWidth="340.0" text="Label" />
                   <Label fx:id="courseNumber" layoutX="765.0" layoutY="90.0" prefHeight="26.0" prefWidth="319.0" text="Label" />
@@ -48,10 +44,10 @@
                       <TableColumn fx:id="memberGekQuestion" prefWidth="578.0" text="Вопрос" />
                     </columns>
                   </TableView>
-                  <Button layoutX="109.0" layoutY="260.0" mnemonicParsing="false" onAction="#addQuestionButton" text="Добавить вопрос" />
+                  <Button fx:id="addQuest" layoutX="109.0" layoutY="260.0" mnemonicParsing="false" onAction="#addQuestionButton" text="Добавить вопрос" />
                   <Label layoutX="135.0" layoutY="90.0" stylesheets="@../view/White.css" text="Название кафедры" />
                   <TextField fx:id="chairName" editable="false" layoutX="320.0" layoutY="85.0" prefHeight="26.0" prefWidth="255.0" stylesheets="@../view/White.css" />
-                  <Button layoutX="740.0" layoutY="590.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" prefWidth="350.0" text="Сформировать протокол атестации" />
+                  <Button fx:id="createProtocolAttest" layoutX="740.0" layoutY="590.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" prefWidth="350.0" text="Сформировать протокол атестации" />
                   <TextArea fx:id="specialOpinion" layoutX="590.0" layoutY="480.0" prefHeight="30.0" prefWidth="500.0" stylesheets="@../view/Archiverstyle.css" />
                   <Label layoutX="590.0" layoutY="455.0" text="Особое мнение" />
                   <Label layoutX="590.0" layoutY="128.0" prefHeight="31.0" prefWidth="170.0" text="ФИО студента в Д.п." />
@@ -62,7 +58,7 @@
                   <Label layoutX="170.0" layoutY="500.0" stylesheets="@../view/White.css" text="Квалификация" />
                   <Label layoutX="220.0" layoutY="540.0" stylesheets="@../view/White.css" text="Диплом" />
                   <TextField fx:id="vkrName" layoutX="320.0" layoutY="5.0" prefHeight="37.0" prefWidth="255.0" />
-                  <Button layoutX="321.0" layoutY="590.0" mnemonicParsing="false" prefWidth="250.0" text="Протокол ВКР в Word" />
+                  <Button fx:id="openInWord" layoutX="321.0" layoutY="590.0" mnemonicParsing="false" onAction="#openProtocolVkrInWord" prefWidth="250.0" text="Протокол ВКР в Word" />
                   <ChoiceBox fx:id="diplom" layoutX="321.0" layoutY="539.0" prefHeight="31.0" prefWidth="220.0" />
                </children>
             </AnchorPane>

@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.URL;
