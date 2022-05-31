@@ -119,7 +119,9 @@ public class VKRController implements Initializable {
         memberGekName.setCellValueFactory(new PropertyValueFactory<MemberGek, String>("name"));
         memberGekQuestion.setCellValueFactory(new PropertyValueFactory<MemberGek,String>("question"));
         diplom.getItems().addAll("с отличием", "без отличия");
-
+        specialOpinion.setText(" ");
+        qualification.setText(" ");
+        reviewerName.setText(" ");
     }
 
     @FXML
@@ -237,6 +239,7 @@ public class VKRController implements Initializable {
             tmpData.setStudentHar(vkrGrade.getValue());
             tmpData.setSpecialOpinion(specialOpinion.getText());
             tmpData.setDiplom(diplom.getValue());
+            tmpData.setQualification(qualification.getText());
             processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
         }
 
