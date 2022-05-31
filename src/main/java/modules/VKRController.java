@@ -49,7 +49,7 @@ public class VKRController implements Initializable {
     @FXML protected TextField reviewerName;
 
     //Название института
-    @FXML protected TextField instituteName;
+    @FXML protected String instituteName;
 
     //Название кафедры
     @FXML protected TextField chairName;
@@ -84,7 +84,7 @@ public class VKRController implements Initializable {
      protected String memberGekFive;
 
     //Название направления
-    @FXML protected Label courseName;
+    @FXML protected String courseName;
 
     //ВКР выполнена в виде:
     @FXML protected ChoiceBox<String> vkrType;
@@ -126,7 +126,7 @@ public class VKRController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         ChooseStudentController controller = fxmlLoader.getController();
-        controller.initCourseData(courseNumber.getText(), courseName.getText(), instituteName.getText(), chairName.getText());
+        controller.initCourseData(courseNumber.getText(), courseName, instituteName, chairName.getText());
         controller.initGroupData(groupData);
         controller.initGekData(membersGek, predsedatelName, secretaryName);
         controller.initOtherData(date,protocolNumber.getText());
@@ -159,8 +159,8 @@ public class VKRController implements Initializable {
 
     public void initCourseData(String aCourseNumber, String aCourseName, String aInstituteName, String aChairName){
         courseNumber.setText(aCourseNumber);
-        courseName.setText(aCourseName);
-        instituteName.setText(aInstituteName);
+        courseName = aCourseName;
+        instituteName = aInstituteName;
         chairName.setText(aChairName);
     }
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
@@ -216,10 +216,10 @@ public class VKRController implements Initializable {
                 Files.createDirectory(Paths.get("OutDocumentsVKR/"));
             }
             VKRData tmpData = new VKRData(membersGekTableNames, membersGekQuestions,membersGekNames);
-            tmpData.setInstituteName(instituteName.getText());
+            tmpData.setInstituteName(instituteName);
             tmpData.setChairName(chairName.getText());
             tmpData.setCourseNumber(courseNumber.getText());
-            tmpData.setCourseName(courseName.getText());
+            tmpData.setCourseName(courseName);
             tmpData.setProtocolNumber(protocolNumber.getText());
             tmpData.setPredsedatelName(predsedatelName);
             tmpData.setSecretaryName(secretaryName);
