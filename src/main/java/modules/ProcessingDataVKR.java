@@ -33,6 +33,7 @@ public class ProcessingDataVKR {
         mappings.put("napr_full_name",vkrData.getCourseName());
         mappings.put("predsedatel_name",vkrData.getPredsedatelName());
         mappings.put("full_date",vkrData.getDate());
+        mappings.put("date",vkrData.getDate());
         mappings.put("student_name",vkrData.getStudentName());
         mappings.put("vkr_theme",vkrData.getVkrName());
         mappings.put("type_of_vkr", vkrData.getVkrType());
@@ -41,6 +42,11 @@ public class ProcessingDataVKR {
         mappings.put("ocenka", vkrData.getVkrGrade());
         mappings.put("secretar_name", vkrData.getSecretaryName());
         mappings.put("harakteristika", vkrData.getStudentHar());
+        mappings.put("osoboe_mnenie", vkrData.getSpecialOpinion());
+        mappings.put("student_name_RP", vkrData.getStudentNameRP());
+        mappings.put("student_name_DP", vkrData.getStudentNameDP());
+        mappings.put("diplom",vkrData.getDiplom());
+        mappings.put("kvalificacia",vkrData.getQualification());
         for (int i = 1; i<=6; i++){
             mappings.put("id"+i,"");
             mappings.put("question_chlen"+i+"_name", "");
