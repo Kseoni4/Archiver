@@ -17,7 +17,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.VKRController">
    <children>
-      <TitledPane animated="false" collapsible="false" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг третий: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TitledPane animated="false" collapsible="false" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг четвёртый: введите основные данные" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css">
                <children>
@@ -52,7 +52,7 @@
                   <Label layoutX="135.0" layoutY="90.0" stylesheets="@../view/White.css" text="Название кафедры" />
                   <TextField fx:id="chairName" editable="false" layoutX="320.0" layoutY="85.0" prefHeight="26.0" prefWidth="255.0" stylesheets="@../view/White.css" />
                   <Button layoutX="740.0" layoutY="590.0" mnemonicParsing="false" onAction="#makeDocumentAtestacii" prefWidth="350.0" text="Сформировать протокол атестации" />
-                  <TextArea fx:id="studentHar" layoutX="590.0" layoutY="493.0" prefHeight="40.0" prefWidth="500.0" stylesheets="@../view/Archiverstyle.css" />
+                  <TextArea fx:id="studentHar" layoutX="590.0" layoutY="488.0" prefHeight="30.0" prefWidth="500.0" stylesheets="@../view/Archiverstyle.css" />
                   <Label layoutX="590.0" layoutY="460.0" text="Характеристика студента" />
                   <Label layoutX="590.0" layoutY="128.0" prefHeight="31.0" prefWidth="170.0" text="ФИО студента в Д.п." />
                   <Label layoutX="590.0" layoutY="170.0" prefHeight="13.0" prefWidth="306.0" text="ФИО студента в Р.п." />
