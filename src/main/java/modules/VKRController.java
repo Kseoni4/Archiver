@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
@@ -134,6 +135,7 @@ public class VKRController implements Initializable {
         controller.initGekData(membersGek, predsedatelName, secretaryName);
         controller.initOtherData(date,protocolNumber.getText());
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);
         window.show();
@@ -194,6 +196,7 @@ public class VKRController implements Initializable {
         memberNames.add(predsedatelName);
 
         FXMLLoader loaderSlave = new FXMLLoader(Main.class.getResource("/modules/addQuestion.fxml"));
+        window.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         Scene scene = new Scene(loaderSlave.load());
         AddQuestionController controller = loaderSlave.getController();
         controller.initMembersData(memberNames, memberGekTable);
