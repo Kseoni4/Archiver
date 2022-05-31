@@ -8,3 +8,26 @@
     -fx-text-fill: #eeeeee;
     -fx-opacity: 0.95;
 }
+.table-view {
+    -fx-base: #dddddd;
+    -fx-control-inner-background: #16637D;
+    -fx-background-color: #dddddd;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #dddddd;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-background-color: #dddddd;
+    -fx-border-color: #16637D;
+}
+
+.table-view .column-header .label
+{
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #16637D;
+    -fx-opacity: 0.8;
+}

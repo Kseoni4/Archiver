@@ -35,7 +35,7 @@
 
 .menu-bar .label {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -74,6 +74,13 @@
     -fx-opacity: 0.8;
 }
 .combo-box .list-view
+{
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #333333;
+    -fx-opacity: 0.8;
+}
+.combo-box
 {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";

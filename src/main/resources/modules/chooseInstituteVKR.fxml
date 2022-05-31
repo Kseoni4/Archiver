@@ -13,47 +13,47 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
    <children>
       <TitledPane animated="false" prefHeight="26.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг второй: выберите факультет, кафедру и направление" AnchorPane.bottomAnchor="674.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16637d" height="665.0" layoutY="37.0" opacity="0.8" stroke="#16637d" strokeType="INSIDE" width="300.0" />
-      <ComboBox fx:id="instituteName" layoutX="320.0" layoutY="45.0" onAction="#instituteSelected" prefHeight="26.0" prefWidth="300.0" />
-      <ComboBox fx:id="chairName" layoutX="320.0" layoutY="80.0" onAction="#chairSelected" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
-      <ComboBox fx:id="courseNameFull" layoutX="320.0" layoutY="115.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <ComboBox fx:id="instituteName" layoutX="320.0" layoutY="45.0" onAction="#instituteSelected" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <ComboBox fx:id="chairName" layoutX="320.0" layoutY="90.0" onAction="#chairSelected" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <ComboBox fx:id="courseNameFull" layoutX="320.0" layoutY="135.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="60.0" layoutY="45.0" prefHeight="26.0" prefWidth="232.0" stylesheets="@../view/White.css" text="Полное название института" />
-      <Label layoutX="67.0" layoutY="80.0" prefHeight="26.0" prefWidth="225.0" stylesheets="@../view/White.css" text="Полное название кафедры" />
-      <Label layoutX="34.0" layoutY="115.0" prefHeight="26.0" prefWidth="259.0" stylesheets="@../view/White.css" text="Полное название направления" />
-      <Button layoutX="320.0" layoutY="650.0" mnemonicParsing="false" onAction="#changeWindowToChooseFileButton" prefWidth="130.0" stylesheets="@../view/Archiverstyle.css" text="Назад" />
-      <Button layoutX="950.0" layoutY="650.0" mnemonicParsing="false" onAction="#nextStepButton" prefWidth="130.0" stylesheets="@../view/Archiverstyle.css" text="Далее" />
-      <Label layoutX="140.0" layoutY="150.0" prefHeight="26.0" prefWidth="170.0" stylesheets="@../view/White.css" text="Председатель ГЭК" />
-      <TextField fx:id="predsedatel" layoutX="320.0" layoutY="150.0" prefHeight="17.0" prefWidth="300.0" />
-      <TextField fx:id="secretary" layoutX="320.0" layoutY="360.0" prefHeight="26.0" prefWidth="300.0" />
-      <Label layoutX="170.0" layoutY="360.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Секретарь ГЭК" />
-      <Label layoutX="142.0" layoutY="395.0" prefHeight="26.0" prefWidth="156.0" stylesheets="@../view/White.css" text="Номер протокола" />
-      <TextField fx:id="protocolNumber" layoutX="320.0" layoutY="395.0" prefHeight="26.0" prefWidth="75.0" promptText="01/22" />
-      <DatePicker fx:id="fullDate" layoutX="320.0" layoutY="430.0" />
-      <Label layoutX="163.0" layoutY="430.0" prefHeight="26.0" prefWidth="132.0" stylesheets="@../view/White.css" text="Дата заседания" />
+      <Label layoutX="67.0" layoutY="90.0" prefHeight="26.0" prefWidth="225.0" stylesheets="@../view/White.css" text="Полное название кафедры" />
+      <Label layoutX="34.0" layoutY="135.0" prefHeight="26.0" prefWidth="259.0" stylesheets="@../view/White.css" text="Полное название направления" />
+      <Button layoutX="320.0" layoutY="640.0" mnemonicParsing="false" onAction="#changeWindowToChooseFileButton" prefWidth="130.0" stylesheets="@../view/Archiverstyle.css" text="Назад" />
+      <Button layoutX="950.0" layoutY="640.0" mnemonicParsing="false" onAction="#nextStepButton" prefWidth="130.0" stylesheets="@../view/Archiverstyle.css" text="Далее" />
+      <Label layoutX="140.0" layoutY="180.0" prefHeight="26.0" prefWidth="170.0" stylesheets="@../view/White.css" text="Председатель ГЭК" />
+      <TextField fx:id="predsedatel" layoutX="320.0" layoutY="175.0" prefHeight="17.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField fx:id="secretary" layoutX="320.0" layoutY="445.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label layoutX="172.0" layoutY="450.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Секретарь ГЭК" />
+      <Label layoutX="144.0" layoutY="495.0" prefHeight="26.0" prefWidth="156.0" stylesheets="@../view/White.css" text="Номер протокола" />
+      <TextField fx:id="protocolNumber" layoutX="320.0" layoutY="490.0" prefHeight="26.0" prefWidth="75.0" promptText="01/22" stylesheets="@../view/Archiverstyle.css" />
+      <DatePicker fx:id="fullDate" layoutX="320.0" layoutY="541.0" />
+      <Label layoutX="165.0" layoutY="540.0" prefHeight="26.0" prefWidth="132.0" stylesheets="@../view/White.css" text="Дата заседания" />
       <Label fx:id="errorLabel1" layoutX="630.0" layoutY="45.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel2" layoutX="633.0" layoutY="80.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel3" layoutX="630.0" layoutY="115.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel4" layoutX="630.0" layoutY="150.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel5" layoutX="630.0" layoutY="185.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel6" layoutX="630.0" layoutY="220.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel7" layoutX="630.0" layoutY="255.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel8" layoutX="630.0" layoutY="290.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel9" layoutX="630.0" layoutY="325.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel10" layoutX="630.0" layoutY="360.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel11" layoutX="407.0" layoutY="395.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel12" layoutX="507.0" layoutY="430.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label layoutX="145.0" layoutY="185.0" prefHeight="17.0" prefWidth="178.0" stylesheets="@../view/White.css" text="Первый член ГЭК" />
-      <Label layoutX="151.0" layoutY="220.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Второй член ГЭК" />
-      <Label layoutX="153.0" layoutY="255.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Третий член ГЭК" />
-      <Label layoutX="122.0" layoutY="290.0" prefHeight="26.0" prefWidth="178.0" stylesheets="@../view/White.css" text="Четвертый член ГЭК" />
-      <Label layoutX="158.0" layoutY="325.0" prefHeight="26.0" prefWidth="156.0" stylesheets="@../view/White.css" text="Пятый член ГЭК" />
-      <TextField fx:id="memberGek1" layoutX="320.0" layoutY="185.0" prefHeight="26.0" prefWidth="300.0" />
-      <TextField fx:id="memberGek2" layoutX="320.0" layoutY="220.0" prefHeight="26.0" prefWidth="300.0" />
-      <TextField fx:id="memberGek3" layoutX="320.0" layoutY="255.0" prefHeight="26.0" prefWidth="300.0" />
-      <TextField fx:id="memberGek4" layoutX="320.0" layoutY="290.0" prefHeight="26.0" prefWidth="300.0" />
-      <TextField fx:id="memberGek5" layoutX="320.0" layoutY="325.0" prefHeight="26.0" prefWidth="300.0" />
+      <Label fx:id="errorLabel2" layoutX="630.0" layoutY="90.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel3" layoutX="630.0" layoutY="135.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel4" layoutX="630.0" layoutY="180.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel5" layoutX="630.0" layoutY="226.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel6" layoutX="630.0" layoutY="270.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel7" layoutX="630.0" layoutY="315.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel8" layoutX="630.0" layoutY="361.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel9" layoutX="630.0" layoutY="405.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel10" layoutX="630.0" layoutY="450.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel11" layoutX="407.0" layoutY="495.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel12" layoutX="509.0" layoutY="540.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label layoutX="145.0" layoutY="225.0" prefHeight="17.0" prefWidth="178.0" stylesheets="@../view/White.css" text="Первый член ГЭК" />
+      <Label layoutX="152.0" layoutY="270.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Второй член ГЭК" />
+      <Label layoutX="154.0" layoutY="315.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Третий член ГЭК" />
+      <Label layoutX="123.0" layoutY="360.0" prefHeight="26.0" prefWidth="178.0" stylesheets="@../view/White.css" text="Четвертый член ГЭК" />
+      <Label layoutX="159.0" layoutY="405.0" prefHeight="26.0" prefWidth="156.0" stylesheets="@../view/White.css" text="Пятый член ГЭК" />
+      <TextField fx:id="memberGek1" layoutX="320.0" layoutY="220.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField fx:id="memberGek2" layoutX="320.0" layoutY="265.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField fx:id="memberGek3" layoutX="320.0" layoutY="310.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField fx:id="memberGek4" layoutX="320.0" layoutY="355.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField fx:id="memberGek5" layoutX="320.0" layoutY="400.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
    </children>
 </AnchorPane>
