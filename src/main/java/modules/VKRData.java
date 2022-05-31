@@ -20,13 +20,17 @@ public class VKRData {
     private LinkedList<String> membersGekQuestions;
     private LinkedList<String> membersGekNames;
     private String studentName;
+    private String studentNameRP;
+    private String studentNameDP;
+    private String studentHar;
     private String vkrName;
     private String nauchName;
     private String reviewerName;
     private String date;
     private String vkrGrade;
     private String vkrType;
-    private String studentHar;
+    private String specialOpinion;
+    private String diplom;
 
     public VKRData(LinkedList<String> aMembersGekTableNames,
                    LinkedList<String> aMembersGekQuestions,
@@ -45,6 +49,9 @@ public class VKRData {
 
     public String getVkrType(){return vkrType;}
     public void setVkrType(String aType) {vkrType = aType;}
+
+    public String getDiplom(){return diplom;}
+    public void setDiplom(String aName){diplom=aName;}
 
     public String getCourseName() {
         return courseName;
@@ -68,6 +75,12 @@ public class VKRData {
         return studentName;
     }
     public void setStudentName(String aName){studentName=aName;}
+
+    public String getStudentNameDP(){return studentNameDP;}
+    public void setStudentNameDP(String aName){studentNameDP = aName;}
+
+    public String getStudentNameRP(){return studentNameRP;}
+    public void setStudentNameRP(String aName){studentNameRP = aName;}
 
     public String getVkrName() {
         return vkrName;
@@ -104,7 +117,12 @@ public class VKRData {
     }
     public void setVkrGrade(String aName){vkrGrade = aName;}
 
+    public String getSpecialOpinion(){return specialOpinion;}
+    public void setSpecialOpinion(String aName){specialOpinion = aName;}
+
     public String getStudentHar(){return studentHar;}
-    public void setStudentHar(String aName){studentHar = aName;}
+    public void setStudentHar(String aName){
+
+    }
 
 }

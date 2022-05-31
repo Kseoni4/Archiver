@@ -65,7 +65,7 @@ public class VKRController implements Initializable {
 
     @FXML protected TextField qualification;
 
-    @FXML protected TextField diplom;
+    @FXML protected ChoiceBox<String> diplom;
 
     //Председатель ГЭК
      protected String predsedatelName;
@@ -90,7 +90,7 @@ public class VKRController implements Initializable {
     @FXML protected ChoiceBox<String> vkrType;
 
     //Характеристика студента
-    @FXML protected TextArea studentHar;
+    @FXML protected TextArea specialOpinion;
 
     //Итоговая оценка
     @FXML protected ChoiceBox<String> vkrGrade;
@@ -118,6 +118,7 @@ public class VKRController implements Initializable {
         vkrGrade.getItems().addAll("Неудовлетворительно", "Удовлетворительно", "Хорошо", "Отлично");
         memberGekName.setCellValueFactory(new PropertyValueFactory<MemberGek, String>("name"));
         memberGekQuestion.setCellValueFactory(new PropertyValueFactory<MemberGek,String>("question"));
+        diplom.getItems().addAll("с отличием", "без отличия");
 
     }
 
@@ -155,6 +156,7 @@ public class VKRController implements Initializable {
         nauchName.setText(student.getNauchName());
         groupData = new LinkedList<>(aGroupData);
         vkrName.setEditable(false);
+        grammaticalCaseName(student.getName());
     }
 
     public void initCourseData(String aCourseNumber, String aCourseName, String aInstituteName, String aChairName){
@@ -224,13 +226,17 @@ public class VKRController implements Initializable {
             tmpData.setPredsedatelName(predsedatelName);
             tmpData.setSecretaryName(secretaryName);
             tmpData.setStudentName(studentName.getText());
+            tmpData.setStudentNameDP(studentNameDP.getText());
+            tmpData.setStudentNameRP(studentNameRP.getText());
             tmpData.setVkrName(vkrName.getText());
             tmpData.setNauchName(nauchName.getText());
             tmpData.setReviewerName(reviewerName.getText());
             tmpData.setDate(dateText.getText());
             tmpData.setVkrGrade(vkrGrade.getValue());
             tmpData.setVkrType(vkrType.getValue());
-            tmpData.setStudentHar(studentHar.getText());
+            tmpData.setStudentHar(vkrGrade.getValue());
+            tmpData.setSpecialOpinion(specialOpinion.getText());
+            tmpData.setDiplom(diplom.getValue());
             processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
         }
 
@@ -253,10 +259,18 @@ public class VKRController implements Initializable {
                 sklonyatel.say(lastName, NameType.LastName, gender, Case.Genitive) + " " +
                 sklonyatel.say(firstName, NameType.FirstName, gender, Case.Genitive) + " " +
                 sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Genitive));
+        String tmpStudentNameRP = sklonyatel.say(lastName, NameType.LastName, gender, Case.Genitive) + " " +
+                sklonyatel.say(firstName, NameType.FirstName, gender, Case.Genitive) + " " +
+                sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Genitive);
+        studentNameRP.setText(tmpStudentNameRP);
         System.out.println("В Дательном падаеже:" +
                 sklonyatel.say(lastName, NameType.LastName, gender, Case.Dative) + " " +
                 sklonyatel.say(firstName, NameType.FirstName, gender, Case.Dative) + " " +
                 sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Dative));
+        String tmpStudentNameDP = sklonyatel.say(lastName, NameType.LastName, gender, Case.Dative) + " " +
+                sklonyatel.say(firstName, NameType.FirstName, gender, Case.Dative) + " " +
+                sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Dative);
+        studentNameDP.setText(tmpStudentNameDP);
     }
 
 }
