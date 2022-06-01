@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import main.Main;
 
 
+import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -159,7 +160,7 @@ public class VKRController implements Initializable {
         controller.initCourseData(courseNumber.getText(), courseName, instituteName, chairName.getText());
         controller.initGroupData(groupData);
         controller.initGekData(membersGek, predsedatelName, secretaryName);
-        controller.initOtherData(date,protocolNumber.getText());
+        controller.initOtherData(date,incrementProtocolNumber());
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
@@ -170,22 +171,26 @@ public class VKRController implements Initializable {
     @FXML
     void makeDocumentVKR(ActionEvent event) throws Exception {
         if (!isFilledVkr()) {
+            disableButtons();
             prepareProcessingData();
             if (processingDataVKR.isPresent()) {
                 fileVkr = Optional.ofNullable(processingDataVKR.get().makeDocumentVKR());
             }
             System.out.println("Документ ВКР сделан");
+            enableButtons();
         }
     }
 
     @FXML
     void makeDocumentAtestacii(ActionEvent event) throws Exception {
         if (!isFilledAttest()) {
+            disableButtons();
             prepareProcessingData();
             if (processingDataVKR.isPresent()) {
                 processingDataVKR.get().makeDocumentAtestacii();
             }
             System.out.println("Документ аттестации сделан");
+            enableButtons();
         }
     }
 
@@ -193,6 +198,7 @@ public class VKRController implements Initializable {
     void openProtocolVkrInWord() throws IOException {
         if (fileVkr.isPresent()){
             Runtime rt = Runtime.getRuntime();
+            fileVkr.get().getAbsolutePath();
             Process ps = rt.exec("rundll32 SHELL32.DLL,ShellExec_RunDLL winword.exe");
             if (ps.isAlive()){
                 System.out.println("Вроде запустить должен");
@@ -359,6 +365,17 @@ public class VKRController implements Initializable {
         addQuest.setDisable(false);
         nextStudent.setDisable(false);
         openInWord.setDisable(false);
+    }
+
+    public String incrementProtocolNumber(){
+        String[] strNumber = protocolNumber.getText().split("/");
+        Integer intNumber = Integer.parseInt(strNumber[0]);
+        intNumber++;
+        if (intNumber<10){
+            return "0"+intNumber+"/"+strNumber[1];
+        } else {
+            return intNumber+"/"+strNumber[1];
+        }
     }
 
 }

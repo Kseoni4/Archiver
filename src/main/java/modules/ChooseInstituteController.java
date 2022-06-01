@@ -20,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
 public class ChooseInstituteController implements Initializable {
@@ -81,6 +83,9 @@ public class ChooseInstituteController implements Initializable {
         instituteName.getItems().addAll(hashMapInstitute.keySet());
         chairName.getItems().addAll(hashMapChair.keySet());
         courseNameFull.getItems().addAll(hashMapNapr.keySet());
+        LocalDate tmpDate = LocalDate.now();
+        int year = tmpDate.getYear();
+        protocolNumber.setText("01/"+(year%100));
 
     }
 

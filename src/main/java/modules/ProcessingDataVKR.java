@@ -79,7 +79,7 @@ public class ProcessingDataVKR {
         loadTemplatesVKR();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        File outputFile = new File("OutDocumentsVKR/"+"templateVKR.docx");
+        File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name")+"_Протокол_ВКР.docx");
         templateDocument.save(outputFile);
         return outputFile;
     }
@@ -88,7 +88,7 @@ public class ProcessingDataVKR {
         loadTemplatesAtestacii();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        File outputFile = new File("OutDocumentsVKR/"+"templateAtestacii.docx");
+        File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name")+"_Протокол_Аттестации.docx");
         templateDocument.save(outputFile);
     }
 
