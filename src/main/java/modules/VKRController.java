@@ -178,6 +178,13 @@ public class VKRController implements Initializable {
             }
             System.out.println("Документ ВКР сделан");
             enableButtons();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Сообщение об ошибке");
+            alert.setHeaderText("Указаны не все данные");
+            alert.setContentText("Для формирования протокола заполните поле Рецензента, Типа работы и Оценки");
+
+            alert.showAndWait();
         }
     }
 
@@ -191,6 +198,12 @@ public class VKRController implements Initializable {
             }
             System.out.println("Документ аттестации сделан");
             enableButtons();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Сообщение об ошибке");
+            alert.setHeaderText("Указаны не все данные");
+            alert.setContentText("Для формирования протокола заплните поле Оценки, Квалификации и Типа диплома");
+            alert.showAndWait();
         }
     }
 
