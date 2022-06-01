@@ -31,6 +31,10 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+/**
+ * Данный класс необходим для обработки событий из окна выбора студента
+ */
+
 public class ChooseStudentController implements Initializable {
 
     private LinkedList<GroupData> groupData;
@@ -55,7 +59,11 @@ public class ChooseStudentController implements Initializable {
     @FXML protected TableColumn<Student, String> studentRowColor;
 
 
-
+    /**
+     * Метод проводит первоначальную инициализацию окна перед представлением пользователю
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         groupName.setCellValueFactory(new PropertyValueFactory<GroupData,String>("name"));
@@ -66,12 +74,25 @@ public class ChooseStudentController implements Initializable {
         studentRowColor.setVisible(false);
     }
 
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param aMembersGek - список членов ГЭК
+     * @param aPredsedatel - имя председателя ГЭК
+     * @param aSecretary - имя секретаря ГЭК
+     */
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
         membersGek = new LinkedList<>(aMembersGek);
         predsedatelName = aPredsedatel;
         secretaryName = aSecretary;
     }
 
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param aCourseName - название направления
+     * @param aCourseNumber - номер направления
+     * @param aInstituteName - название института
+     * @param aChairName - название кафедры
+     */
     public void initCourseData(String aCourseName, String aCourseNumber, String aInstituteName, String aChairName){
         courseNumber = aCourseNumber;
         courseName = aCourseName;
@@ -80,22 +101,37 @@ public class ChooseStudentController implements Initializable {
 
     }
 
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param aDate - выбранная ранее дата
+     * @param aProtocolNumber - номер протокола
+     */
     public void initOtherData(LocalDate aDate, String aProtocolNumber){
         protocolNumber = aProtocolNumber;
         date = aDate;
     }
 
+    /**
+     * Метод предназначен для получения сведений о группах и студентах из предыдущего окна
+     * @param aGroupData - список групп и студентов
+     */
     public void initGroupData(LinkedList<GroupData> aGroupData){
         groupData = new LinkedList<>(aGroupData);
         getGroups();
     }
 
+    /**
+     * Метод предназначен для отображения списка групп в таблице групп
+     */
     public void  getGroups(){
         ObservableList<GroupData> groups = FXCollections.observableArrayList();
         groups.addAll(groupData);
         tableGroup.setItems(groups);
     }
 
+    /**
+     * Метод предназначен для заполнения таблицы студентов при выборе группы из таблицы групп
+     */
     public void setTableStudents(){
         GroupData group = tableGroup.getSelectionModel().getSelectedItem();
         if (group!=null) {
@@ -105,7 +141,11 @@ public class ChooseStudentController implements Initializable {
         }
     }
 
-
+    /**
+     * Метод предназначен для перехода в следующее окно и передачу туда данных
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void nextStepButton(ActionEvent event) throws IOException {
         if (!tableStudent.getSelectionModel().isEmpty()) {
@@ -123,6 +163,12 @@ public class ChooseStudentController implements Initializable {
         }
 
     }
+
+    /**
+     * Метод предназначен для перехода в предыдущее окно и передачу туда данных
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void backStepButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseInstituteVKR.fxml"));

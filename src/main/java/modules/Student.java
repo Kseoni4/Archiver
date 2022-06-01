@@ -7,6 +7,10 @@ package modules;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * Класс предназначен для создания объектов, представляющих студентов
+ * Содержит имя студента, тему ВКР и имя научного руководителя
+ */
 public class Student {
 
     private SimpleStringProperty name;

@@ -24,6 +24,11 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
+/**
+ * Класс вредназначен для обработки событий окна, предназначенного для заполнения сведений,
+ * которые далее будут использоваться на протяжении работы всей оставшейся программы
+ */
+
 public class ChooseInstituteController implements Initializable {
 
     private HashMap<String, LinkedList<String>> hashMapInstitute;
@@ -72,7 +77,12 @@ public class ChooseInstituteController implements Initializable {
     @FXML protected Label errorLabel11;
     @FXML protected Label errorLabel12;
 
-
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     * Данный Метод инициализирует окно для первого представления пользователю некоторыми данными
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -89,19 +99,30 @@ public class ChooseInstituteController implements Initializable {
 
     }
 
-
+    /**
+     * Данный метод при выборе параметра в ComboBox перенастраивает данные в других ComboBox
+     * @param event
+     */
     @FXML
     public void instituteSelected(ActionEvent event){
         chairName.getItems().clear();
         chairName.getItems().addAll(hashMapInstitute.get(instituteName.getValue()));
     }
-
+    /**
+     * Данный метод при выборе параметра в ComboBox перенастраивает данные в других ComboBox
+     * @param event
+     */
     @FXML
     public void chairSelected(ActionEvent event){
         courseNameFull.getItems().clear();
         courseNameFull.getItems().addAll(hashMapChair.get(chairName.getValue()));
     }
 
+    /**
+     * Данный метод позволяет вернуться в предыдущее окно при клике на кнопку
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void changeWindowToChooseFileButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseFileVKRWindow.fxml"));
@@ -112,6 +133,12 @@ public class ChooseInstituteController implements Initializable {
         window.show();
     }
 
+    /**
+     * Данный метод позволяет при определенных условиях перейти в следующее окно при клике на кнопку
+     * и передает в него необходимые данные
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void nextStepButton(ActionEvent event) throws IOException {
         if (isFilled()) {
@@ -135,6 +162,10 @@ public class ChooseInstituteController implements Initializable {
         }
     }
 
+    /**
+     * Данный метод проверяет заполненные данные, и в случае их отсутствия выводит в в окно сообщение пользователю
+     * @return
+     */
     public boolean isFilled(){
         int i = 0;
         if (instituteName.getValue()==null){
@@ -193,10 +224,19 @@ public class ChooseInstituteController implements Initializable {
         }
     }
 
+    /**
+     * Данный метод предназначен для получения инфомрации о группах и студентах из предыдущего окна
+     * @param aGroupData
+     */
     public void initGroupData(LinkedList<GroupData> aGroupData){
         groupData = new LinkedList<>(aGroupData);
     }
 
+    /**
+     * данный метод предназначен для подготовки корректной работы трех ComboBox с данными
+     * Он заполняет три HashMap, каждый из которых соответствует своему ComboBox необходимой информацией
+     * @throws IOException
+     */
     private void prepareHashMaps() throws IOException {
         hashMapInstitute = new HashMap<>();
 
@@ -235,6 +275,11 @@ public class ChooseInstituteController implements Initializable {
         }
     }
 
+    /**
+     * Данный метод заполняет HashMap с ключом в виде названия Института
+     * @param instituteName - название института
+     * @param chairName - название кафедры в этом институте
+     */
     private void addChair(String instituteName, String chairName) {
         if (hashMapInstitute.containsKey(instituteName)) {
             if (!(hashMapInstitute.get(instituteName).contains(chairName))) {
@@ -245,6 +290,11 @@ public class ChooseInstituteController implements Initializable {
         }
     }
 
+    /**
+     * Данный метод заполняет HashMap с ключом в виде названия кафедры
+     * @param chairName - название кафедры
+     * @param napName - название направления у этой кафедры
+     */
     private void addNapr(String chairName, String napName) {
         if (hashMapChair.containsKey(chairName)){
             hashMapChair.get(chairName).add(napName);

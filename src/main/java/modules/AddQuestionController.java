@@ -19,6 +19,9 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+/**
+ * Класс предназначен для обработки событий окна с добавлением вопросов членов ГЭК
+ */
 public class AddQuestionController implements Initializable {
 
     @FXML protected Button addButton;
@@ -29,17 +32,30 @@ public class AddQuestionController implements Initializable {
 
     private TableView<MemberGek> tableView;
 
-
+    /**
+     * Первоначальная инициализация окна
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Нечего инициализировать
     }
 
+    /**
+     * Заполнение ComboBox именами членов ГЭК
+     * @param aMemberNames - Список имен членов ГЭК
+     * @param aTableView - таблица с вопросами членов ГЭК
+     */
     public void initMembersData(LinkedList<String> aMemberNames, TableView<MemberGek> aTableView){
         memberNames.getItems().addAll(aMemberNames);
         tableView = aTableView;
     }
 
+    /**
+     * Метод предназначен для добавления имени члена ГЭК и его вопроса в таблицу
+     * @param event
+     */
     @FXML
     public void addQuestionButtonSlave(ActionEvent event){
         if ((memberNames.getValue()!=null)&&(!question.getText().isBlank())) {

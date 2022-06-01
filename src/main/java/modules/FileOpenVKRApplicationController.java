@@ -27,6 +27,9 @@ import java.io.*;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Класс предназначен для обработки событий окна выбора файла с приказом.
+ */
 
 public class FileOpenVKRApplicationController implements Initializable {
 
@@ -59,7 +62,12 @@ public class FileOpenVKRApplicationController implements Initializable {
 
     private LinkedList<GroupData> groupData;
 
-
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Сетод предназначен для передачи данных в следующее окно, при клике на кнопку
+     */
     @FXML
     void nextStepButton(ActionEvent event) throws IOException {
         if (groupData!=null){
@@ -77,6 +85,13 @@ public class FileOpenVKRApplicationController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * Метод предназначен для возврата из модуля в основную программу, при клике на кнопку
+     */
+
     @FXML
     void changeWindowToArchiverButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("mainWindow.fxml"));
@@ -86,6 +101,14 @@ public class FileOpenVKRApplicationController implements Initializable {
         window.setScene(scene);
         window.show();
     }
+
+    /**
+     *
+     * @param event
+     * Метод вызывается при клике на кнопку "Выбрать файл". Происходит загрузка выбранного файла
+     * при помощи FileChooser. далее происходит проверка расширения файла, и если файл с расширением rtf,
+     * то создается новый объект класса ParseTask и в отдельном потоке вызывается метод call.
+     */
 
     @FXML
     void chooseRTFFile(ActionEvent event){
@@ -116,6 +139,13 @@ public class FileOpenVKRApplicationController implements Initializable {
             nameFile.setText("Файл не выбран");
         }
     }
+
+    /**
+     * Метод предназначен для проверки расширения файла
+     * @param fileName - полное имя файла.
+     * @return - В случае наличия у файла расширения, то возращается String с расширением, иначе - пустая строка
+     *
+     */
 
     private String getFileExtension(String fileName){
         if (fileName.lastIndexOf(".")!=-1 && fileName.lastIndexOf(".")!=0)

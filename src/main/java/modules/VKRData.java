@@ -14,6 +14,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * Метод предназначен для хранения данных, необходимых для формирования протокола ВКР,
+ * протокола Аттестации, содержит все необходимые методы для получения из внутренних полей и установки данных
+ */
 public class VKRData {
 
     private String instituteName;

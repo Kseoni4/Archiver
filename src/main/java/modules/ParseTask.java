@@ -25,6 +25,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Класс предназначен для обработки выбранного ранее файла.
+ *
+ */
+
 public class ParseTask extends Task<LinkedList<GroupData>> {
 
     private final File file;
@@ -34,6 +39,15 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
     @FXML private final Label fileLabel;
     @FXML private final ProgressBar progressBar;
 
+    /**
+     *
+     * @param aFile - объект File выбранного файла
+     * @param aNextButton - кнопка перехода в следующее окно
+     * @param aBackButton - кнопка возврата в предыдущее окно
+     * @param aChooseButton - кнопка выбора файла
+     * @param aFileLabel - поле для вывода информации
+     * @param aProgressBar - Прогресс бар, для демонстрации пользователю идущего процесса
+     */
     public ParseTask(File aFile, Button aNextButton, Button aBackButton, Button aChooseButton, Label aFileLabel, ProgressBar aProgressBar){
         file = aFile;
         nextButton = aNextButton;
@@ -45,6 +59,11 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
 
     LinkedList<GroupData> groupData = new LinkedList<>();
 
+    /**
+     * Основной метод, в котором происходит обработка файла.
+     * @return - Возвращается информация о группах, студентах, темах ВКР и научных руководителях
+     * @throws Exception
+     */
     @Override
     protected LinkedList<GroupData> call() throws Exception {
 

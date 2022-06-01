@@ -24,13 +24,17 @@ import javafx.stage.Stage;
 import main.Main;
 
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
+
+/**
+ * Класс предназначен для обработки событий с основного окна. В нем реализовано добавление вопросов членов ГЭК,
+ * Формирование документов, заполнение последней необходимой информации и так далее
+ */
 
 public class VKRController implements Initializable {
 
@@ -137,7 +141,11 @@ public class VKRController implements Initializable {
     //Текущая дата
     private LocalDate date;
 
-
+    /**
+     * Первоначальная инициализация окна
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -152,6 +160,11 @@ public class VKRController implements Initializable {
         reviewerName.setText(" ");
     }
 
+    /**
+     * Метод предназначен для возврата к выбору студентов и передачи туда необходимых данных
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void changeWindowToChooseStudentButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
@@ -168,6 +181,13 @@ public class VKRController implements Initializable {
         window.show();
     }
 
+    /**
+     * Метод предназначен для обработки события клика по кнопке. Метод запускает формирование протокола ВКР,
+     * при определенных условиях.
+     * Если условия не выполнены, то появляется окно с сообщением об ошибке
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void makeDocumentVKR(ActionEvent event) throws Exception {
         if (!isFilledVkr()) {
@@ -188,6 +208,13 @@ public class VKRController implements Initializable {
         }
     }
 
+    /**
+     *  Метод предназначен для обработки события клика по кнопке. Метод запускает формирование протокола Атестации,
+     *  при определенных условиях.
+     *  Если условия не выполнены, то появляется окно с сообщением об ошибке
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void makeDocumentAtestacii(ActionEvent event) throws Exception {
         if (!isFilledAttest()) {
@@ -207,6 +234,10 @@ public class VKRController implements Initializable {
         }
     }
 
+    /**
+     * Метод предназначен для открытия только что сформированного документа (протокол ВКР) в Microsoft Word
+     * @throws IOException
+     */
     @FXML
     void openProtocolVkrInWord() throws IOException {
         if (fileVkr.isPresent()){
@@ -219,6 +250,11 @@ public class VKRController implements Initializable {
         }
     }
 
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param student - объект студент
+     * @param aGroupData - полный список групп
+     */
     public void initStudentData(Student student, LinkedList<GroupData> aGroupData){
         studentName.setText(student.getName());
         vkrName.setText(student.getVkrName());
@@ -228,12 +264,26 @@ public class VKRController implements Initializable {
         grammaticalCaseName(student.getName());
     }
 
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param aCourseNumber - номер направления
+     * @param aCourseName - название направления
+     * @param aInstituteName - название института
+     * @param aChairName - название кафедры
+     */
     public void initCourseData(String aCourseNumber, String aCourseName, String aInstituteName, String aChairName){
         courseNumber.setText(aCourseNumber);
         courseName = aCourseName;
         instituteName = aInstituteName;
         chairName.setText(aChairName);
     }
+
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param aMembersGek - список членов ГЭК
+     * @param aPredsedatel - имя Председателя ГЭК
+     * @param aSecretary - имя секретаря ГЭК
+     */
     public void initGekData(LinkedList<MemberGek> aMembersGek, String aPredsedatel, String aSecretary){
         membersGek = new LinkedList<MemberGek>(aMembersGek);
         predsedatelName = aPredsedatel;
@@ -244,12 +294,24 @@ public class VKRController implements Initializable {
         memberGekFour = membersGek.get(3).getName();
         memberGekFive = membersGek.get(4).getName();
     }
+
+    /**
+     * Метод предназначен для получения данных из предыдущего окна
+     * @param aDate - выбранная ранее дата
+     * @param aProtocolNumber - номер протокола
+     */
     public void initOtherData(LocalDate aDate, String aProtocolNumber){
         dateText.setText(aDate.toString());
         protocolNumber.setText(aProtocolNumber);
         date = aDate;
     }
 
+    /**
+     * Метод при клике на кнопку "Добавить вопрос" запускает новое окно добавления вопросов,
+     * от членов ГЭК
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void addQuestionButton(ActionEvent event) throws IOException {
         Stage window = new Stage();
@@ -270,6 +332,10 @@ public class VKRController implements Initializable {
         window.showAndWait();
     }
 
+    /**
+     * Метод подготавливает данные для формирования протоколов
+     * @throws IOException
+     */
     private void prepareProcessingData() throws IOException {
 
         LinkedList<String> membersGekTableNames = new LinkedList<>();
@@ -314,6 +380,11 @@ public class VKRController implements Initializable {
         processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
 
     }
+
+    /**
+     * Метод предназначен для генерации ФИО студента в Дательном и Родительном падежах
+     * @param fullName
+     */
     private void  grammaticalCaseName(String fullName){
 
         String[] nameParts = fullName.split(" ");
@@ -356,14 +427,27 @@ public class VKRController implements Initializable {
         studentNameDP.setText(tmpStudentNameDP);
     }
 
+    /**
+     * Метод возвращает true или false в зависимости от того, выполнены ли условия для формирования
+     * протокола Аттестации
+     * @return
+     */
     public boolean isFilledAttest(){
         return ((vkrGrade.getValue() == null)||(diplom.getValue() == null)||(qualification.getText() == null));
     }
 
+    /**
+     * Метод возвращает true или false в зависимости от того, выполнены ли условия для формирования
+     * протокола ВКР
+     * @return
+     */
     public boolean isFilledVkr(){
         return ((reviewerName.getText()==null)||(vkrType.getValue() == null)||(vkrGrade.getValue()==null));
     }
 
+    /**
+     * Метод отключает все кнопки на окне
+     */
     public void disableButtons(){
         createProtocolAttest.setDisable(true);
         createProtocolVkr.setDisable(true);
@@ -372,6 +456,9 @@ public class VKRController implements Initializable {
         openInWord.setDisable(true);
     }
 
+    /**
+     * Метод включает все кнопки на окне
+     */
     public void enableButtons(){
         createProtocolAttest.setDisable(false);
         createProtocolVkr.setDisable(false);
@@ -380,6 +467,10 @@ public class VKRController implements Initializable {
         openInWord.setDisable(false);
     }
 
+    /**
+     * Метод увеличивает номер протокола на единицу
+     * @return
+     */
     public String incrementProtocolNumber(){
         String[] strNumber = protocolNumber.getText().split("/");
         Integer intNumber = Integer.parseInt(strNumber[0]);

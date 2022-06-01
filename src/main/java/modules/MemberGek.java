@@ -7,7 +7,9 @@ package modules;
 
 import javafx.beans.property.SimpleStringProperty;
 
-
+/**
+ * Класс предназначен для создания объектов, которые представляют членов ГЭК
+ */
 public class MemberGek {
     private SimpleStringProperty name;
     private SimpleStringProperty question;

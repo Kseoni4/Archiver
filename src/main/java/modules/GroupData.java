@@ -9,6 +9,11 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.util.LinkedList;
 
+/**
+ * Класс предназначен для создания объекта, который содержит название группы, а также
+ * объектов-студентов
+ */
+
 public class GroupData {
 
     private SimpleStringProperty groupName;
@@ -20,6 +25,10 @@ public class GroupData {
         groupName = new SimpleStringProperty(aName);
     }
 
+    /**
+     * Все методы ниже предназначены для взаимоействия с внутренними полями объекта
+     *
+     */
     public void setName(String aName){
         groupName = new SimpleStringProperty(aName);
     }
