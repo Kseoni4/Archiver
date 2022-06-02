@@ -6,9 +6,14 @@
 package modules;
 
 import org.docx4j.model.datastorage.migration.VariablePrepare;
+import org.docx4j.model.structure.HeaderFooterPolicy;
+import org.docx4j.model.structure.SectionWrapper;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-
+import org.docx4j.openpackaging.parts.WordprocessingML.FooterPart;
+import org.docx4j.openpackaging.parts.relationships.Namespaces;
+import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
+import org.docx4j.relationships.Relationship;
 
 
 import java.io.File;
@@ -51,6 +56,9 @@ public class ProcessingDataVKR {
         mappings.put("student_name_DP", vkrData.getStudentNameDP());
         mappings.put("diplom",vkrData.getDiplom());
         mappings.put("kvalificacia",vkrData.getQualification());
+        mappings.put("strnum1", String.valueOf(vkrData.getPageNumber()));
+        mappings.put("strnum2", String.valueOf(vkrData.getPageNumber()+1));
+        mappings.put("str_num3", String.valueOf(vkrData.getPageNumber()+2));
         for (int i = 1; i<=6; i++){
             mappings.put("id"+i,"");
             mappings.put("question_chlen"+i+"_name", "");
@@ -95,6 +103,16 @@ public class ProcessingDataVKR {
         loadTemplatesVKR();
         VariablePrepare.prepare(templateDocument);
         templateDocument.getMainDocumentPart().variableReplace(mappings);
+        List<SectionWrapper> sectionWrappers = templateDocument.getDocumentModel().getSections();
+        HeaderFooterPolicy hfp = null;
+        for (SectionWrapper sw: sectionWrappers){
+            hfp = sw.getHeaderFooterPolicy();
+        }
+        if (hfp!=null) {
+            hfp.getDefaultFooter().variableReplace(mappings);
+            hfp.getEvenFooter().variableReplace(mappings);
+            hfp.getFirstFooter().variableReplace(mappings);
+        }
         File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name")+"_Протокол_ВКР.docx");
         templateDocument.save(outputFile);
         return outputFile;
@@ -108,6 +126,7 @@ public class ProcessingDataVKR {
     public void makeDocumentAtestacii() throws Exception {
         loadTemplatesAtestacii();
         VariablePrepare.prepare(templateDocument);
+
         templateDocument.getMainDocumentPart().variableReplace(mappings);
         File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name")+"_Протокол_Аттестации.docx");
         templateDocument.save(outputFile);

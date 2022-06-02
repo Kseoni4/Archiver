@@ -64,6 +64,8 @@ public class ChooseInstituteController implements Initializable {
 
     @FXML protected DatePicker fullDate;
 
+    @FXML protected TextField pageNumber;
+
     @FXML protected Label errorLabel1;
     @FXML protected Label errorLabel2;
     @FXML protected Label errorLabel3;
@@ -96,6 +98,7 @@ public class ChooseInstituteController implements Initializable {
         LocalDate tmpDate = LocalDate.now();
         int year = tmpDate.getYear();
         protocolNumber.setText("01/"+(year%100));
+        pageNumber.setText("1");
 
     }
 
@@ -154,7 +157,7 @@ public class ChooseInstituteController implements Initializable {
             LinkedList<String> tmpLinked = new LinkedList<>(Arrays.stream(courseNameFull.getValue().split(";")).toList());
             controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0), instituteName.getValue(), chairName.getValue());
             controller.initGekData(memberGeks, predsedatel.getText(), secretary.getText());
-            controller.initOtherData(fullDate.getValue(), protocolNumber.getText());
+            controller.initOtherData(fullDate.getValue(), protocolNumber.getText(), Integer.parseInt(pageNumber.getText()));
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);

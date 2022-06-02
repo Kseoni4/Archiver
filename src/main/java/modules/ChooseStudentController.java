@@ -47,6 +47,7 @@ public class ChooseStudentController implements Initializable {
     private String protocolNumber;
     private String instituteName;
     private String chairName;
+    private int pageNumber;
 
 
 
@@ -106,9 +107,10 @@ public class ChooseStudentController implements Initializable {
      * @param aDate - выбранная ранее дата
      * @param aProtocolNumber - номер протокола
      */
-    public void initOtherData(LocalDate aDate, String aProtocolNumber){
+    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumber){
         protocolNumber = aProtocolNumber;
         date = aDate;
+        pageNumber = aPageNumber;
     }
 
     /**
@@ -155,7 +157,7 @@ public class ChooseStudentController implements Initializable {
             controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData);
             controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
-            controller.initOtherData(date, protocolNumber);
+            controller.initOtherData(date, protocolNumber, pageNumber);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);

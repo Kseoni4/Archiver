@@ -141,6 +141,8 @@ public class VKRController implements Initializable {
     //Текущая дата
     private LocalDate date;
 
+    private int pageNumber;
+
     /**
      * Первоначальная инициализация окна
      * @param url
@@ -170,10 +172,10 @@ public class VKRController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/chooseStudent.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         ChooseStudentController controller = fxmlLoader.getController();
-        controller.initCourseData(courseNumber.getText(), courseName, instituteName, chairName.getText());
+        controller.initCourseData(courseName, courseNumber.getText(), instituteName, chairName.getText());
         controller.initGroupData(groupData);
         controller.initGekData(membersGek, predsedatelName, secretaryName);
-        controller.initOtherData(date,incrementProtocolNumber());
+        controller.initOtherData(date,incrementProtocolNumber(), pageNumber);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
@@ -197,6 +199,9 @@ public class VKRController implements Initializable {
                 fileVkr = Optional.ofNullable(processingDataVKR.get().makeDocumentVKR());
             }
             System.out.println("Документ ВКР сделан");
+
+            pageNumber+=3;
+
             enableButtons();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -300,10 +305,11 @@ public class VKRController implements Initializable {
      * @param aDate - выбранная ранее дата
      * @param aProtocolNumber - номер протокола
      */
-    public void initOtherData(LocalDate aDate, String aProtocolNumber){
+    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumber){
         dateText.setText(aDate.toString());
         protocolNumber.setText(aProtocolNumber);
         date = aDate;
+        pageNumber = aPageNumber;
     }
 
     /**
@@ -376,6 +382,7 @@ public class VKRController implements Initializable {
         tmpData.setSpecialOpinion(specialOpinion.getText());
         tmpData.setDiplom(diplom.getValue());
         tmpData.setQualification(qualification.getText());
+        tmpData.setPageNumber(pageNumber);
 
         processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
 
