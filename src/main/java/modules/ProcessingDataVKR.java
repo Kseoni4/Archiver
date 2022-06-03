@@ -113,7 +113,7 @@ public class ProcessingDataVKR {
             hfp.getEvenFooter().variableReplace(mappings);
             hfp.getFirstFooter().variableReplace(mappings);
         }
-        File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name")+"_Протокол_ВКР.docx");
+        File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name").replace(" ", "_")+"_Протокол_ВКР.docx");
         templateDocument.save(outputFile);
         return outputFile;
     }
@@ -128,7 +128,7 @@ public class ProcessingDataVKR {
         VariablePrepare.prepare(templateDocument);
 
         templateDocument.getMainDocumentPart().variableReplace(mappings);
-        File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name")+"_Протокол_Аттестации.docx");
+        File outputFile = new File("OutDocumentsVKR/"+mappings.get("student_name").replace(" ", "_")+"_Протокол_Аттестации.docx");
         templateDocument.save(outputFile);
     }
 

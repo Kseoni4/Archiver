@@ -248,7 +248,10 @@ public class VKRController implements Initializable {
         if (fileVkr.isPresent()){
             Runtime rt = Runtime.getRuntime();
             fileVkr.get().getAbsolutePath();
-            Process ps = rt.exec("rundll32 SHELL32.DLL,ShellExec_RunDLL winword.exe");
+            String path = new String(fileVkr.get().getAbsolutePath());
+            System.out.println(path);
+            Process ps = rt.exec("rundll32 SHELL32.DLL,ShellExec_RunDLL winword.exe " + path);
+            //Process ps = rt.exec(fileVkr.get().getAbsolutePath());
             if (ps.isAlive()){
                 System.out.println("Вроде запустить должен");
             }
