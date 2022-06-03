@@ -43,8 +43,6 @@
       <Label fx:id="errorLabel8" layoutX="630.0" layoutY="361.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
       <Label fx:id="errorLabel9" layoutX="630.0" layoutY="405.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
       <Label fx:id="errorLabel10" layoutX="630.0" layoutY="450.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel11" layoutX="407.0" layoutY="495.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel12" layoutX="509.0" layoutY="540.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="145.0" layoutY="225.0" prefHeight="17.0" prefWidth="178.0" stylesheets="@../view/White.css" text="Первый член ГЭК" />
       <Label layoutX="152.0" layoutY="270.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Второй член ГЭК" />
       <Label layoutX="154.0" layoutY="315.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Третий член ГЭК" />
@@ -58,5 +56,9 @@
       <Label layoutX="148.0" layoutY="573.0" prefHeight="26.0" prefWidth="149.0" stylesheets="@../view/White.css" text="Номер стартовой " />
       <TextField fx:id="pageNumber" layoutX="320.0" layoutY="580.0" promptText="1" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="120.0" layoutY="591.0" stylesheets="@../view/White.css" text="страницы протокола" />
+      <Label layoutX="624.0" layoutY="495.0" prefHeight="26.0" prefWidth="206.0" stylesheets="@../view/Archiverstyle.css" text=" ВКР выполнены в  виде" />
+      <Label layoutX="630.0" layoutY="540.0" stylesheets="@../view/Archiverstyle.css" text="Квалификация" />
+      <ComboBox layoutX="838.0" layoutY="496.0" prefHeight="25.0" prefWidth="243.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField layoutX="838.0" layoutY="535.0" prefHeight="37.0" prefWidth="243.0" stylesheets="@../view/Archiverstyle.css" />
    </children>
 </AnchorPane>
