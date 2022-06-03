@@ -10,13 +10,10 @@ import org.docx4j.model.structure.HeaderFooterPolicy;
 import org.docx4j.model.structure.SectionWrapper;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.FooterPart;
-import org.docx4j.openpackaging.parts.relationships.Namespaces;
-import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
-import org.docx4j.relationships.Relationship;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -81,16 +78,16 @@ public class ProcessingDataVKR {
      * Загружает документ для формирования протокола ВКР
      * @throws Docx4JException
      */
-    public void loadTemplatesVKR() throws Docx4JException {
-        templateDocument = WordprocessingMLPackage.load(new File("Protocol_VKR.docx"));
+    public void loadTemplatesVKR() throws Docx4JException, IOException {
+        templateDocument = WordprocessingMLPackage.load(ProcessingDataVKR.class.getResource("/Protocol_VKR.docx").openStream());
     }
 
     /**
      * Загружает документ для формирования протокола Аттестации
      * @throws Docx4JException
      */
-    public void loadTemplatesAtestacii() throws Docx4JException {
-        templateDocument = WordprocessingMLPackage.load(new File("Protocol_atestacii.docx"));
+    public void loadTemplatesAtestacii() throws Docx4JException, IOException {
+        templateDocument = WordprocessingMLPackage.load(ProcessingDataVKR.class.getResource("/Protocol_atestacii.docx").openStream());
     }
 
     /**

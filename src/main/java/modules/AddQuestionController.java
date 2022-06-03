@@ -14,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
