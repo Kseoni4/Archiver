@@ -160,7 +160,7 @@ public class ChooseStudentController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             VKRController controller = fxmlLoader.getController();
-            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData, qualification, vkrType);
+            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData, tableGroup.getSelectionModel().getSelectedItem(), qualification, vkrType);
             controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
             controller.initOtherData(date, protocolNumber, pageNumberVkr, pageNumberAttest);

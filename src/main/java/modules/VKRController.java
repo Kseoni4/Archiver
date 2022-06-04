@@ -130,6 +130,8 @@ public class VKRController implements Initializable {
     //Данные о текущей группе
     private LinkedList<GroupData> groupData;
 
+    private GroupData group;
+
     //Данные о членах ГЭК
     private LinkedList<MemberGek> membersGek;
 
@@ -207,6 +209,7 @@ public class VKRController implements Initializable {
             alert.showAndWait();
             enableButtons();
             createProtocolVkr.setVisible(false);
+            addToCsvFile();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Сообщение об ошибке");
@@ -274,13 +277,14 @@ public class VKRController implements Initializable {
      * @param student - объект студент
      * @param aGroupData - полный список групп
      */
-    public void initStudentData(Student student, LinkedList<GroupData> aGroupData, String aQualification, String aVkrType){
+    public void initStudentData(Student student, LinkedList<GroupData> aGroupData, GroupData aGroup, String aQualification, String aVkrType){
         qualification = aQualification;
         vkrType = aVkrType;
         studentName.setText(student.getName());
         vkrName.setText(student.getVkrName());
         nauchName.setText(student.getNauchName());
         groupData = new LinkedList<>(aGroupData);
+        group = aGroup;
         vkrName.setEditable(false);
         grammaticalCaseName(student.getName());
     }
@@ -504,6 +508,13 @@ public class VKRController implements Initializable {
             return "0"+intNumber+"/"+strNumber[1];
         } else {
             return intNumber+"/"+strNumber[1];
+        }
+    }
+
+    public void addToCsvFile() throws IOException {
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(group.getName() + ".csv", true));) {
+            bufferedWriter.write(studentName.getText() + ";" + "0" + ";" + vkrName.getText() + ";" + nauchName.getText() + ";" + "0" + ";" + protocolNumber.getText() + ";" + vkrGrade.getValue()+"\n");
+            bufferedWriter.flush();
         }
     }
 
