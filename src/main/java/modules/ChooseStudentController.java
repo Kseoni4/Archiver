@@ -47,7 +47,10 @@ public class ChooseStudentController implements Initializable {
     private String protocolNumber;
     private String instituteName;
     private String chairName;
-    private int pageNumber;
+    private String vkrType;
+    private String qualification;
+    private int pageNumberVkr;
+    private int pageNumberAttest;
 
 
 
@@ -107,10 +110,13 @@ public class ChooseStudentController implements Initializable {
      * @param aDate - выбранная ранее дата
      * @param aProtocolNumber - номер протокола
      */
-    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumber){
+    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumberVkr, int aPageNumberAttest, String aQualification, String aVkrType){
+        qualification = aQualification;
+        vkrType = aVkrType;
         protocolNumber = aProtocolNumber;
         date = aDate;
-        pageNumber = aPageNumber;
+        pageNumberVkr = aPageNumberVkr;
+        pageNumberAttest = aPageNumberAttest;
     }
 
     /**
@@ -154,10 +160,10 @@ public class ChooseStudentController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/modules/mainWindowsVKR.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             VKRController controller = fxmlLoader.getController();
-            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData);
+            controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData, qualification, vkrType);
             controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
-            controller.initOtherData(date, protocolNumber, pageNumber);
+            controller.initOtherData(date, protocolNumber, pageNumberVkr, pageNumberAttest);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);

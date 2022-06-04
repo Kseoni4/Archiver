@@ -46,6 +46,10 @@ public class ChooseInstituteController implements Initializable {
 
     @FXML protected ComboBox<String> chairName;
 
+    @FXML protected ComboBox<String> vkrType;
+
+    @FXML protected TextField qualification;
+
     @FXML protected TextField predsedatel;
 
     @FXML protected TextField memberGek1;
@@ -64,7 +68,9 @@ public class ChooseInstituteController implements Initializable {
 
     @FXML protected DatePicker fullDate;
 
-    @FXML protected TextField pageNumber;
+    @FXML protected TextField pageNumberVkr;
+
+    @FXML protected TextField pageNumberAttest;
 
     @FXML protected Label errorLabel1;
     @FXML protected Label errorLabel2;
@@ -92,13 +98,18 @@ public class ChooseInstituteController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        vkrType.getItems().addAll("Бакалаврская работа (выпускная квалификационная работа бакалавра",
+                "Дипломный проект", "Дипломная работа", "Магистерская диссертация");
+        vkrType.setValue("Дипломная работа");
+        qualification.setText(" ");
         instituteName.getItems().addAll(hashMapInstitute.keySet());
         chairName.getItems().addAll(hashMapChair.keySet());
         courseNameFull.getItems().addAll(hashMapNapr.keySet());
         LocalDate tmpDate = LocalDate.now();
         int year = tmpDate.getYear();
         protocolNumber.setText("01/"+(year%100));
-        pageNumber.setText("1");
+        pageNumberVkr.setText("1");
+        pageNumberAttest.setText("1");
 
     }
 
@@ -157,7 +168,7 @@ public class ChooseInstituteController implements Initializable {
             LinkedList<String> tmpLinked = new LinkedList<>(Arrays.stream(courseNameFull.getValue().split(";")).toList());
             controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0), instituteName.getValue(), chairName.getValue());
             controller.initGekData(memberGeks, predsedatel.getText(), secretary.getText());
-            controller.initOtherData(fullDate.getValue(), protocolNumber.getText(), Integer.parseInt(pageNumber.getText()));
+            controller.initOtherData(fullDate.getValue(), protocolNumber.getText(), Integer.parseInt(pageNumberVkr.getText()), Integer.parseInt(pageNumberAttest.getText()), qualification.getText(), vkrType.getValue());
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);

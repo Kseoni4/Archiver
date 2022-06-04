@@ -72,7 +72,7 @@ public class VKRController implements Initializable {
     @FXML protected Label protocolNumber;
 
     //Присваиваемая квалификация
-    @FXML protected TextField qualification;
+    private String qualification;
 
     //Диплом с отличием или без
     @FXML protected ChoiceBox<String> diplom;
@@ -102,7 +102,7 @@ public class VKRController implements Initializable {
     @FXML protected String courseName;
 
     //ВКР выполнена в виде:
-    @FXML protected ChoiceBox<String> vkrType;
+    private String vkrType;
 
     //Характеристика студента
     @FXML protected TextArea specialOpinion;
@@ -141,7 +141,9 @@ public class VKRController implements Initializable {
     //Текущая дата
     private LocalDate date;
 
-    private int pageNumber;
+    private int pageNumberVkr;
+
+    private int pageNumberAttest;
 
     /**
      * Первоначальная инициализация окна
@@ -151,14 +153,12 @@ public class VKRController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        vkrType.getItems().addAll("Бакалаврская работа (выпускная квалификационная работа бакалавра",
-                    "Дипломный проект", "Дипломная работа", "Магистерская диссертация");
+
         vkrGrade.getItems().addAll("Неудовлетворительно", "Удовлетворительно", "Хорошо", "Отлично");
         memberGekName.setCellValueFactory(new PropertyValueFactory<MemberGek, String>("name"));
         memberGekQuestion.setCellValueFactory(new PropertyValueFactory<MemberGek,String>("question"));
         diplom.getItems().addAll("с отличием", "без отличия");
         specialOpinion.setText(" ");
-        qualification.setText(" ");
         reviewerName.setText(" ");
     }
 
@@ -175,7 +175,7 @@ public class VKRController implements Initializable {
         controller.initCourseData(courseName, courseNumber.getText(), instituteName, chairName.getText());
         controller.initGroupData(groupData);
         controller.initGekData(membersGek, predsedatelName, secretaryName);
-        controller.initOtherData(date,incrementProtocolNumber(), pageNumber);
+        controller.initOtherData(date,incrementProtocolNumber(), pageNumberVkr, pageNumberAttest, qualification, vkrType);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
@@ -197,18 +197,21 @@ public class VKRController implements Initializable {
             prepareProcessingData();
             if (processingDataVKR.isPresent()) {
                 fileVkr = Optional.ofNullable(processingDataVKR.get().makeDocumentVKR());
+                System.out.println("Документ ВКР сделан");
+                pageNumberVkr+=3;
             }
-            System.out.println("Документ ВКР сделан");
-
-            pageNumber+=3;
-
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Информация для пользователя");
+            alert.setHeaderText("Успех");
+            alert.setContentText("Протокол ВКР успешно сформирован");
+            alert.showAndWait();
             enableButtons();
+            createProtocolVkr.setVisible(false);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Сообщение об ошибке");
             alert.setHeaderText("Указаны не все данные");
-            alert.setContentText("Для формирования протокола заполните поле Рецензента, Типа работы и Оценки");
-
+            alert.setContentText("Для формирования протокола заполните поле Рецензента и Оценки");
             alert.showAndWait();
         }
     }
@@ -227,14 +230,22 @@ public class VKRController implements Initializable {
             prepareProcessingData();
             if (processingDataVKR.isPresent()) {
                 processingDataVKR.get().makeDocumentAtestacii();
+                System.out.println("Документ аттестации сделан");
+                pageNumberAttest+=2;
             }
-            System.out.println("Документ аттестации сделан");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Информация для пользователя");
+            alert.setHeaderText("Успех");
+            alert.setContentText("Протокол аттестации успешно сформирован");
+            alert.showAndWait();
+            createProtocolAttest.setVisible(false);
             enableButtons();
+            
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Сообщение об ошибке");
             alert.setHeaderText("Указаны не все данные");
-            alert.setContentText("Для формирования протокола заплните поле Оценки, Квалификации и Типа диплома");
+            alert.setContentText("Для формирования протокола заплните поле Оценки и Типа диплома");
             alert.showAndWait();
         }
     }
@@ -263,7 +274,9 @@ public class VKRController implements Initializable {
      * @param student - объект студент
      * @param aGroupData - полный список групп
      */
-    public void initStudentData(Student student, LinkedList<GroupData> aGroupData){
+    public void initStudentData(Student student, LinkedList<GroupData> aGroupData, String aQualification, String aVkrType){
+        qualification = aQualification;
+        vkrType = aVkrType;
         studentName.setText(student.getName());
         vkrName.setText(student.getVkrName());
         nauchName.setText(student.getNauchName());
@@ -308,11 +321,12 @@ public class VKRController implements Initializable {
      * @param aDate - выбранная ранее дата
      * @param aProtocolNumber - номер протокола
      */
-    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumber){
+    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumberVkr, int aPageNumberAttest){
         dateText.setText(aDate.toString());
         protocolNumber.setText(aProtocolNumber);
         date = aDate;
-        pageNumber = aPageNumber;
+        pageNumberVkr = aPageNumberVkr;
+        pageNumberAttest = aPageNumberAttest;
     }
 
     /**
@@ -380,12 +394,13 @@ public class VKRController implements Initializable {
         tmpData.setReviewerName(reviewerName.getText());
         tmpData.setDate(dateText.getText());
         tmpData.setVkrGrade(vkrGrade.getValue());
-        tmpData.setVkrType(vkrType.getValue());
+        tmpData.setVkrType(vkrType);
         tmpData.setStudentHar(vkrGrade.getValue());
         tmpData.setSpecialOpinion(specialOpinion.getText());
         tmpData.setDiplom(diplom.getValue());
-        tmpData.setQualification(qualification.getText());
-        tmpData.setPageNumber(pageNumber);
+        tmpData.setQualification(qualification);
+        tmpData.setPageNumberVkr(pageNumberVkr);
+        tmpData.setPageNumberAttest(pageNumberAttest);
 
         processingDataVKR = Optional.ofNullable(new ProcessingDataVKR(tmpData));
 
@@ -443,7 +458,7 @@ public class VKRController implements Initializable {
      * @return
      */
     public boolean isFilledAttest(){
-        return ((vkrGrade.getValue() == null)||(diplom.getValue() == null)||(qualification.getText() == null));
+        return ((vkrGrade.getValue() == null)||(diplom.getValue() == null));
     }
 
     /**
@@ -452,7 +467,7 @@ public class VKRController implements Initializable {
      * @return
      */
     public boolean isFilledVkr(){
-        return ((reviewerName.getText()==null)||(vkrType.getValue() == null)||(vkrGrade.getValue()==null));
+        return ((reviewerName.getText()==null)||(vkrGrade.getValue()==null));
     }
 
     /**

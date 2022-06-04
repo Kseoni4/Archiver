@@ -43,7 +43,8 @@ public class VKRData {
     private String specialOpinion;
     private String diplom;
     private String qualification;
-    private int pageNumber;
+    private int pageNumberVkr;
+    private int pageNumberAttest;
 
     public VKRData(LinkedList<String> aMembersGekTableNames,
                    LinkedList<String> aMembersGekQuestions,
@@ -156,7 +157,10 @@ public class VKRData {
     public String getQualification() {return qualification;}
     public void setQualification(String qualification) {this.qualification = qualification;}
 
-    public int getPageNumber(){return pageNumber;}
-    public void setPageNumber(int aPageNumber){pageNumber = aPageNumber;}
+    public int getPageNumberVkr(){return pageNumberVkr;}
+    public void setPageNumberVkr(int aPageNumber){pageNumberVkr = aPageNumber;}
+
+    public int getPageNumberAttest(){return pageNumberAttest;}
+    public void setPageNumberAttest(int aPageNumber){pageNumberAttest = aPageNumber;}
 
 }
