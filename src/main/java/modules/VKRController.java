@@ -438,18 +438,11 @@ public class VKRController implements Initializable {
 
         System.out.println("Склоняем " + lastName + " " + firstName + " " + patronymicName);
         System.out.println(gender);
-        System.out.println("В Родительном падаеже:" +
-                sklonyatel.say(lastName, NameType.LastName, gender, Case.Genitive) + " " +
-                sklonyatel.say(firstName, NameType.FirstName, gender, Case.Genitive) + " " +
-                sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Genitive));
         String tmpStudentNameRP = sklonyatel.say(lastName, NameType.LastName, gender, Case.Genitive) + " " +
                 sklonyatel.say(firstName, NameType.FirstName, gender, Case.Genitive) + " " +
                 sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Genitive);
         studentNameRP.setText(tmpStudentNameRP);
-        System.out.println("В Дательном падаеже:" +
-                sklonyatel.say(lastName, NameType.LastName, gender, Case.Dative) + " " +
-                sklonyatel.say(firstName, NameType.FirstName, gender, Case.Dative) + " " +
-                sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Dative));
+
         String tmpStudentNameDP = sklonyatel.say(lastName, NameType.LastName, gender, Case.Dative) + " " +
                 sklonyatel.say(firstName, NameType.FirstName, gender, Case.Dative) + " " +
                 sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Dative);

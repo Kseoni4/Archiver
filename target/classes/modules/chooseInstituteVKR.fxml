@@ -54,11 +54,14 @@
       <TextField fx:id="memberGek4" layoutX="320.0" layoutY="355.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
       <TextField fx:id="memberGek5" layoutX="320.0" layoutY="400.0" prefHeight="26.0" prefWidth="300.0" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="148.0" layoutY="573.0" prefHeight="26.0" prefWidth="149.0" stylesheets="@../view/White.css" text="Номер стартовой " />
-      <TextField fx:id="pageNumber" layoutX="320.0" layoutY="580.0" promptText="1" stylesheets="@../view/Archiverstyle.css" />
-      <Label layoutX="120.0" layoutY="591.0" stylesheets="@../view/White.css" text="страницы протокола" />
+      <TextField fx:id="pageNumberVkr" layoutX="320.0" layoutY="580.0" promptText="1" stylesheets="@../view/Archiverstyle.css" />
+      <Label layoutX="84.0" layoutY="591.0" stylesheets="@../view/White.css" text="страницы протокола ВКР" />
       <Label layoutX="624.0" layoutY="495.0" prefHeight="26.0" prefWidth="206.0" stylesheets="@../view/Archiverstyle.css" text=" ВКР выполнены в  виде" />
       <Label layoutX="630.0" layoutY="540.0" stylesheets="@../view/Archiverstyle.css" text="Квалификация" />
-      <ComboBox layoutX="838.0" layoutY="496.0" prefHeight="25.0" prefWidth="243.0" stylesheets="@../view/Archiverstyle.css" />
-      <TextField layoutX="838.0" layoutY="535.0" prefHeight="37.0" prefWidth="243.0" stylesheets="@../view/Archiverstyle.css" />
+      <ComboBox fx:id="vkrType" layoutX="838.0" layoutY="496.0" prefHeight="25.0" prefWidth="243.0" stylesheets="@../view/Archiverstyle.css" />
+      <TextField fx:id="qualification" layoutX="838.0" layoutY="535.0" prefHeight="37.0" prefWidth="243.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label layoutX="630.0" layoutY="573.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/Archiverstyle.css" text="Номер Стартовой" />
+      <TextField fx:id="pageNumberAttest" layoutX="906.0" layoutY="581.0" prefHeight="37.0" prefWidth="174.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label layoutX="630.0" layoutY="593.0" stylesheets="@../view/Archiverstyle.css" text="страницы протокола атестации" />
    </children>
 </AnchorPane>
