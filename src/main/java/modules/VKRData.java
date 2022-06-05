@@ -7,9 +7,8 @@ package modules;
 
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -136,22 +135,18 @@ public class VKRData {
 
     public String getStudentHar(){return studentHar;}
     public void setStudentHar(String aName) throws IOException {
-        try(BufferedReader csvReader = new BufferedReader(new FileReader("Harakteristiki.csv"))) {
-            Optional<String> nextLine = Optional.ofNullable(csvReader.readLine());
-            String ocenka;
-            String tmpHar;
+        try(BufferedInputStream csvReader = new BufferedInputStream(new FileInputStream("Harakteristiki.csv"))) {
+            String[] nextLine = new String(csvReader.readAllBytes(), Charset.forName("UTF-8")).split("\n");
             studentHar = "";
-            while ((nextLine.isPresent()) && (!nextLine.get().isEmpty())) {
-                LinkedList<String> tmpList = new LinkedList<>(Arrays.stream(nextLine.get().split(";")).toList());
-                ocenka = tmpList.remove(0);
-                tmpHar = tmpList.remove(0);
-                if (ocenka.equals(aName)) {
+            for (String s : nextLine){
+                String ocenka = s.split(";")[0];
+                String tmpHar = s.split(";")[1];
+                tmpHar = tmpHar.substring(0,tmpHar.length()-1);
+                if (ocenka.equals(aName)){
                     studentHar = tmpHar;
                 }
-                nextLine = Optional.ofNullable(csvReader.readLine());
             }
         }
-
     }
 
     public String getQualification() {return qualification;}

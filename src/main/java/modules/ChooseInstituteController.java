@@ -16,12 +16,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.Main;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
 /**
@@ -257,33 +256,17 @@ public class ChooseInstituteController implements Initializable {
         hashMapNapr = new HashMap<>();
         hashMapChair = new HashMap<>();
         try (
-                BufferedReader csvReader = new BufferedReader(new FileReader("csvTableExample.csv"))
+                BufferedInputStream csvReader = new BufferedInputStream(new FileInputStream("InstStructure.csv"))
         ){
-            Optional<String> nextLine = Optional.ofNullable(csvReader.readLine());
-            String instName;
-            String chaName;
-            String napName;
-            while (((nextLine.isPresent())&&(!nextLine.get().isEmpty()))) {
-                LinkedList<String> forInst = new LinkedList<>(Arrays.stream(nextLine.get().split(";")).toList());
-                instName = forInst.remove(0);
-
-                chaName = forInst.remove(0);
-
-                napName = forInst.remove(0)+";"+ forInst.remove(0);
-
-
+            String[] nextLine = new String(csvReader.readAllBytes(), Charset.forName("UTF-8")).split("\n");
+            for (String s: nextLine){
+                String instName = s.split(";")[0];
+                String chaName = s.split(";")[1];
+                String napName = s.split(";")[2] + ";"+s.split(";")[3];
+                napName = napName.substring(0, napName.length()-1);
                 addChair(instName, chaName);
-
                 addNapr(chaName, napName);
-
-                if (hashMapNapr.containsKey(napName)){
-                    hashMapNapr.get(napName).addAll(forInst);
-                } else {
-                    hashMapNapr.put(napName, new LinkedList<>(forInst));
-                }
-                nextLine = Optional.ofNullable(csvReader.readLine());
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
