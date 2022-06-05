@@ -62,7 +62,6 @@ public class ChooseStudentController implements Initializable {
     @FXML protected TableColumn<Student, String> studentName;
     @FXML protected TableColumn<Student, String> studentVkrName;
     @FXML protected TableColumn<Student, String> studentNauchName;
-    @FXML protected TableColumn<Student, String> studentRowColor;
 
 
     /**
@@ -76,8 +75,7 @@ public class ChooseStudentController implements Initializable {
         studentName.setCellValueFactory(new PropertyValueFactory<Student,String>("name"));
         studentVkrName.setCellValueFactory(new PropertyValueFactory<Student,String>("VkrName"));
         studentNauchName.setCellValueFactory(new PropertyValueFactory<Student,String>("NauchName"));
-        studentRowColor.setCellValueFactory(new PropertyValueFactory<Student, String>("color"));
-        studentRowColor.setVisible(false);
+
     }
 
     /**

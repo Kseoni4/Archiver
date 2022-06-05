@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../view/Archiverstyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseStudentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../view/Archiverstyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseStudentController">
    <children>
       <TitledPane animated="false" prefWidth="1100.0" text="Шаг четвертый: выберите студента" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
@@ -22,7 +19,6 @@
                       <TableColumn fx:id="studentName" prefWidth="300.0" text="ФИО" />
                       <TableColumn fx:id="studentVkrName" minWidth="6.0" prefWidth="240.0" text="Тема" />
                         <TableColumn fx:id="studentNauchName" prefWidth="238.0" text="Научрук" />
-                        <TableColumn fx:id="studentRowColor" editable="false" prefWidth="-1.0" sortable="false" text="Цвет" visible="false" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tableGroup" layoutX="8.0" layoutY="10.0" onMouseClicked="#setTableStudents" prefHeight="600.0" prefWidth="280.0" stylesheets="@../view/White.css">
