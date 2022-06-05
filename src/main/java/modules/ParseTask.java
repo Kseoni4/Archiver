@@ -126,8 +126,8 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
                 progressBar.setProgress(1);
                 fileLabel.setText("Обработка файла завершилась успешно");
             });
-            Files.delete(Path.of("test.docx"));
         }
+        Files.delete(Path.of("test.docx"));
         return groupData;
     }
 }
