@@ -199,7 +199,6 @@ public class VKRController implements Initializable {
             prepareProcessingData();
             if (processingDataVKR.isPresent()) {
                 fileVkr = Optional.ofNullable(processingDataVKR.get().makeDocumentVKR());
-                System.out.println("Документ ВКР сделан");
                 pageNumberVkr+=3;
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -210,8 +209,8 @@ public class VKRController implements Initializable {
             enableButtons();
             createProtocolVkr.setVisible(false);
             addToCsvFile();
-            for (GroupData group : groupData){
-                for (Student student: group.getGroupStudents()){
+            for (GroupData aGroup : groupData){
+                for (Student student: aGroup.getGroupStudents()){
                     if (student.getName().equals(studentName.getText())){
                         student.setDefended();
                     }
@@ -240,7 +239,6 @@ public class VKRController implements Initializable {
             prepareProcessingData();
             if (processingDataVKR.isPresent()) {
                 processingDataVKR.get().makeDocumentAtestacii();
-                System.out.println("Документ аттестации сделан");
                 pageNumberAttest+=2;
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -269,13 +267,8 @@ public class VKRController implements Initializable {
         if (fileVkr.isPresent()){
             Runtime rt = Runtime.getRuntime();
             fileVkr.get().getAbsolutePath();
-            String path = new String(fileVkr.get().getAbsolutePath());
-            System.out.println(path);
-            Process ps = rt.exec("rundll32 SHELL32.DLL,ShellExec_RunDLL winword.exe " + path);
-            //Process ps = rt.exec(fileVkr.get().getAbsolutePath());
-            if (ps.isAlive()){
-                System.out.println("Вроде запустить должен");
-            }
+            String path = fileVkr.get().getAbsolutePath();
+            rt.exec("rundll32 SHELL32.DLL,ShellExec_RunDLL winword.exe " + path);
         }
     }
 
@@ -442,9 +435,6 @@ public class VKRController implements Initializable {
 
         Gender gender = sklonyatel.gender(patronymicName, Gender.Male);
 
-
-        System.out.println("Склоняем " + lastName + " " + firstName + " " + patronymicName);
-        System.out.println(gender);
         String tmpStudentNameRP = sklonyatel.say(lastName, NameType.LastName, gender, Case.Genitive) + " " +
                 sklonyatel.say(firstName, NameType.FirstName, gender, Case.Genitive) + " " +
                 sklonyatel.say(patronymicName, NameType.PatronymicName, gender, Case.Genitive);

@@ -19,6 +19,8 @@ import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,7 +126,7 @@ public class ParseTask extends Task<LinkedList<GroupData>> {
                 progressBar.setProgress(1);
                 fileLabel.setText("Обработка файла завершилась успешно");
             });
-            new File("test.docx").delete();
+            Files.delete(Path.of("test.docx"));
         }
         return groupData;
     }
