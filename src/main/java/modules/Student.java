@@ -17,6 +17,8 @@ public class Student {
     private SimpleStringProperty vkrName;
     private SimpleStringProperty nauchName;
 
+    private boolean defended = false;
+
 
 
     public Student(String aName, String aVkrName, String aNauchName){
@@ -49,6 +51,10 @@ public class Student {
     public String getNauchName(){
         return nauchName.get();
     }
+
+    public boolean isDefended(){return defended;}
+
+    public void setDefended(){defended=true;}
 
 
 }

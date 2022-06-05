@@ -210,6 +210,13 @@ public class VKRController implements Initializable {
             enableButtons();
             createProtocolVkr.setVisible(false);
             addToCsvFile();
+            for (GroupData group : groupData){
+                for (Student student: group.getGroupStudents()){
+                    if (student.getName().equals(studentName.getText())){
+                        student.setDefended();
+                    }
+                }
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Сообщение об ошибке");

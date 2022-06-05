@@ -17,11 +17,13 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.TableColumn;
 
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.stage.Stage;
 
+import javafx.util.Callback;
 import main.Main;
 
 
@@ -146,6 +148,24 @@ public class ChooseStudentController implements Initializable {
             ObservableList<Student> students = FXCollections.observableArrayList();
             students.addAll(group.getGroupStudents());
             tableStudent.setItems(students);
+            tableStudent.setRowFactory(new Callback<TableView<Student>, TableRow<Student>>() {
+                @Override
+                public TableRow<Student> call(TableView<Student> paramP) {
+                    return new TableRow<Student>() {
+                        @Override
+                        protected void updateItem(Student paramT, boolean paramBoolean){
+                            if((paramT!=null)&&(paramT.isDefended())) {
+                                String style = "-fx-background-color: #159240;";
+                                setStyle(style);
+                            } else {
+                                String style = "-fx-control-inner-background: #dddddd;";
+                                setStyle(style);
+                            }
+                            super.updateItem(paramT, paramBoolean);
+                        }
+                    };
+                }
+            });
         }
     }
 
