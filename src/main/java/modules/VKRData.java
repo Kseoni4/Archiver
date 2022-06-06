@@ -36,7 +36,8 @@ public class VKRData {
     private String vkrName;
     private String nauchName;
     private String reviewerName;
-    private String date;
+    private String dateVkr;
+    private String dateAttest;
     private String vkrGrade;
     private String vkrType;
     private String specialOpinion;
@@ -115,10 +116,15 @@ public class VKRData {
     }
     public void setCourseNumber(String courseNumber) {this.courseNumber = courseNumber;}
 
-    public String getDate() {
-        return date;
+    public String getDateVkr() {
+        return dateVkr;
     }
-    public void setDate(String aDate){date = aDate;}
+    public void setDateVkr(String aDate){dateVkr = aDate;}
+
+    public String getDateAttest() {
+        return dateAttest;
+    }
+    public void setDateAttest(String aDate){dateAttest = aDate;}
 
     public String getProtocolNumber() {
         return protocolNumber;

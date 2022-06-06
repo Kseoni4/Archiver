@@ -64,7 +64,9 @@ public class ChooseInstituteController implements Initializable {
 
     @FXML protected TextField protocolNumber;
 
-    @FXML protected DatePicker fullDate;
+    @FXML protected DatePicker dateVkr;
+
+    @FXML protected DatePicker dateAttest;
 
     @FXML protected TextField pageNumberVkr;
 
@@ -166,7 +168,7 @@ public class ChooseInstituteController implements Initializable {
             LinkedList<String> tmpLinked = new LinkedList<>(Arrays.stream(courseNameFull.getValue().split(";")).toList());
             controller.initCourseData(tmpLinked.get(1),tmpLinked.get(0), instituteName.getValue(), chairName.getValue());
             controller.initGekData(memberGeks, predsedatel.getText(), secretary.getText());
-            controller.initOtherData(fullDate.getValue(), protocolNumber.getText(), Integer.parseInt(pageNumberVkr.getText()), Integer.parseInt(pageNumberAttest.getText()), qualification.getText(), vkrType.getValue());
+            controller.initOtherData(dateVkr.getValue(),dateAttest.getValue(), protocolNumber.getText(), Integer.parseInt(pageNumberVkr.getText()), Integer.parseInt(pageNumberAttest.getText()), qualification.getText(), vkrType.getValue());
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);
@@ -225,8 +227,12 @@ public class ChooseInstituteController implements Initializable {
             errorLabel11.setText("Не введен номер протокола");
             i++;
         }
-        if (fullDate.getValue()==null){
+        if (dateVkr.getValue()==null){
             errorLabel12.setText("Не указана дата заседания");
+            i++;
+        }
+        if(dateAttest.getValue()==null){
+            errorLabel12.setText("Не введена дата аттестации");
             i++;
         }
         if (i==0){
@@ -268,8 +274,9 @@ public class ChooseInstituteController implements Initializable {
         courseNameFull.setValue(aCourseNumber+";"+aCourseName);
     }
 
-    public void initOtherData(LocalDate aDate, String aQualification, String aVkrType){
-        fullDate.setValue(aDate);
+    public void initOtherData(LocalDate aDateVkr, LocalDate aDateAttest, String aQualification, String aVkrType){
+        dateVkr.setValue(aDateVkr);
+        dateAttest.setValue(aDateAttest);
         qualification.setText(aQualification);
         vkrType.setValue(aVkrType);
     }

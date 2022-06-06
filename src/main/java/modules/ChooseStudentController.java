@@ -43,7 +43,8 @@ public class ChooseStudentController implements Initializable {
     private LinkedList<MemberGek> membersGek;
     private String predsedatelName;
     private String secretaryName;
-    private LocalDate date;
+    private LocalDate dateVkr;
+    private LocalDate dateAttest;
     private String courseName;
     private String courseNumber;
     private String protocolNumber;
@@ -107,14 +108,16 @@ public class ChooseStudentController implements Initializable {
 
     /**
      * Метод предназначен для получения данных из предыдущего окна
-     * @param aDate - выбранная ранее дата
+     * @param aDateVkr - выбранная ранее дата заседания
      * @param aProtocolNumber - номер протокола
+     * @param aDateAttest - выбранная ранее дата аттестации
      */
-    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumberVkr, int aPageNumberAttest, String aQualification, String aVkrType){
+    public void initOtherData(LocalDate aDateVkr, LocalDate aDateAttest, String aProtocolNumber, int aPageNumberVkr, int aPageNumberAttest, String aQualification, String aVkrType){
         qualification = aQualification;
         vkrType = aVkrType;
         protocolNumber = aProtocolNumber;
-        date = aDate;
+        dateVkr = aDateVkr;
+        dateAttest = aDateAttest;
         pageNumberVkr = aPageNumberVkr;
         pageNumberAttest = aPageNumberAttest;
     }
@@ -181,7 +184,7 @@ public class ChooseStudentController implements Initializable {
             controller.initStudentData(tableStudent.getSelectionModel().getSelectedItem(), groupData, tableGroup.getSelectionModel().getSelectedItem(), qualification, vkrType);
             controller.initCourseData(courseNumber, courseName, instituteName, chairName);
             controller.initGekData(membersGek, predsedatelName, secretaryName);
-            controller.initOtherData(date, protocolNumber, pageNumberVkr, pageNumberAttest);
+            controller.initOtherData(dateVkr, dateAttest, protocolNumber, pageNumberVkr, pageNumberAttest);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setTitle("Архивер. Версия 1.2:25/08/2021");
             window.setScene(scene);
@@ -204,7 +207,7 @@ public class ChooseStudentController implements Initializable {
         controller.initGekData(predsedatelName, membersGek, secretaryName);
         controller.initCourseData(instituteName, chairName, courseNumber, courseName);
         controller.initProtocolData(protocolNumber, String.valueOf(pageNumberVkr), String.valueOf(pageNumberAttest));
-        controller.initOtherData(date, qualification, vkrType);
+        controller.initOtherData(dateVkr, dateAttest, qualification, vkrType);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);

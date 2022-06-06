@@ -65,8 +65,8 @@ public class VKRController implements Initializable {
     //Номер направления обучения (10.10.10)
     @FXML protected Label courseNumber;
 
-    //Дата заседания (вторник, 14 января, 2022)
-    @FXML protected Label dateText;
+    //Дата заседания
+    @FXML protected Label dateVkrText;
 
     //Номер протокола
     @FXML protected Label protocolNumber;
@@ -141,7 +141,8 @@ public class VKRController implements Initializable {
     private Optional<File> fileVkr;
 
     //Текущая дата
-    private LocalDate date;
+    private LocalDate dateVkr;
+    private LocalDate dateAttest;
 
     private int pageNumberVkr;
 
@@ -177,7 +178,7 @@ public class VKRController implements Initializable {
         controller.initCourseData(courseName, courseNumber.getText(), instituteName, chairName.getText());
         controller.initGroupData(groupData);
         controller.initGekData(membersGek, predsedatelName, secretaryName);
-        controller.initOtherData(date,incrementProtocolNumber(), pageNumberVkr, pageNumberAttest, qualification, vkrType);
+        controller.initOtherData(dateVkr, dateAttest, incrementProtocolNumber(), pageNumberVkr, pageNumberAttest, qualification, vkrType);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.getIcons().add(new Image(getClass().getResourceAsStream("/icon/Archiverlogo.png")));
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
@@ -322,13 +323,15 @@ public class VKRController implements Initializable {
 
     /**
      * Метод предназначен для получения данных из предыдущего окна
-     * @param aDate - выбранная ранее дата
+     * @param aDateVkr - выбранная ранее дата заседания
      * @param aProtocolNumber - номер протокола
+     * @param aDateAttest - выбранная ранее дата аттестации
      */
-    public void initOtherData(LocalDate aDate, String aProtocolNumber, int aPageNumberVkr, int aPageNumberAttest){
-        dateText.setText(aDate.toString());
+    public void initOtherData(LocalDate aDateVkr,LocalDate aDateAttest, String aProtocolNumber, int aPageNumberVkr, int aPageNumberAttest){
+        dateVkrText.setText(aDateVkr.toString());
         protocolNumber.setText(aProtocolNumber);
-        date = aDate;
+        dateVkr = aDateVkr;
+        dateAttest = aDateAttest;
         pageNumberVkr = aPageNumberVkr;
         pageNumberAttest = aPageNumberAttest;
     }
@@ -396,7 +399,8 @@ public class VKRController implements Initializable {
         tmpData.setVkrName(vkrName.getText());
         tmpData.setNauchName(nauchName.getText());
         tmpData.setReviewerName(reviewerName.getText());
-        tmpData.setDate(dateText.getText());
+        tmpData.setDateVkr(dateVkrText.getText());
+        tmpData.setDateAttest(dateAttest.toString());
         tmpData.setVkrGrade(vkrGrade.getValue());
         tmpData.setVkrType(vkrType);
         tmpData.setStudentHar(vkrGrade.getValue());

@@ -39,8 +39,8 @@ public class ProcessingDataVKR {
         mappings.put("kod_napr",vkrData.getCourseNumber());
         mappings.put("napr_full_name",vkrData.getCourseName());
         mappings.put("predsedatel_name",vkrData.getPredsedatelName());
-        mappings.put("full_date",vkrData.getDate());
-        mappings.put("date",vkrData.getDate());
+        mappings.put("vkr_date",vkrData.getDateVkr());
+        mappings.put("attest_date",vkrData.getDateAttest());
         mappings.put("student_name",vkrData.getStudentName());
         mappings.put("vkr_theme",vkrData.getVkrName());
         mappings.put("type_of_vkr", vkrData.getVkrType());
