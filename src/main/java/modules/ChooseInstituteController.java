@@ -244,6 +244,36 @@ public class ChooseInstituteController implements Initializable {
         groupData = new LinkedList<>(aGroupData);
     }
 
+    public void initGekData(String aPredsedatel, LinkedList<MemberGek> aGekMembers, String aSecretary){
+        predsedatel.setText(aPredsedatel);
+        secretary.setText(aSecretary);
+        memberGek1.setText(aGekMembers.get(0).getName());
+        memberGek2.setText(aGekMembers.get(1).getName());
+        memberGek3.setText(aGekMembers.get(2).getName());
+        memberGek4.setText(aGekMembers.get(3).getName());
+        memberGek5.setText(aGekMembers.get(4).getName());
+    }
+
+    public void initProtocolData(String aProtocolNumber, String aPageNumberVkr, String aPageNumberAttest){
+        protocolNumber.setText(aProtocolNumber);
+        pageNumberVkr.setText(aPageNumberVkr);
+        pageNumberAttest.setText(aPageNumberAttest);
+    }
+
+    public void initCourseData(String aInstituteName, String aChairName, String aCourseNumber, String aCourseName){
+        instituteName.setValue(aInstituteName);
+        instituteSelected(new ActionEvent());
+        chairName.setValue(aChairName);
+        chairSelected(new ActionEvent());
+        courseNameFull.setValue(aCourseNumber+";"+aCourseName);
+    }
+
+    public void initOtherData(LocalDate aDate, String aQualification, String aVkrType){
+        fullDate.setValue(aDate);
+        qualification.setText(aQualification);
+        vkrType.setValue(aVkrType);
+    }
+
     /**
      * данный метод предназначен для подготовки корректной работы трех ComboBox с данными
      * Он заполняет три HashMap, каждый из которых соответствует своему ComboBox необходимой информацией
@@ -262,7 +292,6 @@ public class ChooseInstituteController implements Initializable {
                 String instName = s.split(";")[0];
                 String chaName = s.split(";")[1];
                 String napName = s.split(";")[2] + ";"+s.split(";")[3];
-                napName = napName.substring(0, napName.length()-1);
                 addChair(instName, chaName);
                 addNapr(chaName, napName);
             }

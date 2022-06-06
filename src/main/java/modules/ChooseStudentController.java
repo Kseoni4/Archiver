@@ -201,6 +201,10 @@ public class ChooseStudentController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load());
         ChooseInstituteController controller = fxmlLoader.getController();
         controller.initGroupData(groupData);
+        controller.initGekData(predsedatelName, membersGek, secretaryName);
+        controller.initCourseData(instituteName, chairName, courseNumber, courseName);
+        controller.initProtocolData(protocolNumber, String.valueOf(pageNumberVkr), String.valueOf(pageNumberAttest));
+        controller.initOtherData(date, qualification, vkrType);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setTitle("Архивер. Версия 1.2:25/08/2021");
         window.setScene(scene);
