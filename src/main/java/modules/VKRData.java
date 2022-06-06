@@ -141,7 +141,6 @@ public class VKRData {
             for (String s : nextLine){
                 String ocenka = s.split(";")[0];
                 String tmpHar = s.split(";")[1];
-                tmpHar = tmpHar.substring(0,tmpHar.length()-1);
                 if (ocenka.equals(aName)){
                     studentHar = tmpHar;
                 }
