@@ -111,7 +111,7 @@ public class FileOpenVKRApplicationController implements Initializable {
      */
 
     @FXML
-    void chooseRTFFile(ActionEvent event) throws IOException {
+    void chooseRTFFile(ActionEvent event) {
         Stage stage = (Stage) ap.getScene().getWindow();
         Optional<File> optionalFile = Optional.ofNullable(new FileChooser().showOpenDialog(stage));
         if (optionalFile.isPresent()){
