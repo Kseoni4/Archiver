@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.ChooseInstituteController">
    <children>
       <TitledPane animated="false" prefHeight="26.0" prefWidth="1100.0" stylesheets="@../view/Archiverstyle.css" text="Шаг второй: выберите факультет, кафедру и направление" AnchorPane.bottomAnchor="674.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16637d" height="665.0" layoutY="37.0" opacity="0.8" stroke="#16637d" strokeType="INSIDE" width="300.0" />
@@ -38,7 +42,7 @@
       <Label fx:id="errorLabel7" layoutX="630.0" layoutY="315.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
       <Label fx:id="errorLabel8" layoutX="630.0" layoutY="361.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
       <Label fx:id="errorLabel9" layoutX="630.0" layoutY="405.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
-      <Label fx:id="errorLabel10" layoutX="630.0" layoutY="450.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
+      <Label fx:id="errorLabel10" layoutX="526.0" layoutY="648.0" prefHeight="26.0" prefWidth="315.0" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="145.0" layoutY="225.0" prefHeight="17.0" prefWidth="178.0" stylesheets="@../view/White.css" text="Первый член ГЭК" />
       <Label layoutX="152.0" layoutY="270.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Второй член ГЭК" />
       <Label layoutX="154.0" layoutY="315.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/White.css" text="Третий член ГЭК" />
@@ -59,7 +63,7 @@
       <Label layoutX="630.0" layoutY="573.0" prefHeight="26.0" prefWidth="148.0" stylesheets="@../view/Archiverstyle.css" text="Номер Стартовой" />
       <TextField fx:id="pageNumberAttest" layoutX="906.0" layoutY="581.0" prefHeight="37.0" prefWidth="174.0" stylesheets="@../view/Archiverstyle.css" />
       <Label layoutX="630.0" layoutY="593.0" stylesheets="@../view/Archiverstyle.css" text="страницы протокола атестации" />
-      <Label layoutX="659.0" layoutY="455.0" text="Дата аттестации" />
+      <Label layoutX="630.0" layoutY="451.0" stylesheets="@../view/Archiverstyle.css" text="Дата аттестации" />
       <DatePicker fx:id="dateAttest" layoutX="836.0" layoutY="448.0" prefHeight="26.0" prefWidth="243.0" />
    </children>
 </AnchorPane>
